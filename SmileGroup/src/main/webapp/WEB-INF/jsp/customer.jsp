@@ -23,35 +23,29 @@
                 <table>
                     <tr>
                         <td>
-                            <label class="segment-lb">ID</label>
-                            <input type="text" name="maKH" class="segment-tb"/>
+                            <input type="hidden" name="maKH" class="segment-tb"/>
+                            <label class="segment-lb">Name</label>
+                            <input type="text" name="tenKH" required="" class="segment-tb"/>
+                        </td>
+                        <td>
+                            <label class="segment-lb">Address</label>
+                            <input type="text" name="diaChi" required="" class="segment-tb"/>
+                        </td>
+                    </tr>
+                    <tr>
+
+                        <td class="form-list__row">
+                            <label class="segment-lb">Phone</label>
+                            <input type="text" name="soDT" required="" class="segment-tb"/>
                         </td>
                         <td>
                             <label class="segment-lb">Email</label>
                             <input type="text" name="email" required="" class="segment-tb"/>
                         </td>
                     </tr>
-                    <tr>
-                        <td>
-                            <label class="segment-lb">Name</label>
-                            <input type="text" name="tenKH" required="" class="segment-tb"/>
-                        </td>
-                        <td class="form-list__row">
-                            <label class="segment-lb">Phone</label>
-                            <input type="text" name="soDT" required="" class="segment-tb"/>
-                        </td>
-                    </tr>
-                    <tr>
-                        <td>
-                            <label class="segment-lb">Address</label>
-                            <input type="text" name="diaChi" required="" class="segment-tb"/>
-                        </td>
-                        <td>
-                            <input type="submit" value="SAVE"/>
-                            <input type="button" value="REFRESH" onclick="window.location.href='/customer'"/>
-                        </td>
-                    </tr>
                 </table>
+                <input type="submit" value="SAVE"/>
+                <input type="button" value="REFRESH" onclick="window.location.href='/customer'"/>
             </form>
         </div>
         <div>
