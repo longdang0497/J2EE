@@ -2,7 +2,7 @@
 <!DOCTYPE html>
 <html lang="en" xmlns:th="http://www.springframework.org/schema/data/jaxb">
 <head>
-    <title>Types Of Component List</title>
+    <title>Store List</title>
     <%@include file="fragment/importLibs.jsp"%>
 </head>
 <body>
@@ -16,22 +16,22 @@
 <div class="w3-main w3-content w3-padding" style="max-width:1200px;margin-top:100px;">
 
     <div>
-        <form class="segment" method="post" action="/typeofcomponent&edit">
+        <form class="segment" method="post" action="/store&edit">
             <table class="fl-table">
                 <thead>
                 <tr>
                     <th>ID</th>
-                    <td><input type="text" name="maLoai" required="" class="segment-tb" value="${tocEditList.maLoai}"></td>
+                    <td><input type="text" name="maKhu" required="" class="segment-tb" value="${storeEditList.maKhu}"></td>
                 </tr>
                 <tr>
                     <th>Name</th>
-                    <td><input type="text" name="tenLoai" required="" class="segment-tb" value="${tocEditList.tenLoai}"></td>
+                    <td><input type="text" name="tenKhu" required="" class="segment-tb" value="${storeEditList.tenKhu}"></td>
                 </tr>
                 <thead>
             </table>
             <input type="submit" value="SAVE" />
         </form>
-        <a href="/typeofcomponent">BACK</a>
+        <a href="/store">BACK</a>
     </div>
 </div>
 

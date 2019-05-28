@@ -30,6 +30,7 @@ public class TypeOfComponentController {
         ModelAndView mv = new ModelAndView("redirect:/typeofcomponent");
         TypeOfComponent obj = new TypeOfComponent();
         obj.setTenLoai(tenLoai);
+        tocRepo.save(obj);
         return mv;
     }
 
