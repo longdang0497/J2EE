@@ -2,5 +2,6 @@
     <a href="javascript:void(0)" onclick="w3_close()"
        class="w3-bar-item w3-button">Close Menu</a>
     <a href="/customer" onclick="w3_close()" class="w3-bar-item w3-button">Customer</a>
+    <a href="/typeofcomponent" onclick="w3_close()" class="w3-bar-item w3-button">Type of component</a>
     <a href="#about" onclick="w3_close()" class="w3-bar-item w3-button">About</a>
 </nav>
