@@ -19,7 +19,7 @@ public class StoreController {
     StoreRepository storeRepo;
 
     @RequestMapping("/store")
-    public ModelAndView doTypeOfComponent() {
+    public ModelAndView doStore() {
         ModelAndView mv = new ModelAndView("store");
         mv.addObject("storeLists", storeRepo.findAll());
         return mv;
