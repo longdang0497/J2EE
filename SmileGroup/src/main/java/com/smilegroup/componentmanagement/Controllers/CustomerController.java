@@ -13,16 +13,10 @@ import org.springframework.web.servlet.ModelAndView;
 import java.util.Optional;
 
 @Controller
-public class MainController {
+public class CustomerController {
 
     @Autowired
     CustomerRepository customerRepo;
-
-    @RequestMapping("/")
-    public ModelAndView doHome() {
-        ModelAndView mv = new ModelAndView("index");
-        return mv;
-    }
 
     @RequestMapping("/customer")
     public ModelAndView doCustomer() {
