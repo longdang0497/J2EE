@@ -1,10 +1,14 @@
 package com.smilegroup.componentmanagement.Models;
 
 import javax.persistence.*;
+import java.io.Serializable;
+import java.util.Set;
 
 @Entity
 @Table(name = "DONVITINH")
-public class Unit {
+public class Unit implements Serializable {
+    private static final long serialVersionUID = 1L;
+
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Integer maDV;
