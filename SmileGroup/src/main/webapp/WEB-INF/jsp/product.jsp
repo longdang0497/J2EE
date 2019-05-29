@@ -29,7 +29,12 @@
                     </td>
                     <td>
                         <label class="segment-lb">Unit</label>
-                        <input type="text" name="tenDV" required="" class="segment-tb"/>
+                        <select name="tenDV" class="segment-tb">
+                            <option>Choose a unit</option>
+                            <c:forEach var="uList" items="${unitLists}">
+                                <option>${uList.tenDV}</option>
+                            </c:forEach>
+                        </select>
                     </td>
                 </tr>
                 <tr>
@@ -39,7 +44,12 @@
                     </td>
                     <td>
                         <label class="segment-lb">Type</label>
-                        <input type="text" name="tenLoai" required="" class="segment-tb"/>
+                        <select name="tenLoai" class="segment-tb">
+                            <option>Choose a type</option>
+                            <c:forEach var="tList" items="${tocLists}">
+                                <option>${tList.tenLoai}</option>
+                            </c:forEach>
+                        </select>
                     </td>
                 </tr>
                 <tr>
@@ -49,7 +59,12 @@
                     </td>
                     <td>
                         <label class="segment-lb">Store</label>
-                        <input type="text" name="tenKhu" required="" class="segment-tb"/>
+                        <select name="tenKhu" class="segment-tb" value="">
+                            <option>Choose a store</option>
+                            <c:forEach var="sList" items="${storeLists}">
+                                <option>${sList.tenKhu}</option>
+                            </c:forEach>
+                        </select>
                     </td>
                 </tr>
                 <tr>

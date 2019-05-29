@@ -2,6 +2,7 @@ package com.smilegroup.componentmanagement.Models;
 
 import javax.persistence.*;
 import java.io.Serializable;
+import java.util.List;
 import java.util.Set;
 
 @Entity
@@ -15,6 +16,10 @@ public class Unit implements Serializable {
 
     @Column(name = "TenDV")
     private String tenDV;
+
+    @OneToMany(cascade = CascadeType.ALL)
+    @JoinColumn(name = "maDV", referencedColumnName = "maDV")
+    private List<Product> productLists;
 
     public Unit() {}
 
@@ -36,6 +41,14 @@ public class Unit implements Serializable {
 
     public void setTenDV(String tenDV) {
         this.tenDV = tenDV;
+    }
+
+    public List<Product> getProductLists() {
+        return productLists;
+    }
+
+    public void setProductLists(List<Product> productLists) {
+        this.productLists = productLists;
     }
 }
 

@@ -16,7 +16,7 @@
 <div class="w3-main w3-content w3-padding" style="max-width:1200px;margin-top:100px;">
 
     <div>
-        <form class="segment" method="post" action="/store&edit">
+        <form class="segment" method="post" action="/product&edit">
             <table class="fl-table">
                 <thead>
                 <tr>
@@ -33,7 +33,13 @@
                 </tr>
                 <tr>
                     <th>Unit</th>
-                    <td><input type="text" name="tenDV" required="" class="segment-tb" value="${productEditList.unit.tenDV}"></td>
+                    <td>
+                        <select name="tenDV" class="segment-tb" >
+                            <c:forEach var="item" items="${unitLists}">
+                                <option value="${item.tenDV}" ${item.maDV == productEditList.unit.maDV ? 'selected="selected"' : ''}>${item.tenDV}</option>
+                            </c:forEach>
+                        </select>
+                    </td>
                 </tr>
                 <tr>
                     <th>Description</th>
@@ -41,11 +47,23 @@
                 </tr>
                 <tr>
                     <th>Type</th>
-                    <td><input type="text" name="tenLoai" required="" class="segment-tb" value="${productEditList.type.tenLoai}"></td>
+                    <td>
+                        <select name="tenLoai" class="segment-tb" >
+                            <c:forEach var="item" items="${tocLists}">
+                                <option value="${item.tenLoai}" ${item.maLoai == productEditList.type.maLoai ? 'selected="selected"' : ''}>${item.tenLoai}</option>
+                            </c:forEach>
+                        </select>
+                    </td>
                 </tr>
                 <tr>
                     <th>Store</th>
-                    <td><input type="text" name="tenKhu" required="" class="segment-tb" value="${productEditList.store.tenKhu}"></td>
+                    <td>
+                        <select name="tenKhu" class="segment-tb" >
+                            <c:forEach var="item" items="${storeLists}">
+                                <option value="${item.tenKhu}" ${item.maKhu == productEditList.store.maKhu ? 'selected="selected"' : ''}>${item.tenKhu}</option>
+                            </c:forEach>
+                        </select>
+                    </td>
                 </tr>
                 <tr>
                     <th>Quantities</th>
