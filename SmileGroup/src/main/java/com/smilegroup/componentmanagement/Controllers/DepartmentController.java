@@ -18,14 +18,14 @@ public class DepartmentController {
     @Autowired
     DepartmentRepository depRepo;
 
-    @RequestMapping("/department")
+    @RequestMapping(value = "/department", produces = "application/x-www-form-urlencoded;charset=utf-8")
     public ModelAndView doDepartment() {
         ModelAndView mv = new ModelAndView("department");
         mv.addObject("depLists", depRepo.findAll());
         return mv;
     }
 
-    @RequestMapping(value = "/department&save", method = RequestMethod.POST)
+    @RequestMapping(value = "/department&save", method = RequestMethod.POST, produces = "application/x-www-form-urlencoded;charset=utf-8")
     public ModelAndView doSave(@RequestParam("tenPhong") String tenPhong) {
         ModelAndView mv = new ModelAndView("redirect:/department");
         Department obj = new Department();
@@ -34,7 +34,7 @@ public class DepartmentController {
         return mv;
     }
 
-    @RequestMapping(value = "/department&edit", method = RequestMethod.POST)
+    @RequestMapping(value = "/department&edit", method = RequestMethod.POST, produces = "application/x-www-form-urlencoded;charset=utf-8")
     public ModelAndView doUpdate(@RequestParam("maPhong") int maPhong, @RequestParam("tenPhong") String tenPhong) {
         ModelAndView mv = new ModelAndView("redirect:/department");
         Department obj = null;
@@ -49,7 +49,7 @@ public class DepartmentController {
         return mv;
     }
 
-    @RequestMapping(value = "/viewDepartment/{maPhong}", method = RequestMethod.GET)
+    @RequestMapping(value = "/viewDepartment/{maPhong}", method = RequestMethod.GET, produces = "application/x-www-form-urlencoded;charset=utf-8")
     public ModelAndView doEdit(@PathVariable("maPhong") int maPhong) {
         ModelAndView mv = new ModelAndView("viewDepartment");
         Optional<Department> objOpt  = this.depRepo.findById(maPhong);
@@ -64,7 +64,7 @@ public class DepartmentController {
         return mv;
     }
 
-    @RequestMapping(value = "/department/delete/{maPhong}", method = RequestMethod.GET)
+    @RequestMapping(value = "/department/delete/{maPhong}", method = RequestMethod.GET, produces = "application/x-www-form-urlencoded;charset=utf-8")
     public ModelAndView doDelete(@PathVariable("maPhong") int maPhong) {
         ModelAndView mv = new ModelAndView("redirect:/department");
         depRepo.deleteById(maPhong);

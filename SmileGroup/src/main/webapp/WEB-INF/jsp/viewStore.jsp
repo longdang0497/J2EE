@@ -1,4 +1,5 @@
 <%@ taglib uri = "http://java.sun.com/jsp/jstl/core" prefix="c" %>
+<%@ page pageEncoding="UTF-8" contentType="text/html; charset=utf-8"%>
 <!DOCTYPE html>
 <html lang="en" xmlns:th="http://www.springframework.org/schema/data/jaxb">
 <head>

@@ -6,7 +6,7 @@ import org.springframework.web.servlet.ModelAndView;
 
 @Controller
 public class HomeController {
-    @RequestMapping("/")
+    @RequestMapping(value = "/", produces = "application/x-www-form-urlencoded;charset=utf-8")
     public ModelAndView doHome() {
         ModelAndView mv = new ModelAndView("index");
         return mv;

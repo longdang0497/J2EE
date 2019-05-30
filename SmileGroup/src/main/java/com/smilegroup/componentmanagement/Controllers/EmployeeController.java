@@ -22,7 +22,7 @@ public class EmployeeController {
     @Autowired
     DepartmentRepository depRepository;
 
-    @RequestMapping("/employee")
+    @RequestMapping(value = "/employee", produces = "application/x-www-form-urlencoded;charset=utf-8")
     public ModelAndView doEmployee() {
         ModelAndView mv = new ModelAndView("employee");
         mv.addObject("depLists", depRepository.findAll());
@@ -30,7 +30,7 @@ public class EmployeeController {
         return mv;
     }
 
-    @RequestMapping(value = "/employee&save", method = RequestMethod.POST)
+    @RequestMapping(value = "/employee&save", method = RequestMethod.POST, produces = "application/x-www-form-urlencoded;charset=utf-8")
     public ModelAndView doSave(@RequestParam("tenNV") String tenNV, String tenPhong) {
         ModelAndView mv = new ModelAndView("redirect:/employee");
         Employee obj = new Employee();
@@ -47,7 +47,7 @@ public class EmployeeController {
         return mv;
     }
 
-    @RequestMapping(value = "/employee&edit", method = RequestMethod.POST)
+    @RequestMapping(value = "/employee&edit", method = RequestMethod.POST, produces = "application/x-www-form-urlencoded;charset=utf-8")
     public ModelAndView doUpdate(@RequestParam("maNV") int maNV, @RequestParam("tenNV") String tenNV, String tenPhong) {
         ModelAndView mv = new ModelAndView("redirect:/employee");
         Employee obj = null;
@@ -72,7 +72,7 @@ public class EmployeeController {
         return mv;
     }
 
-    @RequestMapping(value = "/viewEmployee/{maNV}", method = RequestMethod.GET)
+    @RequestMapping(value = "/viewEmployee/{maNV}", method = RequestMethod.GET, produces = "application/x-www-form-urlencoded;charset=utf-8")
     public ModelAndView doEdit(@PathVariable("maNV") int maNV) {
         ModelAndView mv = new ModelAndView("viewEmployee");
         mv.addObject("depLists", depRepository.findAll());
@@ -88,7 +88,7 @@ public class EmployeeController {
         return mv;
     }
 
-    @RequestMapping(value = "/employee/delete/{maNV}", method = RequestMethod.GET)
+    @RequestMapping(value = "/employee/delete/{maNV}", method = RequestMethod.GET, produces = "application/x-www-form-urlencoded;charset=utf-8")
     public ModelAndView doDelete(@PathVariable("maNV") int maNV) {
         ModelAndView mv = new ModelAndView("redirect:/employee");
         empRepository.deleteById(maNV);

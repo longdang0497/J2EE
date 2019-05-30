@@ -18,14 +18,14 @@ public class UnitController {
     @Autowired
     UnitRepository unitRepo;
 
-    @RequestMapping("/unit")
+    @RequestMapping(value = "/unit", produces = "application/x-www-form-urlencoded;charset=utf-8")
     public ModelAndView doUnit() {
         ModelAndView mv = new ModelAndView("unit");
         mv.addObject("unitLists", unitRepo.findAll());
         return mv;
     }
 
-    @RequestMapping(value = "/unit&save", method = RequestMethod.POST)
+    @RequestMapping(value = "/unit&save", method = RequestMethod.POST, produces = "application/x-www-form-urlencoded;charset=utf-8")
     public ModelAndView doSave(@RequestParam("tenDV") String tenDV) {
         ModelAndView mv = new ModelAndView("redirect:/unit");
         Unit obj = new Unit();
@@ -34,7 +34,7 @@ public class UnitController {
         return mv;
     }
 
-    @RequestMapping(value = "/unit&edit", method = RequestMethod.POST)
+    @RequestMapping(value = "/unit&edit", method = RequestMethod.POST, produces = "application/x-www-form-urlencoded;charset=utf-8")
     public ModelAndView doUpdate(@RequestParam("maDV") int maDV, @RequestParam("tenDV") String tenDV) {
         ModelAndView mv = new ModelAndView("redirect:/unit");
         Unit obj = null;
@@ -49,7 +49,7 @@ public class UnitController {
         return mv;
     }
 
-    @RequestMapping(value = "/viewUnit/{maDV}", method = RequestMethod.GET)
+    @RequestMapping(value = "/viewUnit/{maDV}", method = RequestMethod.GET, produces = "application/x-www-form-urlencoded;charset=utf-8")
     public ModelAndView doEdit(@PathVariable("maDV") int maDV) {
         ModelAndView mv = new ModelAndView("viewUnit");
         Optional<Unit> objOpt  = this.unitRepo.findById(maDV);
@@ -64,7 +64,7 @@ public class UnitController {
         return mv;
     }
 
-    @RequestMapping(value = "/unit/delete/{maDV}", method = RequestMethod.GET)
+    @RequestMapping(value = "/unit/delete/{maDV}", method = RequestMethod.GET, produces = "application/x-www-form-urlencoded;charset=utf-8")
     public ModelAndView doDelete(@PathVariable("maDV") int maDV) {
         ModelAndView mv = new ModelAndView("redirect:/unit");
         unitRepo.deleteById(maDV);

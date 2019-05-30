@@ -5,10 +5,10 @@ import org.springframework.data.jpa.repository.Query;
 import org.springframework.data.repository.CrudRepository;
 import org.springframework.data.repository.query.Param;
 
-import java.util.Optional;
+import java.util.List;
 
-public interface ProductRepository extends CrudRepository<Product, Integer> {
-    String QUERY_BY_NAME = "SELECT * FROM MATHANG mh where mh.TenMH = :tenMH";
+public interface BillInfoRepository extends CrudRepository<BillInfo, Integer> {
+    String QUERY_BY_NAME = "SELECT * FROM CHITIETHOADON CTHD where CTHD.MaHD = :maHD";
     @Query(value = QUERY_BY_NAME, nativeQuery = true)
-    Optional<Product> findByName(@Param("tenMH") String tenMH);
+    List<BillInfo> findByBillID(@Param("maHD") int maHD);
 }

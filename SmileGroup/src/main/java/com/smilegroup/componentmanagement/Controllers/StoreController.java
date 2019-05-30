@@ -18,14 +18,14 @@ public class StoreController {
     @Autowired
     StoreRepository storeRepo;
 
-    @RequestMapping("/store")
+    @RequestMapping(value = "/store", produces = "application/x-www-form-urlencoded;charset=utf-8")
     public ModelAndView doStore() {
         ModelAndView mv = new ModelAndView("store");
         mv.addObject("storeLists", storeRepo.findAll());
         return mv;
     }
 
-    @RequestMapping(value = "/store&save", method = RequestMethod.POST)
+    @RequestMapping(value = "/store&save", method = RequestMethod.POST, produces = "application/x-www-form-urlencoded;charset=utf-8")
     public ModelAndView doSave(@RequestParam("tenKhu") String tenKhu) {
         ModelAndView mv = new ModelAndView("redirect:/store");
         Store obj = new Store();
@@ -34,7 +34,7 @@ public class StoreController {
         return mv;
     }
 
-    @RequestMapping(value = "/store&edit", method = RequestMethod.POST)
+    @RequestMapping(value = "/store&edit", method = RequestMethod.POST, produces = "application/x-www-form-urlencoded;charset=utf-8")
     public ModelAndView doUpdate(@RequestParam("maKhu") int maKhu, @RequestParam("tenKhu") String tenKhu) {
         ModelAndView mv = new ModelAndView("redirect:/store");
         Store obj = null;
@@ -49,7 +49,7 @@ public class StoreController {
         return mv;
     }
 
-    @RequestMapping(value = "/viewStore/{maKhu}", method = RequestMethod.GET)
+    @RequestMapping(value = "/viewStore/{maKhu}", method = RequestMethod.GET, produces = "application/x-www-form-urlencoded;charset=utf-8")
     public ModelAndView doEdit(@PathVariable("maKhu") int maKhu) {
         ModelAndView mv = new ModelAndView("viewStore");
         Optional<Store> objOpt  = this.storeRepo.findById(maKhu);
@@ -64,7 +64,7 @@ public class StoreController {
         return mv;
     }
 
-    @RequestMapping(value = "/store/delete/{maKhu}", method = RequestMethod.GET)
+    @RequestMapping(value = "/store/delete/{maKhu}", method = RequestMethod.GET, produces = "application/x-www-form-urlencoded;charset=utf-8")
     public ModelAndView doDelete(@PathVariable("maKhu") int maKhu) {
         ModelAndView mv = new ModelAndView("redirect:/store");
         storeRepo.deleteById(maKhu);
