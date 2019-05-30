@@ -17,9 +17,9 @@ public class Department implements Serializable {
     @Column(name = "TenPhong")
     private String tenPhong;
 
-//    @OneToMany(cascade = CascadeType.ALL)
-//    @JoinColumn(name = "maPhong", referencedColumnName = "maPhong")
-//    private List<Product> productLists;
+    @OneToMany(cascade = CascadeType.ALL)
+    @JoinColumn(name = "MaPhong", referencedColumnName = "MaPhong")
+    private List<Employee> employeeList;
 
     public Department() {}
 
