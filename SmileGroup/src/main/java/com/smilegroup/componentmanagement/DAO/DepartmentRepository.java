@@ -10,8 +10,8 @@ import java.util.Optional;
 
 @Repository
 public interface DepartmentRepository extends CrudRepository<Department, Integer> {
-//    String QUERY_BY_NAME = "SELECT * FROM DONVITINH dvt where dvt.TenDV = :tenDV";
-//    @Query(value = QUERY_BY_NAME, nativeQuery = true)
-//    Optional<Department> findByName(@Param("tenDV") String tenDV);
+    String QUERY_BY_NAME = "SELECT * FROM PHONGBAN pb where pb.TenPhong = :tenPhong";
+    @Query(value = QUERY_BY_NAME, nativeQuery = true)
+    Optional<Department> findByName(@Param("tenPhong") String tenPhong);
 }
 //param truyền vào CrudRepository là model và kiểu dữ liệu của id

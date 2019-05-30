@@ -2,7 +2,7 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-    <title>Store List</title>
+    <title>Product List</title>
     <%@include file="fragment/importLibs.jsp" %>
 </head>
 <body>
