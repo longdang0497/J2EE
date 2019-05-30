@@ -6,5 +6,6 @@
     <a href="/typeofcomponent" onclick="w3_close()" class="w3-bar-item w3-button">Type of component</a>
     <a href="/store" onclick="w3_close()" class="w3-bar-item w3-button">Store</a>
     <a href="/unit" onclick="w3_close()" class="w3-bar-item w3-button">Unit</a>
+    <a href="/department" onclick="w3_close()" class="w3-bar-item w3-button">Department</a>
     <a href="#about" onclick="w3_close()" class="w3-bar-item w3-button">About</a>
 </nav>
