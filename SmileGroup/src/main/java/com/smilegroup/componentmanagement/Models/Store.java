@@ -17,7 +17,7 @@ public class Store implements Serializable {
     @Column(name = "TenKhu")
     private String tenKhu;
 
-    @OneToMany(cascade = CascadeType.ALL)
+    @OneToMany
     @JoinColumn(name = "maKhu", referencedColumnName = "maKhu")
     private List<Product> productLists;
 

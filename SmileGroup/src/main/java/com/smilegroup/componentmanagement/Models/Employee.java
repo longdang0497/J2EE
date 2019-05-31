@@ -22,7 +22,7 @@ public class Employee implements Serializable {
     @Column(name = "Phai")
     private String phai;
 
-    @OneToOne(cascade = CascadeType.ALL)
+    @OneToOne
     @JoinColumn(name = "MaPhong", referencedColumnName = "MaPhong")
     private Department department;
 

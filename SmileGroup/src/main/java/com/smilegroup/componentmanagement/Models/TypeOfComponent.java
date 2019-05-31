@@ -17,7 +17,7 @@ public class TypeOfComponent implements Serializable {
     @Column(name = "TenLoai")
     private String tenLoai;
 
-    @OneToMany(cascade = CascadeType.ALL)
+    @OneToMany
     @JoinColumn(name = "maLoai", referencedColumnName = "maLoai")
     private List<Product> productLists;
 

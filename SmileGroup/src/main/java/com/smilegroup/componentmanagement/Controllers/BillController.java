@@ -37,7 +37,7 @@ public class BillController {
     }
 
     @RequestMapping(value = "/bill&save", method = RequestMethod.POST, produces = "application/x-www-form-urlencoded;charset=utf-8")
-    public ModelAndView doSave(String tenKH, String tenNV, @DateTimeFormat(iso = DateTimeFormat.ISO.DATE) Date ngayLap, int tongTien, String maSoThue) {
+    public ModelAndView doSave(String tenKH, String tenNV, @DateTimeFormat(iso = DateTimeFormat.ISO.DATE) Date ngayLap, Long tongTien, String maSoThue) {
         ModelAndView mv = new ModelAndView("redirect:/bill");
         Bill obj = new Bill();
         Customer customerObj = new Customer();
@@ -65,7 +65,7 @@ public class BillController {
     }
 
     @RequestMapping(value = "/bill&edit", method = RequestMethod.POST, produces = "application/x-www-form-urlencoded;charset=utf-8")
-    public ModelAndView doUpdate(@RequestParam("maHD") int maHD, String tenKH, String tenNV, @DateTimeFormat(iso = DateTimeFormat.ISO.DATE) Date ngayLap, int tongTien, String maSoThue) {
+    public ModelAndView doUpdate(@RequestParam("maHD") int maHD, String tenKH, String tenNV, @DateTimeFormat(iso = DateTimeFormat.ISO.DATE) Date ngayLap, Long tongTien, String maSoThue) {
         ModelAndView mv = new ModelAndView("redirect:/bill");
         Bill obj = new Bill();
         Customer customerObj = new Customer();

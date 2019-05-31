@@ -23,20 +23,20 @@ public class Bill implements Serializable {
     private Date ngayLap;
 
     @Column(name = "TongTien")
-    private int tongTien;
+    private Long tongTien;
 
-    @OneToOne(cascade = CascadeType.ALL)
+    @OneToOne
     @JoinColumn(name = "MaNV", referencedColumnName = "MaNV")
     private Employee employee;
 
-    @OneToOne(cascade = CascadeType.ALL)
+    @OneToOne
     @JoinColumn(name = "MaKH", referencedColumnName = "MaKH")
     private Customer customer;
 
     public Bill() {
     }
 
-    public Bill(String maSoThue, Date ngayLap, int tongTien, Employee employee, Customer customer) {
+    public Bill(String maSoThue, Date ngayLap, Long tongTien, Employee employee, Customer customer) {
         this.maSoThue = maSoThue;
         this.ngayLap = ngayLap;
         this.tongTien = tongTien;
@@ -72,11 +72,11 @@ public class Bill implements Serializable {
         this.ngayLap = ngayLap;
     }
 
-    public int getTongTien() {
+    public Long getTongTien() {
         return tongTien;
     }
 
-    public void setTongTien(int tongTien) {
+    public void setTongTien(Long tongTien) {
         this.tongTien = tongTien;
     }
 

@@ -14,27 +14,27 @@ public class BillInfo implements Serializable {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Integer maCTHD;
 
-    @Column(name = "DonGianBan")
-    private int donGia;
+    @Column(name = "DonGiaBan")
+    private Long donGia;
 
     @Column(name = "SoLuong")
-    private int soLuong;
+    private Long soLuong;
 
     @Column(name = "TienThanhToan")
-    private int tienThanhToan;
+    private Long tienThanhToan;
 
-    @OneToOne(cascade = CascadeType.ALL)
+    @OneToOne
     @JoinColumn(name = "MaHD", referencedColumnName = "MaHD")
     private Bill bill;
 
-    @OneToOne(cascade = CascadeType.ALL)
+    @OneToOne
     @JoinColumn(name = "MaMH", referencedColumnName = "MaMH")
     private Product product;
 
     public BillInfo() {
     }
 
-    public BillInfo(int donGia, int soLuong, int tienThanhToan, Bill bill, Product product) {
+    public BillInfo(Long donGia, Long soLuong, Long tienThanhToan, Bill bill, Product product) {
         this.donGia = donGia;
         this.soLuong = soLuong;
         this.tienThanhToan = tienThanhToan;
@@ -54,27 +54,27 @@ public class BillInfo implements Serializable {
         this.maCTHD = maCTHD;
     }
 
-    public int getDonGia() {
+    public Long getDonGia() {
         return donGia;
     }
 
-    public void setDonGia(int donGia) {
+    public void setDonGia(Long donGia) {
         this.donGia = donGia;
     }
 
-    public int getSoLuong() {
+    public Long getSoLuong() {
         return soLuong;
     }
 
-    public void setSoLuong(int soLuong) {
+    public void setSoLuong(Long soLuong) {
         this.soLuong = soLuong;
     }
 
-    public int getTienThanhToan() {
+    public Long getTienThanhToan() {
         return tienThanhToan;
     }
 
-    public void setTienThanhToan(int tienThanhToan) {
+    public void setTienThanhToan(Long tienThanhToan) {
         this.tienThanhToan = tienThanhToan;
     }
 

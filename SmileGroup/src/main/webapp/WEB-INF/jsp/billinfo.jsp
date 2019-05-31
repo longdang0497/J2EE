@@ -1,8 +1,12 @@
+<%@ page import="java.util.Optional" %>
+<%@ page import="com.smilegroup.componentmanagement.Models.Product" %>
+<%@ page import="com.smilegroup.componentmanagement.DAO.ProductRepository" %>
 <%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c" %>
+<%@ page pageEncoding="UTF-8" contentType="text/html; charset=utf-8"%>
 <!DOCTYPE html>
 <html lang="en">
 <head>
-    <title>Bill List</title>
+    <title>Bill Info List</title>
     <%@include file="fragment/importLibs.jsp" %>
 </head>
 <body>
@@ -15,52 +19,52 @@
 <!-- PAGE CONTENT -->
 <div class="w3-main w3-content w3-padding" style="max-width:1200px;margin-top:100px;">
     <div class="w3-white w3-xlarge">
-        <h1 class="w3-left" style="width: 100%;">MANAGE BILLS</h1>
+        <h1 class="w3-left" style="width: 100%;">MANAGE BILLS INFORMATION</h1>
     </div>
 
     <div>
-        <form class="segment" method="post" action="/bill&save">
+        <a href="/bill/">BACK</a>
+        <form name="biForm" class="segment" method="post" action="/bill-info&save/${maHD}">
             <table>
                 <tr>
                     <td>
-                        <input type="hidden" name="maHD" class="segment-tb"/>
-                        <label class="segment-lb">Customer Name</label>
-                        <select name="tenKH" class="segment-tb">
-                            <option>Choose a customer</option>
-                            <c:forEach var="cList" items="${customerLists}">
-                                <option>${cList.tenKH}</option>
-                            </c:forEach>
-                        </select>
+                        <input type="hidden" name="maCTHD" class="segment-tb"/>
+                        <label class="segment-lb">Bill ID</label>
+                        <input name="maHD" type="number" required="" value="${maHD}" class="segment-tb"/>
                     </td>
                     <td>
-                        <label class="segment-lb">Tax Code</label>
-                        <input type="text" name="maSoThue" required="" class="segment-tb"/>
+                        <label class="segment-lb">Product</label>
+                        <select name="tenMH" class="segment-tb">
+                            <option>Choose a product</option>
+                            <c:forEach var="pList" items="${productLists}">
+                                <option>${pList.tenMH}</option>
+                            </c:forEach>
+                        </select>
                     </td>
                 </tr>
                 <tr>
                     <td>
-                        <label class="segment-lb">Employee</label>
-                        <select name="tenNV" class="segment-tb">
-                            <option>Choose an employee</option>
-                            <c:forEach var="eList" items="${employeeLists}">
-                                <option>${eList.tenNV}</option>
-                            </c:forEach>
-                        </select>
+                        <label class="segment-lb">Selling price</label>
+<%--                        <select name="tenNV" class="segment-tb" >--%>
+<%--                            <c:forEach var="item" items="${productLists}">--%>
+<%--                                <option value="${item.donGia}" ${item.tenMH == request.getParameter("tenKH") ? 'selected="selected"' : ''}>${item.donGia}</option>--%>
+<%--                            </c:forEach>--%>
+<%--                        </select>--%>
+                        <input id="biPrice" type="number" name="donGia" required="" class="segment-tb"/>
                     </td>
                     <td>
-                        <label class="segment-lb">Published Date</label>
-                        <input type="date" name="ngayLap" required="" class="segment-tb"/>
+                        <label class="segment-lb">Quantities</label>
+                        <input id="biQuantities" type="number" name="soLuong" value="0" required="" class="segment-tb"/>
                     </td>
                 </tr>
                 <tr>
                     <td>
-                        <input type="hidden" name="maHD" class="segment-tb"/>
                         <label class="segment-lb">Total</label>
-                        <input type="number" name="tongTien" required="" class="segment-tb"/>
+                        <input id="biTotal" type="number" value="" name="tienThanhToan" class="segment-tb" onclick="calculate()"/>
                     </td>
                     <td>
                         <input type="submit" value="SAVE"/>
-                        <input type="button" value="REFRESH" onclick="window.location.href='/bill'"/>
+                        <input type="button" value="REFRESH" onclick="window.location.href='/bill/details/${maHD}'"/>
                     </td>
                 </tr>
             </table>
@@ -71,27 +75,26 @@
             <thead>
             <tr>
                 <th>ID</th>
-                <th>Published Date</th>
-                <th>Employee</th>
-                <th>Customer</th>
-                <th>Tax Code</th>
+                <th>Bill ID</th>
+                <th>Product</th>
+                <th>Selling price</th>
+                <th>Quantities</th>
                 <th>Total</th>
                 <th>Actions</th>
             </tr>
             </thead>
             <tbody>
-            <c:forEach var="list" items="${billLists}">
+            <c:forEach var="list" items="${billInfoList}">
                 <tr>
-                    <td>${list.maHD}</td>
-                    <td>${list.ngayLap}</td>
-                    <td>${list.employee.tenNV}</td>
-                    <td>${list.customer.tenKH}</td>
-                    <td>${list.maSoThue}</td>
-                    <td>${list.tongTien}</td>
+                    <td>${list.maCTHD}</td>
+                    <td>${list.bill.maHD}</td>
+                    <td>${list.product.tenMH}</td>
+                    <td>${list.donGia}</td>
+                    <td>${list.soLuong}</td>
+                    <td>${list.tienThanhToan}</td>
                     <td>
-                        <a href="/bill/details/${list.maHD}">Info</a>
-                        <a href="/bill/delete/${list.maHD}">Delete</a>
-                        <a href="/viewBill/${list.maHD}">Edit</a>
+                        <a href="/bill/details/${list.bill.maHD}/delete/${list.maCTHD}">Delete</a>
+                        <a href="/viewBillInfo/${list.maCTHD}">Edit</a>
                     </td>
                 </tr>
             </c:forEach>
