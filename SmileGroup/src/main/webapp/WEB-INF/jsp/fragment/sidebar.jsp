@@ -5,6 +5,7 @@
     <a href="/customer" onclick="w3_close()" class="w3-bar-item w3-button">Customer</a>
     <a href="/provider" onclick="w3_close()" class="w3-bar-item w3-button">Provider</a>
     <a href="/order" onclick="w3_close()" class="w3-bar-item w3-button">Order</a>
+    <a href="/importProduct" onclick="w3_close()" class="w3-bar-item w3-button">Import Product</a>
     <a href="/bill" onclick="w3_close()" class="w3-bar-item w3-button">Bill</a>
     <a href="/product" onclick="w3_close()" class="w3-bar-item w3-button">Product</a>
     <a href="/typeofcomponent" onclick="w3_close()" class="w3-bar-item w3-button">Type of component</a>
