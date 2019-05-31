@@ -18,14 +18,14 @@ public class TypeOfComponentController {
     @Autowired
     TypeOfComponentRepository tocRepo;
 
-    @RequestMapping("/typeofcomponent")
+    @RequestMapping(value = "/typeofcomponent", produces = "application/x-www-form-urlencoded;charset=utf-8")
     public ModelAndView doTypeOfComponent() {
         ModelAndView mv = new ModelAndView("typeofcomponent");
         mv.addObject("tocLists", tocRepo.findAll());
         return mv;
     }
 
-    @RequestMapping(value = "/typeofcomponent&save", method = RequestMethod.POST)
+    @RequestMapping(value = "/typeofcomponent&save", method = RequestMethod.POST, produces = "application/x-www-form-urlencoded;charset=utf-8")
     public ModelAndView doSave(@RequestParam("tenLoai") String tenLoai) {
         ModelAndView mv = new ModelAndView("redirect:/typeofcomponent");
         TypeOfComponent obj = new TypeOfComponent();
@@ -34,7 +34,7 @@ public class TypeOfComponentController {
         return mv;
     }
 
-    @RequestMapping(value = "/typeofcomponent&edit", method = RequestMethod.POST)
+    @RequestMapping(value = "/typeofcomponent&edit", method = RequestMethod.POST, produces = "application/x-www-form-urlencoded;charset=utf-8")
     public ModelAndView doUpdate(@RequestParam("maLoai") int maLoai, @RequestParam("tenLoai") String tenLoai) {
         ModelAndView mv = new ModelAndView("redirect:/typeofcomponent");
         TypeOfComponent obj = null;
@@ -49,7 +49,7 @@ public class TypeOfComponentController {
         return mv;
     }
 
-    @RequestMapping(value = "/viewTypeOfComponent/{maLoai}", method = RequestMethod.GET)
+    @RequestMapping(value = "/viewTypeOfComponent/{maLoai}", method = RequestMethod.GET, produces = "application/x-www-form-urlencoded;charset=utf-8")
     public ModelAndView doEdit(@PathVariable("maLoai") int maLoai) {
         ModelAndView mv = new ModelAndView("viewTypeOfComponent");
         Optional<TypeOfComponent> objOpt  = this.tocRepo.findById(maLoai);
@@ -64,7 +64,7 @@ public class TypeOfComponentController {
         return mv;
     }
 
-    @RequestMapping(value = "/typeofcomponent/delete/{maLoai}", method = RequestMethod.GET)
+    @RequestMapping(value = "/typeofcomponent/delete/{maLoai}", method = RequestMethod.GET, produces = "application/x-www-form-urlencoded;charset=utf-8")
     public ModelAndView doDelete(@PathVariable("maLoai") int maLoai) {
         ModelAndView mv = new ModelAndView("redirect:/typeofcomponent");
         tocRepo.deleteById(maLoai);

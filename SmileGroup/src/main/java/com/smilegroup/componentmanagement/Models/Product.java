@@ -28,15 +28,15 @@ public class Product implements Serializable {
     @Column(name = "SoLuong")
     private Integer soLuong;
 
-    @OneToOne(cascade = CascadeType.ALL)
+    @OneToOne
     @JoinColumn(name = "MaLoai", referencedColumnName = "MaLoai")
     private TypeOfComponent type;
 
-    @OneToOne(cascade = CascadeType.ALL)
+    @OneToOne
     @JoinColumn(name = "MaDV", referencedColumnName = "MaDV")
     private Unit unit;
 
-    @OneToOne(cascade = CascadeType.ALL)
+    @OneToOne
     @JoinColumn(name = "MaKhu", referencedColumnName = "MaKhu")
     private Store store;
 

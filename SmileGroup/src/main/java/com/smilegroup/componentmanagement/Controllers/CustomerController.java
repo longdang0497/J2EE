@@ -18,14 +18,14 @@ public class CustomerController {
     @Autowired
     CustomerRepository customerRepo;
 
-    @RequestMapping("/customer")
+    @RequestMapping(value = "/customer", produces = "application/x-www-form-urlencoded;charset=utf-8")
     public ModelAndView doCustomer() {
         ModelAndView mv = new ModelAndView("customer");
         mv.addObject("customerLists", customerRepo.findAll());
         return mv;
     }
 
-    @RequestMapping(value = "/customer&save", method = RequestMethod.POST)
+    @RequestMapping(value = "/customer&save", method = RequestMethod.POST, produces = "application/x-www-form-urlencoded;charset=utf-8")
     public ModelAndView doSave(@RequestParam("tenKH") String tenKH, String diaChi, String email,
                                @RequestParam("soDT") String soDT) {
         ModelAndView mv = new ModelAndView("redirect:/customer");
@@ -38,7 +38,7 @@ public class CustomerController {
         return mv;
     }
 
-    @RequestMapping(value = "/customer&edit", method = RequestMethod.POST)
+    @RequestMapping(value = "/customer&edit", method = RequestMethod.POST, produces = "application/x-www-form-urlencoded;charset=utf-8")
     public ModelAndView doUpdate(@RequestParam("maKH") int maKH, @RequestParam("tenKH") String tenKH, String diaChi, String email,
                                  @RequestParam("soDT") String soDT) {
         ModelAndView mv = new ModelAndView("redirect:/customer");
@@ -57,7 +57,7 @@ public class CustomerController {
         return mv;
     }
 
-    @RequestMapping(value = "/viewCustomer/{maKH}", method = RequestMethod.GET)
+    @RequestMapping(value = "/viewCustomer/{maKH}", method = RequestMethod.GET, produces = "application/x-www-form-urlencoded;charset=utf-8")
     public ModelAndView doEdit(@PathVariable("maKH") int maKH) {
         ModelAndView mv = new ModelAndView("viewCustomer");
         Optional<Customer> cusOpt  = this.customerRepo.findById(maKH);
@@ -72,7 +72,7 @@ public class CustomerController {
         return mv;
     }
 
-    @RequestMapping(value = "/customer/delete/{maKH}", method = RequestMethod.GET)
+    @RequestMapping(value = "/customer/delete/{maKH}", method = RequestMethod.GET, produces = "application/x-www-form-urlencoded;charset=utf-8")
     public ModelAndView doDelete(@PathVariable("maKH") int maKH) {
         ModelAndView mv = new ModelAndView("redirect:/customer");
         customerRepo.deleteById(maKH);

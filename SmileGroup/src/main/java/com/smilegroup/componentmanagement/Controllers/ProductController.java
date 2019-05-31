@@ -28,7 +28,7 @@ public class ProductController {
     @Autowired
     UnitRepository unitRepository;
 
-    @RequestMapping("/product")
+    @RequestMapping(value = "/product", produces = "application/x-www-form-urlencoded;charset=utf-8")
     public ModelAndView doProduct() {
         ModelAndView mv = new ModelAndView("product");
         mv.addObject("storeLists", storeRepository.findAll());
@@ -38,7 +38,7 @@ public class ProductController {
         return mv;
     }
 
-    @RequestMapping(value = "/product&save", method = RequestMethod.POST)
+    @RequestMapping(value = "/product&save", method = RequestMethod.POST, produces = "application/x-www-form-urlencoded;charset=utf-8")
     public ModelAndView doSave(@RequestParam("tenMH") String tenMH, String cauHinh, String hangSX,
                                int soLuong, String tenLoai, String tenDV, String tenKhu) {
         ModelAndView mv = new ModelAndView("redirect:/product");
@@ -76,7 +76,7 @@ public class ProductController {
         return mv;
     }
 
-    @RequestMapping(value = "/product&edit", method = RequestMethod.POST)
+    @RequestMapping(value = "/product&edit", method = RequestMethod.POST, produces = "application/x-www-form-urlencoded;charset=utf-8")
     public ModelAndView doUpdate(@RequestParam("maMH") int maMH, @RequestParam("tenMH") String tenMH, String cauHinh, String hangSX,
                                  int soLuong, String tenLoai, String tenDV, String tenKhu) {
         ModelAndView mv = new ModelAndView("redirect:/product");
@@ -121,7 +121,7 @@ public class ProductController {
         return mv;
     }
 
-    @RequestMapping(value = "/viewProduct/{maMH}", method = RequestMethod.GET)
+    @RequestMapping(value = "/viewProduct/{maMH}", method = RequestMethod.GET, produces = "application/x-www-form-urlencoded;charset=utf-8")
     public ModelAndView doEdit(@PathVariable("maMH") int maMH) {
         ModelAndView mv = new ModelAndView("viewProduct");
         mv.addObject("storeLists", storeRepository.findAll());
@@ -139,7 +139,7 @@ public class ProductController {
         return mv;
     }
 
-    @RequestMapping(value = "/product/delete/{maMH}", method = RequestMethod.GET)
+    @RequestMapping(value = "/product/delete/{maMH}", method = RequestMethod.GET, produces = "application/x-www-form-urlencoded;charset=utf-8")
     public ModelAndView doDelete(@PathVariable("maMH") int maMH) {
         ModelAndView mv = new ModelAndView("redirect:/product");
         productRepository.deleteById(maMH);

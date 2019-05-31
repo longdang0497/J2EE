@@ -8,3 +8,4 @@
 <link rel="stylesheet" href="<c:url value='/css/style.css'/>" type="text/css" media="all" />
 
 <script src="<c:url value='/js/sidebar.js'/>"></script>
+<script src="<c:url value='/js/calculate.js'/>"></script>

@@ -17,7 +17,7 @@ public class Unit implements Serializable {
     @Column(name = "TenDV")
     private String tenDV;
 
-    @OneToMany(cascade = CascadeType.ALL)
+    @OneToMany
     @JoinColumn(name = "maDV", referencedColumnName = "maDV")
     private List<Product> productLists;
 
