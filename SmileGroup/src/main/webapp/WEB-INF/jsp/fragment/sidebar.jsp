@@ -3,6 +3,7 @@
        class="w3-bar-item w3-button">Close Menu</a>
     <a href="/" onclick="w3_close()" class="w3-bar-item w3-button">Home</a>
     <a href="/customer" onclick="w3_close()" class="w3-bar-item w3-button">Customer</a>
+    <a href="/provider" onclick="w3_close()" class="w3-bar-item w3-button">Provider</a>
     <a href="/bill" onclick="w3_close()" class="w3-bar-item w3-button">Bill</a>
     <a href="/product" onclick="w3_close()" class="w3-bar-item w3-button">Product</a>
     <a href="/typeofcomponent" onclick="w3_close()" class="w3-bar-item w3-button">Type of component</a>
