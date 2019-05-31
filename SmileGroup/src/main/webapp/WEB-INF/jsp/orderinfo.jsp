@@ -6,7 +6,7 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-    <title>Bill Info List</title>
+    <title>Order Info List</title>
     <%@include file="fragment/importLibs.jsp" %>
 </head>
 <body>
@@ -19,18 +19,18 @@
 <!-- PAGE CONTENT -->
 <div class="w3-main w3-content w3-padding" style="max-width:1200px;margin-top:100px;">
     <div class="w3-white w3-xlarge">
-        <h1 class="w3-left" style="width: 100%;">MANAGE BILLS INFORMATION</h1>
+        <h1 class="w3-left" style="width: 100%;">MANAGE ORDERS INFORMATION</h1>
     </div>
 
     <div>
-        <a href="/bill/">BACK</a>
-        <form name="biForm" class="segment" method="post" action="/bill-info&save/${maHD}">
+        <a href="/order/">BACK</a>
+        <form name="biForm" class="segment" method="post" action="/order-info&save/${maDDH}">
             <table>
                 <tr>
                     <td>
-                        <input type="hidden" name="maCTHD" class="segment-tb"/>
-                        <label class="segment-lb">Bill ID</label>
-                        <input name="maHD" type="number" required="" value="${maHD}" class="segment-tb"/>
+                        <input type="hidden" name="maCTDDH" class="segment-tb"/>
+                        <label class="segment-lb">Order ID</label>
+                        <input name="maDDH" type="number" required="" value="${maDDH}" class="segment-tb"/>
                     </td>
                     <td>
                         <label class="segment-lb">Product</label>
@@ -44,27 +44,12 @@
                 </tr>
                 <tr>
                     <td>
-                        <label class="segment-lb">Selling price</label>
-                        <%--                        <select name="tenNV" class="segment-tb" >--%>
-                        <%--                            <c:forEach var="item" items="${productLists}">--%>
-                        <%--                                <option value="${item.donGia}" ${item.tenMH == request.getParameter("tenKH") ? 'selected="selected"' : ''}>${item.donGia}</option>--%>
-                        <%--                            </c:forEach>--%>
-                        <%--                        </select>--%>
-                        <input id="biPrice" type="number" name="donGia" required="" class="segment-tb"/>
-                    </td>
-                    <td>
                         <label class="segment-lb">Quantities</label>
-                        <input id="biQuantities" type="number" name="soLuong" value="0" required="" class="segment-tb"/>
-                    </td>
-                </tr>
-                <tr>
-                    <td>
-                        <label class="segment-lb">Total</label>
-                        <input id="biTotal" type="number" value="" name="tienThanhToan" class="segment-tb" onclick="calculate()"/>
+                        <input id="orQuantities" type="number" name="soLuong" value="0" required="" class="segment-tb"/>
                     </td>
                     <td>
                         <input type="submit" value="SAVE"/>
-                        <input type="button" value="REFRESH" onclick="window.location.href='/bill/details/${maHD}'"/>
+                        <input type="button" value="REFRESH" onclick="window.location.href='/order/details/${maDDH}'"/>
                     </td>
                 </tr>
             </table>
@@ -77,24 +62,20 @@
                 <th>ID</th>
                 <th>Bill ID</th>
                 <th>Product</th>
-                <th>Selling price</th>
                 <th>Quantities</th>
-                <th>Total</th>
                 <th>Actions</th>
             </tr>
             </thead>
             <tbody>
-            <c:forEach var="list" items="${billInfoList}">
+            <c:forEach var="list" items="${orderInfoList}">
                 <tr>
-                    <td>${list.maCTHD}</td>
-                    <td>${list.bill.maHD}</td>
+                    <td>${list.maCTDDH}</td>
+                    <td>${list.order.maDDH}</td>
                     <td>${list.product.tenMH}</td>
-                    <td>${list.donGia}</td>
                     <td>${list.soLuong}</td>
-                    <td>${list.tienThanhToan}</td>
                     <td>
-                        <a href="/bill/details/${list.bill.maHD}/delete/${list.maCTHD}">Delete</a>
-                        <a href="/viewBillInfo/${list.maCTHD}">Edit</a>
+                        <a href="/order/details/${list.order.maDDH}/delete/${list.maCTDDH}">Delete</a>
+                        <a href="/viewOrderInfo/${list.maCTDDH}">Edit</a>
                     </td>
                 </tr>
             </c:forEach>

@@ -3,7 +3,7 @@
 <!DOCTYPE html>
 <html lang="en" xmlns:th="http://www.springframework.org/schema/data/jaxb">
 <head>
-    <title>Bill Information</title>
+    <title>Order Information</title>
     <%@include file="fragment/importLibs.jsp"%>
 </head>
 <body>
@@ -17,44 +17,36 @@
 <div class="w3-main w3-content w3-padding" style="max-width:1200px;margin-top:100px;">
 
     <div>
-        <form class="segment" method="post" action="/bill-info&edit/${billInfoList.bill.maHD}">
+        <form class="segment" method="post" action="/order-info&edit/${orderInfoList.order.maDDH}">
             <table class="fl-table">
                 <thead>
                 <tr>
                     <th>ID</th>
-                    <td><input type="number" name="maCTHD" required="" class="segment-tb" value="${billInfoList.maCTHD}"></td>
+                    <td><input type="number" name="maCTDDH" required="" class="segment-tb" value="${orderInfoList.maCTDDH}"></td>
                 </tr>
                 <tr>
                     <th>Bill ID</th>
-                    <td><input type="number" name="maHD" required="" class="segment-tb" value="${billInfoList.bill.maHD}"></td>
+                    <td><input type="number" name="maDDH" required="" class="segment-tb" value="${orderInfoList.order.maDDH}"></td>
                 </tr>
                 <tr>
                     <th>Product</th>
                     <td>
                         <select name="tenMH" class="segment-tb" >
                             <c:forEach var="item" items="${productLists}">
-                                <option value="${item.tenMH}" ${item.maMH == billInfoList.product.maMH ? 'selected="selected"' : ''}>${item.tenMH}</option>
+                                <option value="${item.tenMH}" ${item.maMH == orderInfoList.product.maMH ? 'selected="selected"' : ''}>${item.tenMH}</option>
                             </c:forEach>
                         </select>
                     </td>
                 </tr>
                 <tr>
-                    <th>Selling Price</th>
-                    <td><input type="number" name="donGia" required="" class="segment-tb" value="${billInfoList.donGia}"></td>
-                </tr>
-                <tr>
                     <th>Quantities</th>
-                    <td><input type="number" name="soLuong" required="" class="segment-tb" value="${billInfoList.soLuong}"></td>
-                </tr>
-                <tr>
-                    <th>Total</th>
-                    <td><input type="number" name="tienThanhToan" required="" class="segment-tb" value="${billInfoList.tienThanhToan}"></td>
+                    <td><input type="number" name="soLuong" required="" class="segment-tb" value="${orderInfoList.soLuong}"></td>
                 </tr>
                 <thead>
             </table>
             <input type="submit" value="SAVE" />
         </form>
-        <a href="/bill/details/${billInfoList.bill.maHD}">BACK</a>
+        <a href="/order/details/${orderInfoList.order.maDDH}">BACK</a>
     </div>
 </div>
 
