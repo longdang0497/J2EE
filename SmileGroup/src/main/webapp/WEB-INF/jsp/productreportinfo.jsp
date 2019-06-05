@@ -21,58 +21,58 @@
 
     <div>
         <a href="/productReport/">BACK</a>
-        <form class="segment" method="post" action="/productReport&save/${maBCHT}">
-            <table>
-                <tr>
-                    <td>
-                        <input type="hidden" name="maCTBC" class="segment-tb"/>
-                        <label class="segment-lb">Product Report ID</label>
-                        <input type="text" name="maBCHT" required="" class="segment-tb" />
-                    </td>
-                    <td>
-                        <label class="segment-lb">Product</label>
-                        <select name="tenMH" class="segment-tb">
-                            <option>Choose a product</option>
-                            <c:forEach var="pList" items="${productLists}">
-                                <option>${pList.tenMH}</option>
-                            </c:forEach>
-                        </select>
-                    </td>
-                </tr>
-                <tr>
-                    <td>
-                        <input type="submit" value="SAVE"/>
-                        <input type="button" value="REFRESH" onclick="window.location.href='/productReport/details/${maBCHT}'"/>
-                    </td>
-                </tr>
-            </table>
-        </form>
+<%--        <form class="segment" method="post" action="/productReport&save/${maBCHT}">--%>
+<%--&lt;%&ndash;            <table>&ndash;%&gt;--%>
+<%--&lt;%&ndash;                <tr>&ndash;%&gt;--%>
+<%--&lt;%&ndash;                    <td>&ndash;%&gt;--%>
+<%--&lt;%&ndash;                        <input type="hidden" name="maCTBC" class="segment-tb"/>&ndash;%&gt;--%>
+<%--&lt;%&ndash;                        <label class="segment-lb">Product Report ID</label>&ndash;%&gt;--%>
+<%--&lt;%&ndash;                        <input type="text" name="maBCHT" required="" class="segment-tb" />&ndash;%&gt;--%>
+<%--&lt;%&ndash;                    </td>&ndash;%&gt;--%>
+<%--&lt;%&ndash;                    <td>&ndash;%&gt;--%>
+<%--&lt;%&ndash;                        <label class="segment-lb">Product</label>&ndash;%&gt;--%>
+<%--&lt;%&ndash;                        <select name="tenMH" class="segment-tb">&ndash;%&gt;--%>
+<%--&lt;%&ndash;                            <option>Choose a product</option>&ndash;%&gt;--%>
+<%--&lt;%&ndash;                            <c:forEach var="pList" items="${productLists}">&ndash;%&gt;--%>
+<%--&lt;%&ndash;                                <option>${pList.tenMH}</option>&ndash;%&gt;--%>
+<%--&lt;%&ndash;                            </c:forEach>&ndash;%&gt;--%>
+<%--&lt;%&ndash;                        </select>&ndash;%&gt;--%>
+<%--&lt;%&ndash;                    </td>&ndash;%&gt;--%>
+<%--&lt;%&ndash;                </tr>&ndash;%&gt;--%>
+<%--&lt;%&ndash;                <tr>&ndash;%&gt;--%>
+<%--&lt;%&ndash;                    <td>&ndash;%&gt;--%>
+<%--&lt;%&ndash;                        <input type="submit" value="SAVE"/>&ndash;%&gt;--%>
+<%--&lt;%&ndash;                        <input type="button" value="REFRESH" onclick="window.location.href='/productReportInfo/details/${maBCHT}'"/>&ndash;%&gt;--%>
+<%--&lt;%&ndash;                    </td>&ndash;%&gt;--%>
+<%--&lt;%&ndash;                </tr>&ndash;%&gt;--%>
+<%--&lt;%&ndash;            </table>&ndash;%&gt;--%>
+<%--        </form>--%>
     </div>
     <div>
         <table class="fl-table">
             <thead>
             <tr>
-                <th>ID</th>
-                <th>PR ID</th>
+<%--                <th>ID</th>--%>
+<%--                <th>PR ID</th>--%>
                 <th>Product</th>
                 <th>Import</th>
                 <th>Export</th>
                 <th>Left</th>
-                <th>Actions</th>
+<%--                <th>Actions</th>--%>
             </tr>
             </thead>
             <tbody>
             <c:forEach var="list" items="${productReportInfoLists}">
                 <tr>
-                    <td>${list.maCTBC}</td>
-                    <td>${list.productReport.maBCHT}</td>
-                    <td>${list.product.tenMH}</td>
+<%--                    <td>${list.maCTBC}</td>--%>
+<%--                    <td>${list.productReport.maBCHT}</td>--%>
+                    <td>${list.tenMH}</td>
                     <td>${list.luongNhap}</td>
                     <td>${list.luongBan}</td>
                     <td>${list.luongTon}</td>
                     <td>
-                        <a href="/productReport/details/${list.productReport.maBCHT}/delete/${list.maCTBC}">Delete</a>
-                        <a href="/viewProductReportInfo/${list.maCTBC}">Edit</a>
+<%--                        <a href="/productReport/details/${list.productReport.maBCHT}/delete/${list.maCTBC}">Delete</a>--%>
+<%--                        <a href="/viewProductReportInfo/${list.maCTBC}">Edit</a>--%>
                     </td>
                 </tr>
             </c:forEach>

@@ -41,10 +41,7 @@
                 <tr>
                     <td>
                         <label class="segment-lb">Month</label>
-                        <select name="thang" class="segment-tb">
-                            <option>Choose a month</option>
-                            <option>1</option><option>2</option><option>3</option><option>4</option><option>5</option><option>6</option><option>7</option><option>8</option><option>9</option><option>10</option><option>11</option><option>12</option>
-                        </select>
+                        <input type="number" name="thang" required="" class="segment-tb" />
                     </td>
                     <td>
                         <input type="submit" value="SAVE"/>
@@ -79,9 +76,9 @@
                     <td>${list.tongBan}</td>
                     <td>${list.tongTon}</td>
                     <td>
-                        <a href="/productReportInfo/details/${list.maBCHT}">Info</a>
+                        <a href="/productReportInfo/details/${list.maBCHT}/${list.thang}">Info</a>
                         <a href="/productReport/delete/${list.maBCHT}">Delete</a>
-                        <a href="/viewBill/${list.maBCHT}">Edit</a>
+                        <a href="/viewProductReport/${list.maBCHT}">Edit</a>
                     </td>
                 </tr>
             </c:forEach>

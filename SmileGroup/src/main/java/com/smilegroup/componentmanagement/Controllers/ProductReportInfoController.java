@@ -22,13 +22,16 @@ public class ProductReportInfoController {
     ProductReportInfoRepository productReportInfoRepository;
 
     @Autowired
+    ProductReportRepository productReportRepository;
+
+    @Autowired
     ProductRepository productRepository;
 
-    @RequestMapping(value = "/productReportInfo/details/{maBCHT}", produces = "application/x-www-form-urlencoded;charset=utf-8")
-    public ModelAndView doProductReportInfo(@PathVariable("maBCHT") int maBCHT) {
+    @RequestMapping(value = "/productReportInfo/details/{maBCHT}/{thang}", method = RequestMethod.GET, produces = "application/x-www-form-urlencoded;charset=utf-8")
+    public ModelAndView doProductReportInfo(@PathVariable("maBCHT") int maBCHT, @PathVariable("thang") int thang) {
         ModelAndView mv = new ModelAndView("productreportinfo");
-        mv.addObject("productLists", productRepository.findAll());
-        mv.addObject("productReportInfoLists", productReportInfoRepository.findAll());
+        Iterable<ProductReportInfoDTO> productReportInfos = productReportInfoRepository.calculateImportExportLeft(thang);
+        mv.addObject("productReportInfoLists", productReportInfos);
         return mv;
     }
 
