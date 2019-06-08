@@ -13,4 +13,8 @@ public interface BillInfoRepository extends CrudRepository<BillInfo, Integer> {
     String QUERY_BY_NAME = "SELECT * FROM CHITIETHOADON CTHD where CTHD.MaHD = :maHD";
     @Query(value = QUERY_BY_NAME, nativeQuery = true)
     Iterable<BillInfo> findByBillID(@Param("maHD") int maHD);
+
+    String QUERY_BY_PRODUCT = "SELECT SUM(CTHD.SoLuong) as SoLuong FROM CHITIETHOADON CTHD where CTHD.MaMH = :maMH AND CTHD.MaHD = :maHD";
+    @Query(value = QUERY_BY_PRODUCT, nativeQuery = true)
+    Long calculateSumSellByProductID(@Param("maHD") int maHD, @Param("maMH") int maMH);
 }

@@ -60,7 +60,7 @@
                 <th>Published Date</th>
                 <th>Employee</th>
                 <th>Total Import</th>
-                <th>Total Export</th>
+                <th>Total Export/Sell</th>
                 <th>Total Left</th>
                 <th>Actions</th>
             </tr>
@@ -76,7 +76,7 @@
                     <td>${list.tongBan}</td>
                     <td>${list.tongTon}</td>
                     <td>
-                        <a href="/productReportInfo/details/${list.maBCHT}/${list.thang}">Info</a>
+                        <a href="/productReportInfo/create/details/${list.maBCHT}/${list.thang}">Info</a>
                         <a href="/productReport/delete/${list.maBCHT}">Delete</a>
                         <a href="/viewProductReport/${list.maBCHT}">Edit</a>
                     </td>
@@ -85,8 +85,6 @@
             </tbody>
         </table>
     </div>
-
-
 </div>
 
 <!-- Footer -->
