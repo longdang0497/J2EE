@@ -70,7 +70,7 @@
                         <td>${list.email}</td>
                         <td>${list.soDT}</td>
                         <td>
-                            <a href="/customer/delete/${list.maKH}">Delete</a>
+                            <a href="/customer/delete/${list.maKH}" onclick="return confirm('Do you want to delete this?')">Delete</a>
                             <a href="/viewCustomer/${list.maKH}">Edit</a>
                         </td>
                     </tr>

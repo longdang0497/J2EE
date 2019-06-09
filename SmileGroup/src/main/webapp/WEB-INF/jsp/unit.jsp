@@ -51,7 +51,7 @@
                     <td>${list.maDV}</td>
                     <td>${list.tenDV}</td>
                     <td>
-                        <a href="/unit/delete/${list.maDV}">Delete</a>
+                        <a href="/unit/delete/${list.maDV}" onclick="return confirm('Do you want to delete this?')">Delete</a>
                         <a href="/viewUnit/${list.maDV}">Edit</a>
                     </td>
                 </tr>

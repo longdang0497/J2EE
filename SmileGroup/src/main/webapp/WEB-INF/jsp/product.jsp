@@ -109,7 +109,7 @@
                     <td>${list.store.tenKhu}</td>
                     <td>${list.soLuong}</td>
                     <td>
-                        <a href="/product/delete/${list.maMH}">Delete</a>
+                        <a href="/product/delete/${list.maMH}" onclick="return confirm('Do you want to delete this?')">Delete</a>
                         <a href="/viewProduct/${list.maMH}">Edit</a>
                     </td>
                 </tr>

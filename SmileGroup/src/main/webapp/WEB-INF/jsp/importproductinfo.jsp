@@ -37,7 +37,7 @@
                         <select name="tenMH" class="segment-tb">
                             <option>Choose a product</option>
                             <c:forEach var="pList" items="${productLists}">
-                                <option>${pList.tenMH}</option>
+                                <option>${pList.product.tenMH}</option>
                             </c:forEach>
                         </select>
                     </td>
@@ -54,7 +54,7 @@
                     </td>
                     <td>
                         <label class="segment-lb">Listed price</label>
-                        <input id="biTotal" type="number" value="" name="donGian" class="segment-tb" onclick="calculate()"/>
+                        <input id="biTotal" type="number" value="" name="donGia" class="segment-tb" onclick="calculate()"/>
                     </td>
                 </tr>
                 <tr>
@@ -63,16 +63,12 @@
                         <input id="ipQuantities" type="number" name="soLuong" value="0" required="" class="segment-tb"/>
                     </td>
                     <td>
-                        <label class="segment-lb">Total</label>
-                        <input id="ipTotal" type="number" value="" name="tongTien" class="segment-tb" onclick="calculate()"/>
-                    </td>
-                </tr>
-                <tr>
-                    <td>
                         <label class="segment-lb">Note</label>
                         <input type="text" name="ghiChu" required="" class="segment-tb"/>
                     </td>
-                    <td>
+                </tr>
+                <tr>
+                    <td colspan="2">
                         <input type="submit" value="SAVE"/>
                         <input type="button" value="REFRESH" onclick="window.location.href='/importProduct/details/${maPN}'"/>
                     </td>
@@ -107,7 +103,7 @@
                     <td>${list.tongTien}</td>
                     <td>${list.ghiChu}</td>
                     <td>
-                        <a href="/importProduct/details/${list.importProduct.maPN}/delete/${list.maCTPN}">Delete</a>
+                        <a href="/importProduct/details/${list.importProduct.maPN}/delete/${list.maCTPN}" onclick="return confirm('Do you want to delete this?')">Delete</a>
                         <a href="/viewImportProductInfo/${list.maCTPN}">Edit</a>
                     </td>
                 </tr>

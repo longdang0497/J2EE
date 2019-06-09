@@ -15,6 +15,11 @@
 
 <!-- PAGE CONTENT -->
 <div class="w3-main w3-content w3-padding" style="max-width:1200px;margin-top:100px;">
+    <h2>
+        <c:if test="${not empty errorMessage}">
+            <c:out value="${errorMessage}"/>
+        </c:if>
+    </h2>
     <div class="w3-white w3-xlarge">
         <h1 class="w3-left" style="width: 100%;">MANAGE IMPORT PRODUCT</h1>
     </div>
@@ -49,12 +54,6 @@
                         <input type="text" name="ngayLapPhieu" required="" class="segment-tb" required pattern="[0-9]{4}-[0-9]{2}-[0-9]{2}"/>
                     </td>
                     <td>
-                        <label class="segment-lb">Total</label>
-                        <input type="number" name="tongTienPN" required="" class="segment-tb""/>
-                    </td>
-                </tr>
-                <tr>
-                    <td>
                         <input type="submit" value="SAVE"/>
                         <input type="button" value="REFRESH" onclick="window.location.href='/importProduct'"/>
                     </td>
@@ -84,7 +83,7 @@
                     <td>${list.tongTienPN}</td>
                     <td>
                         <a href="/importProduct/details/${list.maPN}">Info</a>
-                        <a href="/importProduct/delete/${list.maPN}">Delete</a>
+                        <a href="/importProduct/delete/${list.maPN}" onclick="return confirm('Do you want to delete this?')">Delete</a>
                         <a href="/viewImportProduct/${list.maPN}">Edit</a>
                     </td>
                 </tr>
