@@ -13,4 +13,8 @@ public interface ImportProductInfoRepository extends CrudRepository<ImportProduc
     String QUERY_BY_NAME = "SELECT * FROM CHITIETPHIEUNHAP CTPN where CTPN.MaPN = :maPN";
     @Query(value = QUERY_BY_NAME, nativeQuery = true)
     Iterable<ImportProductInfo> findByImportProductID(@Param("maPN") int maPN);
+
+    String QUERY_BY_PRODUCT = "SELECT SUM(CTPN.SoLuong) FROM CHITIETPHIEUNHAP CTPN where CTPN.MaMH = :maMH AND CTPN.MaPN = :maPN";
+    @Query(value = QUERY_BY_PRODUCT, nativeQuery = true)
+    Long calculateSumImportByProductID(@Param("maPN") int maPN, @Param("maMH") int maMH);
 }
