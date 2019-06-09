@@ -78,7 +78,6 @@
                     <td>
                         <a href="/productReportInfo/create/details/${list.maBCHT}/${list.thang}">Info</a>
                         <a href="/productReport/delete/${list.maBCHT}">Delete</a>
-                        <a href="/viewProductReport/${list.maBCHT}">Edit</a>
                     </td>
                 </tr>
             </c:forEach>

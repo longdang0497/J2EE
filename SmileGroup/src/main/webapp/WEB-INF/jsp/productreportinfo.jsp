@@ -20,7 +20,7 @@
     </div>
 
     <div>
-        <a href="/productReport/">BACK</a>
+        <a href="/productReport">BACK</a>
     </div>
     <div>
         <div>

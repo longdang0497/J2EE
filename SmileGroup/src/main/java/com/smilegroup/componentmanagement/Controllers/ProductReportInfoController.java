@@ -13,6 +13,7 @@ import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.servlet.ModelAndView;
 
 import javax.persistence.EntityManager;
+import java.sql.SQLException;
 import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
@@ -43,17 +44,55 @@ public class ProductReportInfoController {
     ImportProductRepository importProductRepository;
 
     @RequestMapping(value = "/productReportInfo/create/details/{maBCHT}/{thang}", method = { RequestMethod.GET, RequestMethod.POST }, produces = "application/x-www-form-urlencoded;charset=utf-8")
-    public ModelAndView doGetProductReportInfo(@PathVariable("maBCHT") int maBCHT, @PathVariable("thang") int thang) {
+    public ModelAndView doGetProductReportInfo(@PathVariable("maBCHT") int maBCHT, @PathVariable("thang") int thang) throws Exception, SQLException, NullPointerException {
         ModelAndView mv = new ModelAndView("productreportinfo");
-        ArrayList<ProductReportInfo> arrResult = CreateReport(maBCHT, thang);
-        for (ProductReportInfo obj : arrResult)
+
+        ProductReport obj = new ProductReport();
+        Long sumImport = productReportRepository.sumImport(maBCHT);
+        Long sumSell = productReportRepository.sumSell(maBCHT);
+        Long sumLeft = productReportRepository.sumLeft(maBCHT);
+        if (maBCHT != 0 && sumImport != null && sumLeft != null && sumSell != null)
         {
-            if (obj.getProduct().getMaMH() != 0)
-            {
-                Optional<ProductReportInfo> prOptional = productReportInfoRepository.findAllByProductID(obj.getProduct().getMaMH());
-                if (!prOptional.isPresent())
-                    productReportInfoRepository.save(obj);
+            Optional<ProductReport> productReportOptional = productReportRepository.findById(maBCHT);
+            if (productReportOptional.isPresent()){
+                obj.setMaBCHT(productReportOptional.get().getMaBCHT());
+                obj.setNgayLap(productReportOptional.get().getNgayLap());
+                obj.setThang(productReportOptional.get().getThang());
+                obj.setEmployee(productReportOptional.get().getEmployee());
+                if (sumImport != 0)
+                    obj.setTongNhap(sumImport);
+                else
+                    obj.setTongNhap(Long.parseLong("0"));
+                if (sumSell != 0)
+                    obj.setTongBan(sumSell);
+                else
+                    obj.setTongBan(Long.parseLong("0"));
+                if (sumLeft != 0)
+                    obj.setTongTon(sumLeft);
+                else
+                    obj.setTongTon(Long.parseLong("0"));
+                productReportRepository.save(obj);
             }
+        }
+
+        ArrayList<ProductReportInfo> arrResult = CreateReport(maBCHT, thang);
+        if (arrResult != null)
+        {
+            for (ProductReportInfo itr : arrResult)
+            {
+                if (itr.getProduct().getMaMH() != 0)
+                {
+                    Optional<ProductReportInfo> prOptional = productReportInfoRepository.findAllByProductID(itr.getProduct().getMaMH(), itr.getProductReport().getMaBCHT());
+                    if (!prOptional.isPresent())
+                        productReportInfoRepository.save(itr);
+                }
+            }
+
+        }
+        else
+        {
+            ProductReportInfo productReportInfo = new ProductReportInfo();
+            arrResult.add(productReportInfo);
         }
         mv.addObject("prInfoLists", arrResult);
         return mv;
@@ -82,7 +121,7 @@ public class ProductReportInfoController {
                 if(billInfos.iterator().hasNext() && i < counter)
                 {
                     luongBan[i][0] = info.getProduct().getMaMH();
-                    luongBan[i][1] = Math.toIntExact(billInfoRepository.calculateSumSellByProductID(obj.getMaHD(), info.getProduct().getMaMH()));
+                    luongBan[i][1] = Math.toIntExact(billInfoRepository.calculateSumSellByProductID(info.getBill().getMaHD(), info.getProduct().getMaMH()));
                     i++;
                 }
             }
@@ -165,46 +204,47 @@ public class ProductReportInfoController {
         Iterable<Product> listProducts = productRepository.findAll();
         for (Product obj : listProducts)
         {
+            ProductReportInfo result = new ProductReportInfo();
             if (obj != null)
             {
-                ProductReportInfo result = new ProductReportInfo();
+                int temp = 0;
                 for (int i = 0; i < luongBan.length; i++)
                 {
                     if (luongBan[i][0] == obj.getMaMH())
                     {
-                        if (luongBan[i][1] != 0)
-                            result.setLuongBan(new Long(luongBan[i][1]));
-                        else
-                            result.setLuongBan(new Long(0));
+                        temp = luongBan[i][0];
+                        result.setLuongBan(new Long(luongBan[i][1]));
                     }
                 }
+                if (temp == 0)
+                    result.setLuongBan(Long.parseLong("0"));
 
                 for (int i = 0; i < luongNhap.length; i++)
                 {
                     if (luongNhap[i][0] == obj.getMaMH())
                     {
-                        if (luongNhap[i][1] != 0)
-                            result.setLuongNhap(new Long(luongNhap[i][1]));
-                        else
-                            result.setLuongNhap(new Long(0));
+                        temp = luongNhap[i][0];
+                        result.setLuongNhap(new Long(luongNhap[i][1]));
                     }
                 }
+                if (temp == 0)
+                    result.setLuongNhap(Long.parseLong("0"));
 
                 for (int i = 0; i < luongTon.length; i++)
                 {
                     if (luongTon[i][0] == obj.getMaMH())
                     {
-                        if (luongTon[i][1] != 0)
-                            result.setLuongTon(new Long(luongTon[i][1]));
-                        else
-                            result.setLuongTon(new Long(0));
+                        temp = luongTon[i][0];
+                        result.setLuongTon(new Long(luongTon[i][1]));
                     }
                 }
+                if (temp == 0)
+                    result.setLuongTon(Long.parseLong("0"));
+
                 result.setProductReport(productReport);
                 result.setProduct(obj);
 
                 arrResult.add(result);
-
             }
         }
         return arrResult;

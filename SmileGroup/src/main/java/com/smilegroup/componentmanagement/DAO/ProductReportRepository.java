@@ -8,7 +8,15 @@ import org.springframework.data.repository.query.Param;
 import java.util.Optional;
 
 public interface ProductReportRepository extends CrudRepository<ProductReport, Integer> {
-    String QUERY_FOR_REPORT = "SELECT BCHT.MaBCHT, BCHT.NgayLap, BCHT.Thang, SUM(CTBC.LuongNhapBĐ) AS TongNhap, SUM(CTBC.LuongTon) AS TongTon, SUM(CTBC.LuongBan) AS TongBan, BCHT.MaNV FROM BAOCAOHANGTON BCHT JOIN CHITIETBAOCAOHANGTON CTBC ON CTBC.MaBCHT = BCHT.MaBCHT WHERE BCHT.Thang = :thang";
-    @Query(value = QUERY_FOR_REPORT, nativeQuery = true)
-    Optional<ProductReport> createReport(@Param("thang") int thang);
+    String QUERY_SUM_IMPORT = "SELECT SUM(LuongNhapBĐ) FROM CHITIETBAOCAOHANGTON CTBC WHERE CTBC.MaBCHT = :maBCHT";
+    @Query(value = QUERY_SUM_IMPORT, nativeQuery = true)
+    Long sumImport(@Param("maBCHT") int maBCHT);
+
+    String QUERY_SUM_SELL = "SELECT SUM(LuongBan) FROM CHITIETBAOCAOHANGTON CTBC WHERE CTBC.MaBCHT = :maBCHT";
+    @Query(value = QUERY_SUM_SELL, nativeQuery = true)
+    Long sumSell(@Param("maBCHT") int maBCHT);
+
+    String QUERY_SUM_LEFT = "SELECT SUM(LuongTon) FROM CHITIETBAOCAOHANGTON CTBC WHERE CTBC.MaBCHT = :maBCHT";
+    @Query(value = QUERY_SUM_LEFT, nativeQuery = true)
+    Long sumLeft(@Param("maBCHT") int maBCHT);
 }
