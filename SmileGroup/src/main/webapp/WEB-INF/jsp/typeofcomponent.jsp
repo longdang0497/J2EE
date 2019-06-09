@@ -51,7 +51,7 @@
                     <td>${list.maLoai}</td>
                     <td>${list.tenLoai}</td>
                     <td>
-                        <a href="/typeofcomponent/delete/${list.maLoai}">Delete</a>
+                        <a href="/typeofcomponent/delete/${list.maLoai}" onclick="return confirm('Do you want to delete this?')">Delete</a>
                         <a href="/viewTypeOfComponent/${list.maLoai}">Edit</a>
                     </td>
                 </tr>

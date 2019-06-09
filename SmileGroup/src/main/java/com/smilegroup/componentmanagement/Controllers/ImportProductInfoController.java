@@ -30,37 +30,50 @@ public class ImportProductInfoController {
     @Autowired
     ProductRepository productRepository;
 
-    @RequestMapping(value = "/importProduct/details/{maPN}", method = RequestMethod.GET, produces = "application/x-www-form-urlencoded;charset=utf-8")
-    public ModelAndView doImportProductInfo(@PathVariable("maPN") int maPN) {
+    @Autowired
+    OrderInfoRepository orderInfoRepository;
+
+    @RequestMapping(value = "/importProduct/details/{maPN}", produces = "application/x-www-form-urlencoded;charset=utf-8")
+    public ModelAndView doImportProductInfo(@PathVariable("maPN") int maPN) throws NullPointerException {
         ModelAndView mv = new ModelAndView("importproductinfo");
-        mv.addObject("productLists", productRepository.findAll());
-        mv.addObject("importProductInfoList", this.importProductInfoRepository.findByImportProductID(maPN));
+        int maDDH = importProductRepository.findOrderID(maPN);
+        mv.addObject("productLists", orderInfoRepository.findByOrderID(maDDH));
+        mv.addObject("importProductInfoList", importProductInfoRepository.findByImportProductID(maPN));
         return mv;
     }
 
     @RequestMapping(value = "/importProduct-info&save/{maPN}", method = RequestMethod.POST, produces = "application/x-www-form-urlencoded;charset=utf-8")
-    public ModelAndView doSave(Long donGiaBan, Long donGia, Long soLuong, int maPN, @RequestParam("tenMH") String tenMH, Long tongTien, String ghiChu) {
+    public ModelAndView doSave(Long donGiaBan, Long donGia, Long soLuong, int maPN, @RequestParam("tenMH") String tenMH, String ghiChu) throws NullPointerException {
         ModelAndView mv = new ModelAndView("redirect:/importProduct/details/{maPN}");
         ImportProductInfo obj = new ImportProductInfo();
         ImportProduct importProduct = new ImportProduct();
         Product product = new Product();
-
-        if (tenMH != "")
-        {
-            Optional<Product> productOptional = productRepository.findByName(tenMH);
-            if (productOptional.isPresent()) product = productOptional.get();
-        }
+        Long tongTien = null;
 
         if (maPN != 0)
         {
             Optional<ImportProduct> importProductOptional = importProductRepository.findById(maPN);
             if (importProductOptional.isPresent()) importProduct = importProductOptional.get();
         }
-//        if (tienThanhToan != 0)
-//        {
-//            tienThanhToan = 0;
-//            tienThanhToan = donGia * soLuong;
-//        }
+
+        if (donGia != 0 && soLuong != 0)
+            tongTien = donGia * soLuong;
+
+        if (tenMH != "")
+        {
+            Optional<Product> productOptional = productRepository.findByName(tenMH);
+            if (productOptional.isPresent()){
+                product.setMaMH(productOptional.get().getMaMH());
+                product.setUnit(productOptional.get().getUnit());
+                product.setStore(productOptional.get().getStore());
+                product.setType(productOptional.get().getType());
+                product.setTenMH(productOptional.get().getTenMH());
+                product.setHangSX(productOptional.get().getHangSX());
+                product.setCauHinh(productOptional.get().getCauHinh());
+                product.setSoLuong(productOptional.get().getSoLuong() + soLuong.intValue());
+                productRepository.save(product);
+            }
+        }
 
         obj.setProduct(product);
         obj.setDonGia(donGia);
@@ -70,6 +83,11 @@ public class ImportProductInfoController {
         obj.setImportProduct(importProduct);
         obj.setGhiChu(ghiChu);
         importProductInfoRepository.save(obj);
+
+        Long tongTienPN = importProductInfoRepository.calculateSumImport(maPN);
+        importProduct.setTongTienPN(tongTienPN);
+        importProductRepository.save(importProduct);
+
         return mv;
     }
 

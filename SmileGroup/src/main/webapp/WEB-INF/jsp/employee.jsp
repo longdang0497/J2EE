@@ -62,7 +62,7 @@
                     <td>${list.tenNV}</td>
                     <td>${list.department.tenPhong}</td>
                     <td>
-                        <a href="/employee/delete/${list.maNV}">Delete</a>
+                        <a href="/employee/delete/${list.maNV}" onclick="return confirm('Do you want to delete this?')">Delete</a>
                         <a href="/viewEmployee/${list.maNV}">Edit</a>
                     </td>
                 </tr>

@@ -77,7 +77,7 @@
                     <td>${list.tongTon}</td>
                     <td>
                         <a href="/productReportInfo/create/details/${list.maBCHT}/${list.thang}">Info</a>
-                        <a href="/productReport/delete/${list.maBCHT}">Delete</a>
+                        <a href="/productReport/delete/${list.maBCHT}" onclick="return confirm('Do you want to delete this?')">Delete</a>
                     </td>
                 </tr>
             </c:forEach>

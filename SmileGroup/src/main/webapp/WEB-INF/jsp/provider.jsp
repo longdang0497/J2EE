@@ -70,7 +70,7 @@
                     <td>${list.emailNCC}</td>
                     <td>${list.soDTNCC}</td>
                     <td>
-                        <a href="/provider/delete/${list.maNCC}">Delete</a>
+                        <a href="/provider/delete/${list.maNCC}" onclick="return confirm('Do you want to delete this?')">Delete</a>
                         <a href="/viewProvider/${list.maNCC}">Edit</a>
                     </td>
                 </tr>
