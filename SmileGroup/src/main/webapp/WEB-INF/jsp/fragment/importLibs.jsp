@@ -9,3 +9,4 @@
 
 <script src="<c:url value='/js/sidebar.js'/>"></script>
 <script src="<c:url value='/js/calculate.js'/>"></script>
+<script type="text/javascript" src="https://www.google.com/jsapi"></script>
