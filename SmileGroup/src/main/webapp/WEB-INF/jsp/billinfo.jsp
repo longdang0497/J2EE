@@ -93,7 +93,7 @@
                     <td>${list.soLuong}</td>
                     <td>${list.tienThanhToan}</td>
                     <td>
-                        <a href="/bill/details/${list.bill.maHD}/delete/${list.maCTHD}">Delete</a>
+                        <a href="/bill/details/${list.bill.maHD}/delete/${list.maCTHD}" onclick="return confirm('Do you want to delete this?')">Delete</a>
                         <a href="/viewBillInfo/${list.maCTHD}">Edit</a>
                     </td>
                 </tr>

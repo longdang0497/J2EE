@@ -76,7 +76,7 @@
                     <td>${list.provider.tenNCC}</td>
                     <td>
                         <a href="/order/details/${list.maDDH}">Info</a>
-                        <a href="/order/delete/${list.maDDH}">Delete</a>
+                        <a href="/order/delete/${list.maDDH}" onclick="return confirm('Do you want to delete this?')">Delete</a>
                         <a href="/viewOrder/${list.maDDH}">Edit</a>
                     </td>
                 </tr>

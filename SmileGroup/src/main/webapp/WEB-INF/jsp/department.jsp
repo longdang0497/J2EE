@@ -51,7 +51,7 @@
                     <td>${list.maPhong}</td>
                     <td>${list.tenPhong}</td>
                     <td>
-                        <a href="/department/delete/${list.maPhong}">Delete</a>
+                        <a href="/department/delete/${list.maPhong}" onclick="return confirm('Do you want to delete this?')">Delete</a>
                         <a href="/viewDepartment/${list.maPhong}">Edit</a>
                     </td>
                 </tr>

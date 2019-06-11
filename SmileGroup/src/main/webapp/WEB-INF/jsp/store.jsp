@@ -51,7 +51,7 @@
                     <td>${list.maKhu}</td>
                     <td>${list.tenKhu}</td>
                     <td>
-                        <a href="/store/delete/${list.maKhu}">Delete</a>
+                        <a href="/store/delete/${list.maKhu}" onclick="return confirm('Do you want to delete this?')">Delete</a>
                         <a href="/viewStore/${list.maKhu}">Edit</a>
                     </td>
                 </tr>

@@ -19,3 +19,4 @@
 <link href="<c:url value='/css/bootstrap.min.css'/>" rel="stylesheet" />
 <link href="<c:url value='/css/paper-dashboard.css?v=2.0.0'/>" rel="stylesheet" />
 <link href="<c:url value='/demo/demo.css'/>" rel="stylesheet" />
+<script type="text/javascript" src="https://www.google.com/jsapi"></script>

@@ -12,6 +12,7 @@ import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.servlet.ModelAndView;
 
 import javax.persistence.EntityManager;
+import java.util.ArrayList;
 import java.util.Date;
 import java.util.Optional;
 
@@ -20,6 +21,9 @@ public class ImportProductController {
 
     @Autowired
     ImportProductRepository importProductRepository;
+
+    @Autowired
+    ImportProductInfoRepository importProductInfoRepository;
 
     @Autowired
     OrderRepository orderRepository;
@@ -37,7 +41,7 @@ public class ImportProductController {
     }
 
     @RequestMapping(value = "/importProduct&save", method = RequestMethod.POST, produces = "application/x-www-form-urlencoded;charset=utf-8")
-    public ModelAndView doSave(int maDDH, String tenNV, @DateTimeFormat(iso = DateTimeFormat.ISO.DATE) Date ngayLapPhieu, Long tongTienPN) {
+    public ModelAndView doSave(int maDDH, String tenNV, @DateTimeFormat(iso = DateTimeFormat.ISO.DATE) Date ngayLapPhieu) {
         ModelAndView mv = new ModelAndView("redirect:/importProduct");
         ImportProduct obj = new ImportProduct();
         Order orderObj = new Order();
@@ -57,7 +61,7 @@ public class ImportProductController {
 
         obj.setEmployee(employeeObj);
         obj.setOrder(orderObj);
-        obj.setTongTienPN(tongTienPN);
+        obj.setTongTienPN(Long.parseLong("0"));
         obj.setNgayLapPhieu(ngayLapPhieu);
         importProductRepository.save(obj);
         return mv;
@@ -116,6 +120,9 @@ public class ImportProductController {
     @RequestMapping(value = "/importProduct/delete/{maPN}", method = RequestMethod.GET, produces = "application/x-www-form-urlencoded;charset=utf-8")
     public ModelAndView doDelete(@PathVariable("maPN") int maPN) {
         ModelAndView mv = new ModelAndView("redirect:/importProduct");
+        Iterable<ImportProductInfo> arrDelete = importProductInfoRepository.findByImportProductID(maPN);
+        for (ImportProductInfo obj : arrDelete)
+            importProductInfoRepository.deleteById(obj.getMaCTPN());
         importProductRepository.deleteById(maPN);
         return mv;
     }

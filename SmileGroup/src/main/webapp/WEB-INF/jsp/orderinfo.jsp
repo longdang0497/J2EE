@@ -74,7 +74,7 @@
                     <td>${list.product.tenMH}</td>
                     <td>${list.soLuong}</td>
                     <td>
-                        <a href="/order/details/${list.order.maDDH}/delete/${list.maCTDDH}">Delete</a>
+                        <a href="/order/details/${list.order.maDDH}/delete/${list.maCTDDH}" onclick="return confirm('Do you want to delete this?')">Delete</a>
                         <a href="/viewOrderInfo/${list.maCTDDH}">Edit</a>
                     </td>
                 </tr>
