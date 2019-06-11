@@ -21,8 +21,4 @@ public interface ImportProductInfoRepository extends CrudRepository<ImportProduc
     String QUERY_FOR_SUM = "SELECT SUM(CTPN.tongTien) FROM CHITIETPHIEUNHAP CTPN where CTPN.MaPN = :maPN";
     @Query(value = QUERY_FOR_SUM, nativeQuery = true)
     Long calculateSumImport(@Param("maPN") int maPN);
-
-    String QUERY_FOR_DELETE = "DELETE FROM CHITIETPHIEUNHAP CTPN where CTPN.MaPN = :maPN";
-    @Query(value = QUERY_FOR_DELETE, nativeQuery = true)
-    void deleteAllByImportProductID(@Param("maPN") int maPN);
 }

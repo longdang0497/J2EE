@@ -8,6 +8,18 @@
 <head>
     <title>Bill Info List</title>
     <%@include file="fragment/importLibs.jsp" %>
+    <script>
+        function onBindingData() {
+            var list = ${ipLists};
+            var items = document.getElementById('tenMH');
+            var selected = items[items.selectedIndex].value;
+            for (int i = 0; i < list.length; i++)
+            {
+                if (list.product.tenMH == selected)
+                    document.getElementById('donGia').innerText = list.donGia;
+            }
+        }
+    </script>
 </head>
 <body>
 <!-- Sidebar (hidden by default) -->
@@ -34,7 +46,7 @@
                     </td>
                     <td>
                         <label class="segment-lb">Product</label>
-                        <select name="tenMH" class="segment-tb">
+                        <select id="tenMH" name="tenMH" class="segment-tb" onchange="onBindingData()">
                             <option>Choose a product</option>
                             <c:forEach var="pList" items="${productLists}">
                                 <option>${pList.tenMH}</option>
@@ -45,12 +57,13 @@
                 <tr>
                     <td>
                         <label class="segment-lb">Selling price</label>
-<%--                        <select name="tenNV" class="segment-tb" >--%>
-<%--                            <c:forEach var="item" items="${productLists}">--%>
-<%--                                <option value="${item.donGia}" ${item.tenMH == request.getParameter("tenKH") ? 'selected="selected"' : ''}>${item.donGia}</option>--%>
-<%--                            </c:forEach>--%>
-<%--                        </select>--%>
-                        <input id="biPrice" type="number" name="donGia" required="" class="segment-tb"/>
+                        <select id="donGia" name="donGia" class="segment-tb" >
+                            <option>Choose a product</option>
+                            <c:forEach var="item" items="${ipLists}">
+                                <option value="${item.donGia}" ${item.product.tenMH == request.getParameter("tenMH") ? 'selected="selected"' : ''}>${item.donGia}</option>
+                            </c:forEach>
+                        </select>
+<%--                        <input id="biPrice" type="number" name="donGia" required="" class="segment-tb"/>--%>
                     </td>
                     <td>
                         <label class="segment-lb">Quantities</label>
@@ -58,11 +71,7 @@
                     </td>
                 </tr>
                 <tr>
-                    <td>
-                        <label class="segment-lb">Total</label>
-                        <input id="biTotal" type="number" value="" name="tienThanhToan" class="segment-tb" onclick="calculate()"/>
-                    </td>
-                    <td>
+                    <td colspan="2">
                         <input type="submit" value="SAVE"/>
                         <input type="button" value="REFRESH" onclick="window.location.href='/bill/details/${maHD}'"/>
                     </td>

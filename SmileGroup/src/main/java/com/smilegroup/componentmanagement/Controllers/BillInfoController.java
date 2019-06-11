@@ -18,11 +18,16 @@ import java.io.Console;
 import java.util.Date;
 import java.util.Optional;
 
+import static java.lang.Math.abs;
+
 @Controller
 public class BillInfoController {
 
     @Autowired
     BillInfoRepository billInfoRepository;
+
+    @Autowired
+    ImportProductInfoRepository importProductInfoRepository;
 
     @Autowired
     BillRepository billRepository;
@@ -34,16 +39,18 @@ public class BillInfoController {
     public ModelAndView doBillInfo(@PathVariable("maHD") int maHD) {
         ModelAndView mv = new ModelAndView("billinfo");
         mv.addObject("productLists", productRepository.findAll());
+        mv.addObject("ipLists", importProductInfoRepository.findAll());
         mv.addObject("billInfoList", this.billInfoRepository.findByBillID(maHD));
         return mv;
     }
 
     @RequestMapping(value = "/bill-info&save/{maHD}", method = RequestMethod.POST, produces = "application/x-www-form-urlencoded;charset=utf-8")
-    public ModelAndView doSave(@RequestParam("donGia") Long donGia, Long soLuong, int maHD, @RequestParam("tenMH") String tenMH, Long tienThanhToan) {
+    public ModelAndView doSave(@RequestParam("donGia") Long donGia, Long soLuong, int maHD, @RequestParam("tenMH") String tenMH) {
         ModelAndView mv = new ModelAndView("redirect:/bill/details/{maHD}");
         BillInfo obj = new BillInfo();
         Bill bill = new Bill();
         Product product = new Product();
+        Long tienThanhToan = null;
 
         if (tenMH != "")
         {
@@ -56,11 +63,25 @@ public class BillInfoController {
             Optional<Bill> billOptional = billRepository.findById(maHD);
             if (billOptional.isPresent()) bill = billOptional.get();
         }
-//        if (tienThanhToan != 0)
-//        {
-//            tienThanhToan = 0;
-//            tienThanhToan = donGia * soLuong;
-//        }
+
+        if (soLuong != 0 && donGia != 0)
+            tienThanhToan = soLuong * donGia;
+
+        if (tenMH != "")
+        {
+            Optional<Product> productOptional = productRepository.findByName(tenMH);
+            if (productOptional.isPresent()){
+                product.setMaMH(productOptional.get().getMaMH());
+                product.setUnit(productOptional.get().getUnit());
+                product.setStore(productOptional.get().getStore());
+                product.setType(productOptional.get().getType());
+                product.setTenMH(productOptional.get().getTenMH());
+                product.setHangSX(productOptional.get().getHangSX());
+                product.setCauHinh(productOptional.get().getCauHinh());
+                product.setSoLuong(abs(productOptional.get().getSoLuong() - soLuong.intValue()));
+                productRepository.save(product);
+            }
+        }
 
         obj.setProduct(product);
         obj.setDonGia(donGia);
@@ -68,6 +89,10 @@ public class BillInfoController {
         obj.setTienThanhToan(tienThanhToan);
         obj.setBill(bill);
         billInfoRepository.save(obj);
+
+        Long tongTien = billInfoRepository.calculateSumSell(maHD);
+        bill.setTongTien(tongTien);
+        billRepository.save(bill);
         return mv;
     }
 

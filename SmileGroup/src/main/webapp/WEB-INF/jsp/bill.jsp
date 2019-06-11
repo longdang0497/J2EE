@@ -54,12 +54,7 @@
                     </td>
                 </tr>
                 <tr>
-                    <td>
-                        <input type="hidden" name="maHD" class="segment-tb"/>
-                        <label class="segment-lb">Total</label>
-                        <input type="number" name="tongTien" required="" class="segment-tb""/>
-                    </td>
-                    <td>
+                    <td colspan="2">
                         <input type="submit" value="SAVE"/>
                         <input type="button" value="REFRESH" onclick="window.location.href='/bill'"/>
                     </td>

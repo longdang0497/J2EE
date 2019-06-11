@@ -60,7 +60,9 @@ public class ProductReportController {
     @RequestMapping(value = "/productReport/delete/{maBCHT}", method = RequestMethod.GET, produces = "application/x-www-form-urlencoded;charset=utf-8")
     public ModelAndView doDelete(@PathVariable("maBCHT") int maBCHT) {
         ModelAndView mv = new ModelAndView("redirect:/productReport");
-        productReportInfoRepository.deleteAll();
+        Iterable<ProductReportInfo> arrDelete = productReportInfoRepository.findByProductReportID(maBCHT);
+        for (ProductReportInfo obj : arrDelete)
+            productReportInfoRepository.deleteById(obj.getMaCTBC());
         productReportRepository.deleteById(maBCHT);
         return mv;
     }
