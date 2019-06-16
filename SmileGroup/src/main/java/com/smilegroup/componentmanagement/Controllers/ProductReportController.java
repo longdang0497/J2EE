@@ -27,11 +27,29 @@ public class ProductReportController {
     @Autowired
     EmployeeRepository employeeRepository;
 
-    @RequestMapping(value = "/productReport", produces = "application/x-www-form-urlencoded;charset=utf-8")
-    public ModelAndView doProductReport() {
-        ModelAndView mv = new ModelAndView("productreport");
-        mv.addObject("employeeLists", employeeRepository.findAll());
-        mv.addObject("productReportLists", productReportRepository.findAll());
+    @Autowired
+    LogInRepository logInRepository;
+
+    LogIn logIn = new LogIn();
+
+    @RequestMapping(value = "role={maPQ}/nv={maNV}/productReport", produces = "application/x-www-form-urlencoded;charset=utf-8")
+    public ModelAndView doProductReport(@PathVariable("maPQ") int maPQ, @PathVariable("maNV") int maNV) {
+        ModelAndView mv = null;
+        if (maPQ != 0 && maNV != 0)
+        {
+            Optional<LogIn> logInOptional = logInRepository.findByUserByID(maNV, maPQ);
+            if (logInOptional.isPresent())
+            {
+                logIn = logInOptional.get();
+                if (logIn.getAuthority().getMaPQ() == 1 || logIn.getAuthority().getMaPQ() == 2 || logIn.getAuthority().getMaPQ() == 3)
+                {
+                    mv = new ModelAndView("productreport");
+                    mv.addObject("employeeLists", employeeRepository.findAll());
+                    mv.addObject("productReportLists", productReportRepository.findAll());
+                    mv.addObject("authorityObject", logIn);
+                }
+            }
+        }
         return mv;
     }
 

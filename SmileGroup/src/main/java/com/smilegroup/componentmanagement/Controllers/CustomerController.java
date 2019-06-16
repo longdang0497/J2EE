@@ -1,7 +1,11 @@
 package com.smilegroup.componentmanagement.Controllers;
 
+import com.smilegroup.componentmanagement.DAO.AuthorityRepository;
+import com.smilegroup.componentmanagement.DAO.LogInRepository;
+import com.smilegroup.componentmanagement.Models.Authority;
 import com.smilegroup.componentmanagement.Models.Customer;
 import com.smilegroup.componentmanagement.DAO.CustomerRepository;
+import com.smilegroup.componentmanagement.Models.LogIn;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.PathVariable;
@@ -18,14 +22,32 @@ public class CustomerController {
     @Autowired
     CustomerRepository customerRepo;
 
-    @RequestMapping(value = "/customer", produces = "application/x-www-form-urlencoded;charset=utf-8")
-    public ModelAndView doCustomer() {
-        ModelAndView mv = new ModelAndView("customer");
-        mv.addObject("customerLists", customerRepo.findAll());
+    @Autowired
+    LogInRepository logInRepository;
+
+    LogIn logIn = new LogIn();
+
+    @RequestMapping(value = "role={maPQ}/nv={maNV}/customer", produces = "application/x-www-form-urlencoded;charset=utf-8")
+    public ModelAndView doCustomer(@PathVariable("maPQ") int maPQ, @PathVariable("maNV") int maNV) {
+        ModelAndView mv = null;
+        if (maPQ != 0 && maNV != 0)
+        {
+            Optional<LogIn> logInOptional = logInRepository.findByUserByID(maNV, maPQ);
+            if (logInOptional.isPresent())
+            {
+                logIn = logInOptional.get();
+                if (logIn.getAuthority().getMaPQ() == 1 || logIn.getAuthority().getMaPQ() == 2 || logIn.getAuthority().getMaPQ() == 3)
+                {
+                    mv = new ModelAndView("customer");
+                    mv.addObject("customerLists", customerRepo.findAll());
+                    mv.addObject("authorityObject", logIn);
+                }
+            }
+        }
         return mv;
     }
 
-    @RequestMapping(value = "/customer&save", method = RequestMethod.POST, produces = "application/x-www-form-urlencoded;charset=utf-8")
+    @RequestMapping(value = "role={maPQ}/nv={maNV}/customer&save", method = RequestMethod.POST, produces = "application/x-www-form-urlencoded;charset=utf-8")
     public ModelAndView doSave(@RequestParam("tenKH") String tenKH, String diaChi, String email,
                                @RequestParam("soDT") String soDT) {
         ModelAndView mv = new ModelAndView("redirect:/customer");
@@ -38,7 +60,7 @@ public class CustomerController {
         return mv;
     }
 
-    @RequestMapping(value = "/customer&edit", method = RequestMethod.POST, produces = "application/x-www-form-urlencoded;charset=utf-8")
+    @RequestMapping(value = "role={maPQ}/customer&edit", method = RequestMethod.POST, produces = "application/x-www-form-urlencoded;charset=utf-8")
     public ModelAndView doUpdate(@RequestParam("maKH") int maKH, @RequestParam("tenKH") String tenKH, String diaChi, String email,
                                  @RequestParam("soDT") String soDT) {
         ModelAndView mv = new ModelAndView("redirect:/customer");
@@ -57,7 +79,7 @@ public class CustomerController {
         return mv;
     }
 
-    @RequestMapping(value = "/viewCustomer/{maKH}", method = RequestMethod.GET, produces = "application/x-www-form-urlencoded;charset=utf-8")
+    @RequestMapping(value = "role={maPQ}/viewCustomer/{maKH}", method = RequestMethod.GET, produces = "application/x-www-form-urlencoded;charset=utf-8")
     public ModelAndView doEdit(@PathVariable("maKH") int maKH) {
         ModelAndView mv = new ModelAndView("viewCustomer");
         Optional<Customer> cusOpt  = this.customerRepo.findById(maKH);
@@ -72,7 +94,7 @@ public class CustomerController {
         return mv;
     }
 
-    @RequestMapping(value = "/customer/delete/{maKH}", method = RequestMethod.GET, produces = "application/x-www-form-urlencoded;charset=utf-8")
+    @RequestMapping(value = "role={maPQ}/customer/delete/{maKH}", method = RequestMethod.GET, produces = "application/x-www-form-urlencoded;charset=utf-8")
     public ModelAndView doDelete(@PathVariable("maKH") int maKH) {
         ModelAndView mv = new ModelAndView("redirect:/customer");
         customerRepo.deleteById(maKH);

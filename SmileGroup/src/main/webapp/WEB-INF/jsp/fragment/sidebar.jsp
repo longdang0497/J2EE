@@ -32,104 +32,106 @@
   </div>
   <div class="sidebar-wrapper">
     <ul class="nav">
+      <c:set var = "maPQ" scope = "session" value = "${authorityObject.getAuthority().getMaPQ()}"/>
+      <c:set var = "maNV" scope = "session" value = "${authorityObject.getEmployee().getMaNV()}"/>
       <li id="nav_dashboard">
-        <a href="/">
+        <a id="index" onclick="window.history.replaceState({}, document.title, '/' + 'role=${maPQ}/nv=${maNV}/index'); window.history.go();">
           <i class="nc-icon nc-bank"></i>
           <p>Dashboard</p>
         </a>
       </li>
-      <c:if test = "${authorityObject.getAuthority().getMaPQ() == 1 || authorityObject.getAuthority().getMaPQ() == 2 || authorityObject.getAuthority().getMaPQ() == 3}">
+      <c:if test = "${maPQ == 1 || maPQ == 2 || maPQ == 3}">
         <li id="nav_customer">
-          <a href="/customer">
+          <a onclick="window.history.replaceState({}, document.title, '/' + 'role=${maPQ}/nv=${maNV}/customer'); window.history.go();">
             <i class="nc-icon nc-single-02"></i>
             <p>Customer</p>
           </a>
         </li>
       </c:if>
-      <c:if test = "${authorityObject.getAuthority().getMaPQ() == 1 || authorityObject.getAuthority().getMaPQ() == 3 || authorityObject.getAuthority().getMaPQ() == 4}">
+      <c:if test = "${maPQ == 1 || maPQ == 3 || maPQ == 4}">
         <li id="nav_provider">
-          <a href="/provider">
+          <a onclick="window.history.replaceState({}, document.title, '/' + 'role=${maPQ}/nv=${maNV}/provider'); window.history.go();">
             <i class="nc-icon nc-delivery-fast"></i>
             <p>Provider</p>
           </a>
         </li>
       </c:if>
-      <c:if test = "${authorityObject.getAuthority().getMaPQ() == 1 || authorityObject.getAuthority().getMaPQ() == 3 || authorityObject.getAuthority().getMaPQ() == 4}">
+      <c:if test = "${maPQ == 1 || maPQ == 3 || maPQ == 4}">
         <li id="nav_order">
-          <a href="/order">
+          <a onclick="window.history.replaceState({}, document.title, '/' + 'role=${maPQ}/nv=${maNV}/order'); window.history.go();">
             <i class="nc-icon nc-cart-simple"></i>
             <p>Order</p>
           </a>
         </li>
       </c:if>
-      <c:if test = "${authorityObject.getAuthority().getMaPQ() == 1 || authorityObject.getAuthority().getMaPQ() == 2 || authorityObject.getAuthority().getMaPQ() == 4}">
+      <c:if test = "${maPQ == 1 || maPQ == 2 || maPQ == 4}">
         <li id="nav_importProduct">
-          <a href="/importProduct">
+          <a onclick="window.history.replaceState({}, document.title, '/' + 'role=${maPQ}/nv=${maNV}/importProduct'); window.history.go();">
             <i class="nc-icon nc-badge"></i>
             <p>Import</p>
           </a>
         </li>
       </c:if>
-      <c:if test = "${authorityObject.getAuthority().getMaPQ() == 1 || authorityObject.getAuthority().getMaPQ() == 2 || authorityObject.getAuthority().getMaPQ() == 3}">
+      <c:if test = "${maPQ == 1 || maPQ == 2 || maPQ == 3}">
         <li id="nav_bill">
-          <a href="/bill">
+          <a onclick="window.history.replaceState({}, document.title, '/' + 'role=${maPQ}/nv=${maNV}/bill'); window.history.go();">
             <i class="nc-icon nc-money-coins"></i>
             <p>Bill</p>
           </a>
         </li>
       </c:if>
-      <c:if test = "${authorityObject.getAuthority().getMaPQ() == 1 || authorityObject.getAuthority().getMaPQ() == 4}">
+      <c:if test = "${maPQ == 1 || maPQ == 4}">
         <li id="nav_product">
-          <a href="/product">
+          <a onclick="window.history.replaceState({}, document.title, '/' + 'role=${maPQ}/nv=${maNV}/product'); window.history.go();">
             <i class="nc-icon nc-tv-2"></i>
             <p>Product</p>
           </a>
         </li>
       </c:if>
-      <c:if test = "${authorityObject.getAuthority().getMaPQ() == 1 || authorityObject.getAuthority().getMaPQ() == 4}">
+      <c:if test = "${maPQ == 1 || maPQ == 4}">
         <li id="nav_typeofcomponent">
-          <a href="/typeofcomponent">
+          <a onclick="window.history.replaceState({}, document.title, '/' + 'role=${maPQ}/nv=${maNV}/typeofcomponent'); window.history.go();">
             <i class="nc-icon nc-align-left-2"></i>
             <p>Type of component</p>
           </a>
         </li>
       </c:if>
-      <c:if test = "${authorityObject.getAuthority().getMaPQ() == 1 || authorityObject.getAuthority().getMaPQ() == 4}">
+      <c:if test = "${maPQ == 1 || maPQ == 4}">
         </li id="nav_store">
         <li>
-          <a href="/store">
+          <a onclick="window.history.replaceState({}, document.title, '/' + 'role=${maPQ}/nv=${maNV}/store'); window.history.go();">
             <i class="nc-icon nc-app"></i>
             <p>Store</p>
           </a>
         </li>
       </c:if>
-      <c:if test = "${authorityObject.getAuthority().getMaPQ() == 1 || authorityObject.getAuthority().getMaPQ() == 4}">
+      <c:if test = "${maPQ == 1 || maPQ == 4}">
         <li id="nav_unit">
-          <a href="/unit">
+          <a onclick="window.history.replaceState({}, document.title, '/' + 'role=${maPQ}/nv=${maNV}/unit'); window.history.go();">
             <i class="nc-icon nc-bullet-list-67"></i>
             <p>Unit</p>
           </a>
         </li>
       </c:if>
-      <c:if test = "${authorityObject.getAuthority().getMaPQ() == 1}">
+      <c:if test = "${maPQ == 1}">
         <li id="nav_department">
-          <a href="/department">
+          <a onclick="window.history.replaceState({}, document.title, '/' + 'role=${maPQ}/nv=${maNV}/department'); window.history.go();">
             <i class="nc-icon nc-vector"></i>
             <p>Department</p>
           </a>
         </li>
       </c:if>
-      <c:if test = "${authorityObject.getAuthority().getMaPQ() == 1}">
+      <c:if test = "${maPQ == 1}">
         <li id="nav_employee">
-          <a href="/employee">
+          <a onclick="window.history.replaceState({}, document.title, '/' + 'role=${maPQ}/nv=${maNV}/employee'); window.history.go();">
             <i class="nc-icon nc-spaceship"></i>
             <p>Employee</p>
           </a>
         </li>
       </c:if>
-      <c:if test = "${authorityObject.getAuthority().getMaPQ() == 1 || authorityObject.getAuthority().getMaPQ() == 3 || authorityObject.getAuthority().getMaPQ() == 4}">
+      <c:if test = "${maPQ == 1 || maPQ == 3 || maPQ == 4}">
         <li id="nav_report">
-          <a href="/productReport">
+          <a onclick="window.history.replaceState({}, document.title, '/' + 'role=${maPQ}/nv=${maNV}/productReport'); window.history.go();">
             <i class="nc-icon nc-spaceship"></i>
             <p>Report</p>
           </a>

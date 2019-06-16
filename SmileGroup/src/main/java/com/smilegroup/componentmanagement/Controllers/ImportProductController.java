@@ -31,12 +31,30 @@ public class ImportProductController {
     @Autowired
     EmployeeRepository employeeRepository;
 
-    @RequestMapping(value = "/importProduct", produces = "application/x-www-form-urlencoded;charset=utf-8")
-    public ModelAndView doImportProduct() {
-        ModelAndView mv = new ModelAndView("importproduct");
-        mv.addObject("employeeLists", employeeRepository.findAll());
-        mv.addObject("orderLists", orderRepository.findAll());
-        mv.addObject("importProductLists", importProductRepository.findAll());
+    @Autowired
+    LogInRepository logInRepository;
+
+    LogIn logIn = new LogIn();
+
+    @RequestMapping(value = "role={maPQ}/nv={maNV}/importProduct", produces = "application/x-www-form-urlencoded;charset=utf-8")
+    public ModelAndView doImportProduct(@PathVariable("maPQ") int maPQ, @PathVariable("maNV") int maNV) {
+        ModelAndView mv = null;
+        if (maPQ != 0 && maNV != 0)
+        {
+            Optional<LogIn> logInOptional = logInRepository.findByUserByID(maNV, maPQ);
+            if (logInOptional.isPresent())
+            {
+                logIn = logInOptional.get();
+                if (logIn.getAuthority().getMaPQ() == 1 || logIn.getAuthority().getMaPQ() == 2 || logIn.getAuthority().getMaPQ() == 3)
+                {
+                    mv = new ModelAndView("importproduct");
+                    mv.addObject("employeeLists", employeeRepository.findAll());
+                    mv.addObject("orderLists", orderRepository.findAll());
+                    mv.addObject("importProductLists", importProductRepository.findAll());
+                    mv.addObject("authorityObject", logIn);
+                }
+            }
+        }
         return mv;
     }
 

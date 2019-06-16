@@ -28,13 +28,31 @@ public class ProductController {
     @Autowired
     UnitRepository unitRepository;
 
-    @RequestMapping(value = "/product", produces = "application/x-www-form-urlencoded;charset=utf-8")
-    public ModelAndView doProduct() {
-        ModelAndView mv = new ModelAndView("product");
-        mv.addObject("storeLists", storeRepository.findAll());
-        mv.addObject("tocLists", tocRepository.findAll());
-        mv.addObject("unitLists", unitRepository.findAll());
-        mv.addObject("productLists", productRepository.findAll());
+    @Autowired
+    LogInRepository logInRepository;
+
+    LogIn logIn = new LogIn();
+
+    @RequestMapping(value = "role={maPQ}/nv={maNV}/product", produces = "application/x-www-form-urlencoded;charset=utf-8")
+    public ModelAndView doProduct(@PathVariable("maPQ") int maPQ, @PathVariable("maNV") int maNV) {
+        ModelAndView mv = null;
+        if (maPQ != 0 && maNV != 0)
+        {
+            Optional<LogIn> logInOptional = logInRepository.findByUserByID(maNV, maPQ);
+            if (logInOptional.isPresent())
+            {
+                logIn = logInOptional.get();
+                if (logIn.getAuthority().getMaPQ() == 1 || logIn.getAuthority().getMaPQ() == 2 || logIn.getAuthority().getMaPQ() == 3)
+                {
+                    mv = new ModelAndView("product");
+                    mv.addObject("storeLists", storeRepository.findAll());
+                    mv.addObject("tocLists", tocRepository.findAll());
+                    mv.addObject("unitLists", unitRepository.findAll());
+                    mv.addObject("productLists", productRepository.findAll());
+                    mv.addObject("authorityObject", logIn);
+                }
+            }
+        }
         return mv;
     }
 
