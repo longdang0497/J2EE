@@ -8,7 +8,7 @@ import org.springframework.web.servlet.ModelAndView;
 public class HomeController {
     @RequestMapping(value = "/", produces = "application/x-www-form-urlencoded;charset=utf-8")
     public ModelAndView doHome() {
-        ModelAndView mv = new ModelAndView("index");
+        ModelAndView mv = new ModelAndView("login");
         return mv;
     }
 }

@@ -18,6 +18,15 @@ tr:nth-child(even) {
     background-color: #dddddd;
 }
 
+#login {
+    background: rgba(19,35,47,0.9);
+    padding: 5rem;
+    max-width:60rem;
+    margin:0.8rem auto;
+    border-radius:0.5rem;
+    box-shadow:0 0.5rem 0.8rem 0.5rem rgba(19,35,47,.3);
+}
+
 .segment {
     border: solid 0.15rem;
     margin-top: 10rem;

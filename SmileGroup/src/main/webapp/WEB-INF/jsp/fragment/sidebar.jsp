@@ -38,78 +38,109 @@
           <p>Dashboard</p>
         </a>
       </li>
-      <li id="nav_customer">
-        <a href="/customer">
-          <i class="nc-icon nc-single-02"></i>
-          <p>Customer</p>
-        </a>
-      </li>
-      <li id="nav_provider">
-        <a href="/provider">
-          <i class="nc-icon nc-delivery-fast"></i>
-          <p>Provider</p>
-        </a>
-      </li>
-      <li id="nav_order">
-        <a href="/order">
-          <i class="nc-icon nc-cart-simple"></i>
-          <p>Order</p>
-        </a>
-      </li>
-      <li id="nav_importProduct">
-        <a href="/importProduct">
-          <i class="nc-icon nc-badge"></i>
-          <p>User Profile</p>
-        </a>
-      </li>
-      <li id="nav_bill">
-        <a href="/bill">
-          <i class="nc-icon nc-money-coins"></i>
-          <p>Bill</p>
-        </a>
-      </li>
-      <li id="nav_product">
-        <a href="/product">
-          <i class="nc-icon nc-tv-2"></i>
-          <p>Product</p>
-        </a>
-      </li>
-      <li id="nav_typeofcomponent">
-        <a href="/typeofcomponent">
-          <i class="nc-icon nc-align-left-2"></i>
-          <p>Type of component</p>
-        </a>
-      </li id="nav_store">
+      <c:if test = "${authorityObject.getAuthority().getMaPQ() == 1 || authorityObject.getAuthority().getMaPQ() == 2 || authorityObject.getAuthority().getMaPQ() == 3}">
+        <li id="nav_customer">
+          <a href="/customer">
+            <i class="nc-icon nc-single-02"></i>
+            <p>Customer</p>
+          </a>
+        </li>
+      </c:if>
+      <c:if test = "${authorityObject.getAuthority().getMaPQ() == 1 || authorityObject.getAuthority().getMaPQ() == 3 || authorityObject.getAuthority().getMaPQ() == 4}">
+        <li id="nav_provider">
+          <a href="/provider">
+            <i class="nc-icon nc-delivery-fast"></i>
+            <p>Provider</p>
+          </a>
+        </li>
+      </c:if>
+      <c:if test = "${authorityObject.getAuthority().getMaPQ() == 1 || authorityObject.getAuthority().getMaPQ() == 3 || authorityObject.getAuthority().getMaPQ() == 4}">
+        <li id="nav_order">
+          <a href="/order">
+            <i class="nc-icon nc-cart-simple"></i>
+            <p>Order</p>
+          </a>
+        </li>
+      </c:if>
+      <c:if test = "${authorityObject.getAuthority().getMaPQ() == 1 || authorityObject.getAuthority().getMaPQ() == 2 || authorityObject.getAuthority().getMaPQ() == 4}">
+        <li id="nav_importProduct">
+          <a href="/importProduct">
+            <i class="nc-icon nc-badge"></i>
+            <p>Import</p>
+          </a>
+        </li>
+      </c:if>
+      <c:if test = "${authorityObject.getAuthority().getMaPQ() == 1 || authorityObject.getAuthority().getMaPQ() == 2 || authorityObject.getAuthority().getMaPQ() == 3}">
+        <li id="nav_bill">
+          <a href="/bill">
+            <i class="nc-icon nc-money-coins"></i>
+            <p>Bill</p>
+          </a>
+        </li>
+      </c:if>
+      <c:if test = "${authorityObject.getAuthority().getMaPQ() == 1 || authorityObject.getAuthority().getMaPQ() == 4}">
+        <li id="nav_product">
+          <a href="/product">
+            <i class="nc-icon nc-tv-2"></i>
+            <p>Product</p>
+          </a>
+        </li>
+      </c:if>
+      <c:if test = "${authorityObject.getAuthority().getMaPQ() == 1 || authorityObject.getAuthority().getMaPQ() == 4}">
+        <li id="nav_typeofcomponent">
+          <a href="/typeofcomponent">
+            <i class="nc-icon nc-align-left-2"></i>
+            <p>Type of component</p>
+          </a>
+        </li>
+      </c:if>
+      <c:if test = "${authorityObject.getAuthority().getMaPQ() == 1 || authorityObject.getAuthority().getMaPQ() == 4}">
+        </li id="nav_store">
         <li>
           <a href="/store">
             <i class="nc-icon nc-app"></i>
             <p>Store</p>
           </a>
         </li>
+      </c:if>
+      <c:if test = "${authorityObject.getAuthority().getMaPQ() == 1 || authorityObject.getAuthority().getMaPQ() == 4}">
         <li id="nav_unit">
           <a href="/unit">
             <i class="nc-icon nc-bullet-list-67"></i>
             <p>Unit</p>
           </a>
         </li>
+      </c:if>
+      <c:if test = "${authorityObject.getAuthority().getMaPQ() == 1}">
         <li id="nav_department">
           <a href="/department">
             <i class="nc-icon nc-vector"></i>
             <p>Department</p>
           </a>
         </li>
+      </c:if>
+      <c:if test = "${authorityObject.getAuthority().getMaPQ() == 1}">
         <li id="nav_employee">
           <a href="/employee">
             <i class="nc-icon nc-spaceship"></i>
             <p>Employee</p>
           </a>
         </li>
-        <li class="active-pro">
-          <a href="#about">
-            <i class="nc-icon nc-satisfied"></i>
-            <p>About</p>
+      </c:if>
+      <c:if test = "${authorityObject.getAuthority().getMaPQ() == 1 || authorityObject.getAuthority().getMaPQ() == 3 || authorityObject.getAuthority().getMaPQ() == 4}">
+        <li id="nav_report">
+          <a href="/productReport">
+            <i class="nc-icon nc-spaceship"></i>
+            <p>Report</p>
           </a>
         </li>
+      </c:if>
+      <li class="active-pro">
+        <a href="#about">
+          <i class="nc-icon nc-satisfied"></i>
+          <p>About</p>
+        </a>
+      </li>
     </ul>
   </div>
 </div>
