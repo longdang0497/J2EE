@@ -45,7 +45,7 @@ public class ProviderController {
         return mv;
     }
 
-    @RequestMapping(value = "/provider&save", method = RequestMethod.POST, produces = "application/x-www-form-urlencoded;charset=utf-8")
+    @RequestMapping(value = "role={maPQ}/nv={maNV}/provider&save", method = RequestMethod.POST, produces = "application/x-www-form-urlencoded;charset=utf-8")
     public ModelAndView doSave(@RequestParam("tenNCC") String tenNCC, String diaChiNCC, String emailNCC,
                                @RequestParam("soDTNCC") String soDTNCC) {
         ModelAndView mv = new ModelAndView("redirect:/provider");
@@ -58,7 +58,7 @@ public class ProviderController {
         return mv;
     }
 
-    @RequestMapping(value = "/provider&edit", method = RequestMethod.POST, produces = "application/x-www-form-urlencoded;charset=utf-8")
+    @RequestMapping(value = "role={maPQ}/nv={maNV}/provider&edit", method = RequestMethod.POST, produces = "application/x-www-form-urlencoded;charset=utf-8")
     public ModelAndView doUpdate(@RequestParam("maNCC") int maNCC, @RequestParam("tenNCC") String tenNCC, String diaChiNCC, String emailNCC,
                                  @RequestParam("soDTNCC") String soDTNCC) {
         ModelAndView mv = new ModelAndView("redirect:/provider");
@@ -77,25 +77,40 @@ public class ProviderController {
         return mv;
     }
 
-    @RequestMapping(value = "/viewProvider/{maNCC}", method = RequestMethod.GET, produces = "application/x-www-form-urlencoded;charset=utf-8")
-    public ModelAndView doEdit(@PathVariable("maNCC") int maNCC) {
-        ModelAndView mv = new ModelAndView("viewProvider");
-        Optional<Provider> providerOptional  = this.providerRepo.findById(maNCC);
-        Provider provider = null;
-        if(providerOptional.isPresent()){
-            provider = providerOptional.get();
+    @RequestMapping(value = "role={maPQ}/nv={maNV}/viewProvider/{maNCC}", method = RequestMethod.GET, produces = "application/x-www-form-urlencoded;charset=utf-8")
+    public ModelAndView doEdit(@PathVariable("maPQ") int maPQ, @PathVariable("maNV") int maNV, @PathVariable("maNCC") int maNCC) {
+        ModelAndView mv = null;
+        if (maPQ != 0 && maNV != 0)
+        {
+            Optional<LogIn> logInOptional = logInRepository.findByUserByID(maNV, maPQ);
+            if (logInOptional.isPresent())
+            {
+                logIn = logInOptional.get();
+                if (logIn.getAuthority().getMaPQ() == 1 || logIn.getAuthority().getMaPQ() == 2 || logIn.getAuthority().getMaPQ() == 3)
+                {
+                    mv = new ModelAndView("viewProvider");
+                    Optional<Provider> providerOptional  = this.providerRepo.findById(maNCC);
+                    Provider provider = null;
+                    if(providerOptional.isPresent()){
+                        provider = providerOptional.get();
+                    }
+                    if(provider == null){
+                        // Tu tao them class Exception cho Controller
+                    }
+                    mv.addObject("providerEditList", provider);
+                    mv.addObject("authorityObject", logIn);
+                }
+            }
         }
-        if(provider == null){
-            // Tu tao them class Exception cho Controller
-        }
-        mv.addObject("providerEditList", provider);
         return mv;
     }
 
-    @RequestMapping(value = "/provider/delete/{maNCC}", method = RequestMethod.GET, produces = "application/x-www-form-urlencoded;charset=utf-8")
+    @RequestMapping(value = "role={maPQ}/nv={maNV}/provider/delete/{maNCC}", method = RequestMethod.GET, produces = "application/x-www-form-urlencoded;charset=utf-8")
     public ModelAndView doDelete(@PathVariable("maNCC") int maNCC) {
-        ModelAndView mv = new ModelAndView("redirect:/provider");
+        ModelAndView mv = new ModelAndView("provider");
         providerRepo.deleteById(maNCC);
+        mv.addObject("providerLists", providerRepo.findAll());
+        mv.addObject("authorityObject", logIn);
         return mv;
     }
 }
