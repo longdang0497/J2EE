@@ -24,7 +24,9 @@
               <div class="card-header">
                 <h5 class="card-title">MANAGE CUSTOMER</h5>
               </div>
-              <form class="card-body" method="post" action="/customer&save">
+              <c:set var = "maPQ" scope = "session" value = "${authorityObject.getAuthority().getMaPQ()}"/>
+              <c:set var = "maNV" scope = "session" value = "${authorityObject.getEmployee().getMaNV()}"/>
+              <form class="card-body" method="post" onsubmit="window.history.replaceState({}, document.title, '/' + 'role=${maPQ}/nv=${maNV}/customer&save'); window.history.go();">
                 <table>
                   <tr>
                     <td>
@@ -49,9 +51,9 @@
                     </td>
                   </tr>
                 </table>
-                <input type="submit" value="SAVE" class="btn btn-primary btn-round" />
+                <input type="submit" value="SAVE" class="btn btn-primary btn-round" onclick="window.history.replaceState({}, document.title, '/' + 'role=${maPQ}/nv=${maNV}/customer'); window.history.go();" />
                 <input type="button" value="REFRESH" class="btn btn-primary btn-round"
-                  onclick="window.location.href='/customer'" />
+                  onclick="window.history.replaceState({}, document.title, '/' + 'role=${maPQ}/nv=${maNV}/customer'); window.history.go();" />
               </form>
             </div>
           </div>
@@ -81,8 +83,8 @@
                           <td>${list.email}</td>
                           <td>${list.soDT}</td>
                           <td>
-                            <a href="/customer/delete/${list.maKH}" onclick="return confirm('Do you want to delete this?')">Delete</a>
-                            <a href="/viewCustomer/${list.maKH}">Edit</a>
+                            <a id="btn-delete" onclick="if (confirm('Do you want to delete this?')) window.history.replaceState({}, document.title, '/' + 'role=${maPQ}/nv=${maNV}/customer/delete/${list.maKH}'); window.history.go();">Delete</a>
+                            <a onclick="window.history.replaceState({}, document.title, '/' + 'role=${maPQ}/nv=${maNV}/viewCustomer/${list.maKH}'); window.history.go();">Edit</a>
                           </td>
                         </tr>
                       </c:forEach>

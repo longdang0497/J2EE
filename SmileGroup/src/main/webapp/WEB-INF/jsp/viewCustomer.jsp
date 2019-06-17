@@ -7,50 +7,72 @@
     <%@include file="fragment/importLibs.jsp"%>
 </head>
 <body>
-    <!-- Sidebar (hidden by default) -->
-    <%@include file="fragment/sidebar.jsp"%>
+    <div class="wrapper ">
+        <!-- Sidebar (hidden by default) -->
+        <%@include file="fragment/sidebar.jsp"%>
 
-    <!-- Top menu -->
-    <%@include file="fragment/header.jsp"%>
+        <div class="main-panel">
+            <!-- Top menu -->
+            <%@include file="fragment/header.jsp"%>
 
-    <!-- PAGE CONTENT -->
-    <div class="w3-main w3-content w3-padding" style="max-width:1200px;margin-top:100px;">
-
-        <div>
-            <form class="segment" method="post" action="/customer&edit">
-                <table class="fl-table">
-                    <thead>
-                    <tr>
-                        <th>ID</th>
-                        <td><input type="text" name="maKH" required="" class="segment-tb" value="${customerEditList.maKH}"></td>
-                    </tr>
-                    <tr>
-                        <th>Name</th>
-                        <td><input type="text" name="tenKH" required="" class="segment-tb" value="${customerEditList.tenKH}"></td>
-                    </tr>
-                    <tr>
-                        <th>Address</th>
-                        <td><input type="text" name="diaChi" required="" class="segment-tb" value="${customerEditList.diaChi}"></td>
-                    </tr>
-                    <tr>
-                        <th>Email</th>
-                        <td><input type="text" name="email" required="" class="segment-tb" value="${customerEditList.email}"></td>
-                    </tr>
-                    <tr>
-                        <th>Phone</th>
-                        <td><input type="text" name="soDT" required="" class="segment-tb" value="${customerEditList.soDT}"></td>
-                    </tr>
-                    </thead>
-                </table>
-                <input type="submit" value="SAVE" />
-            </form>
-            <a href="/customer">BACK</a>
+            <!-- PAGE CONTENT -->
+            <div class="content">
+                <div class="row">
+                    <div class="col-md-12">
+                        <div class="card">
+                            <div class="card-body">
+                                <div class="table-responsive">
+                                    <div>
+                                        <form class="segment" method="post" action="/customer&edit">
+                                            <table class="table">
+                                                <thead class=" text-primary">
+                                                    <tr>
+                                                        <th>ID</th>
+                                                        <td><input type="text" name="maKH" readonly required="" class="form-control" value="${customerEditList.maKH}"></td>
+                                                    </tr>
+                                                    <tr>
+                                                        <th>Name</th>
+                                                        <td><input type="text" name="tenKH" required="" class="form-control" value="${customerEditList.tenKH}"></td>
+                                                    </tr>
+                                                    <tr>
+                                                        <th>Address</th>
+                                                        <td><input type="text" name="diaChi" required="" class="form-control" value="${customerEditList.diaChi}"></td>
+                                                    </tr>
+                                                    <tr>
+                                                        <th>Email</th>
+                                                        <td><input type="text" name="email" required="" class="form-control" value="${customerEditList.email}"></td>
+                                                    </tr>
+                                                    <tr>
+                                                        <th>Phone</th>
+                                                        <td><input type="text" name="soDT" required="" class="form-control" value="${customerEditList.soDT}"></td>
+                                                    </tr>
+                                                </thead>
+                                            </table>
+                                            <input type="submit" class="btn btn-primary btn-round" value="SAVE" />
+                                        </form>
+                                        <a class="btn btn-primary btn-round" onclick="window.history.replaceState({}, document.title, '/' + 'role=${maPQ}/nv=${maNV}/customer'); window.history.go();">BACK</a>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
         </div>
+
+        <!-- Footer -->
+        <%@include file="fragment/footer.jsp"%>
+
+        <!-- JS -->
+        <%@include file="fragment/importJS.jsp"%>
+
+        <!-- End page content -->
+        <script>
+            $(document).ready(function () {
+                $('#nav_customer').addClass('active');
+            });
+        </script>
+        <!-- End page content -->
     </div>
-
-    <!-- Footer -->
-    <%@include file="fragment/footer.jsp"%>
-
-    <!-- End page content -->
 </body>
 </html>

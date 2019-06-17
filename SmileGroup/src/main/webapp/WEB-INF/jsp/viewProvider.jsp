@@ -7,44 +7,50 @@
     <%@include file="fragment/importLibs.jsp"%>
 </head>
 <body>
-<!-- Sidebar (hidden by default) -->
-<%@include file="fragment/sidebar.jsp"%>
+<div class="wrapper ">
+    <!-- Sidebar (hidden by default) -->
+    <%@include file="fragment/sidebar.jsp"%>
 
-<!-- Top menu -->
-<%@include file="fragment/header.jsp"%>
+    <div class="main-panel">
+        <!-- Top menu -->
+        <%@include file="fragment/header.jsp"%>
 
-<!-- PAGE CONTENT -->
-<div class="w3-main w3-content w3-padding" style="max-width:1200px;margin-top:100px;">
-
-    <div>
-        <form class="segment" method="post" action="/provider&edit">
-            <table class="fl-table">
-                <thead>
+        <!-- PAGE CONTENT -->
+        <div class="content">
+            <div class="row">
+                <div class="col-md-12">
+                    <div class="card">
+                        <div class="card-body">
+                            <div class="table-responsive">
+                                <div>
+                                    <form class="segment" method="post" action="/provider&edit">
+                                        <table class="table">
+                                            <thead class=" text-primary">
                 <tr>
                     <th>ID</th>
-                    <td><input type="text" name="maNCC" required="" class="segment-tb" value="${providerEditList.maNCC}"></td>
+                    <td><input type="text" name="maNCC" readonly required="" class="form-control" value="${providerEditList.maNCC}"></td>
                 </tr>
                 <tr>
                     <th>Name</th>
-                    <td><input type="text" name="tenNCC" required="" class="segment-tb" value="${providerEditList.tenNCC}"></td>
+                    <td><input type="text" name="tenNCC" required="" class="form-control" value="${providerEditList.tenNCC}"></td>
                 </tr>
                 <tr>
                     <th>Address</th>
-                    <td><input type="text" name="diaChiNCC" required="" class="segment-tb" value="${providerEditList.diaChiNCC}"></td>
+                    <td><input type="text" name="diaChiNCC" required="" class="form-control" value="${providerEditList.diaChiNCC}"></td>
                 </tr>
                 <tr>
                     <th>Email</th>
-                    <td><input type="text" name="emailNCC" required="" class="segment-tb" value="${providerEditList.emailNCC}"></td>
+                    <td><input type="text" name="emailNCC" required="" class="form-control" value="${providerEditList.emailNCC}"></td>
                 </tr>
                 <tr>
                     <th>Phone</th>
-                    <td><input type="text" name="soDTNCC" required="" class="segment-tb" value="${providerEditList.soDTNCC}"></td>
+                    <td><input type="text" name="soDTNCC" required="" class="form-control" value="${providerEditList.soDTNCC}"></td>
                 </tr>
                 </thead>
             </table>
-            <input type="submit" value="SAVE" />
+            <input type="submit" class="btn btn-primary btn-round" value="SAVE" />
         </form>
-        <a href="/provider">BACK</a>
+        <a class="btn btn-primary btn-round" onclick="window.history.replaceState({}, document.title, '/' + 'role=${maPQ}/nv=${maNV}/provider'); window.history.go();">BACK</a>
     </div>
 </div>
 

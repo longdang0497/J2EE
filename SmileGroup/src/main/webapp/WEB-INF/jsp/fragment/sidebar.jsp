@@ -32,84 +32,117 @@
   </div>
   <div class="sidebar-wrapper">
     <ul class="nav">
+      <c:set var = "maPQ" scope = "session" value = "${authorityObject.getAuthority().getMaPQ()}"/>
+      <c:set var = "maNV" scope = "session" value = "${authorityObject.getEmployee().getMaNV()}"/>
       <li id="nav_dashboard">
-        <a href="/">
+        <a id="index" onclick="window.history.replaceState({}, document.title, '/' + 'role=${maPQ}/nv=${maNV}/index'); window.history.go();">
           <i class="nc-icon nc-bank"></i>
           <p>Dashboard</p>
         </a>
       </li>
-      <li id="nav_customer">
-        <a href="/customer">
-          <i class="nc-icon nc-single-02"></i>
-          <p>Customer</p>
-        </a>
-      </li>
-      <li id="nav_provider">
-        <a href="/provider">
-          <i class="nc-icon nc-delivery-fast"></i>
-          <p>Provider</p>
-        </a>
-      </li>
-      <li id="nav_order">
-        <a href="/order">
-          <i class="nc-icon nc-cart-simple"></i>
-          <p>Order</p>
-        </a>
-      </li>
-      <li id="nav_importProduct">
-        <a href="/importProduct">
-          <i class="nc-icon nc-badge"></i>
-          <p>User Profile</p>
-        </a>
-      </li>
-      <li id="nav_bill">
-        <a href="/bill">
-          <i class="nc-icon nc-money-coins"></i>
-          <p>Bill</p>
-        </a>
-      </li>
-      <li id="nav_product">
-        <a href="/product">
-          <i class="nc-icon nc-tv-2"></i>
-          <p>Product</p>
-        </a>
-      </li>
-      <li id="nav_typeofcomponent">
-        <a href="/typeofcomponent">
-          <i class="nc-icon nc-align-left-2"></i>
-          <p>Type of component</p>
-        </a>
-      </li id="nav_store">
+      <c:if test = "${maPQ == 1 || maPQ == 2 || maPQ == 3}">
+        <li id="nav_customer">
+          <a onclick="window.history.replaceState({}, document.title, '/' + 'role=${maPQ}/nv=${maNV}/customer'); window.history.go();">
+            <i class="nc-icon nc-single-02"></i>
+            <p>Customer</p>
+          </a>
+        </li>
+      </c:if>
+      <c:if test = "${maPQ == 1 || maPQ == 3 || maPQ == 4}">
+        <li id="nav_provider">
+          <a onclick="window.history.replaceState({}, document.title, '/' + 'role=${maPQ}/nv=${maNV}/provider'); window.history.go();">
+            <i class="nc-icon nc-delivery-fast"></i>
+            <p>Provider</p>
+          </a>
+        </li>
+      </c:if>
+      <c:if test = "${maPQ == 1 || maPQ == 3 || maPQ == 4}">
+        <li id="nav_order">
+          <a onclick="window.history.replaceState({}, document.title, '/' + 'role=${maPQ}/nv=${maNV}/order'); window.history.go();">
+            <i class="nc-icon nc-cart-simple"></i>
+            <p>Order</p>
+          </a>
+        </li>
+      </c:if>
+      <c:if test = "${maPQ == 1 || maPQ == 2 || maPQ == 4}">
+        <li id="nav_importProduct">
+          <a onclick="window.history.replaceState({}, document.title, '/' + 'role=${maPQ}/nv=${maNV}/importProduct'); window.history.go();">
+            <i class="nc-icon nc-badge"></i>
+            <p>Import</p>
+          </a>
+        </li>
+      </c:if>
+      <c:if test = "${maPQ == 1 || maPQ == 2 || maPQ == 3}">
+        <li id="nav_bill">
+          <a onclick="window.history.replaceState({}, document.title, '/' + 'role=${maPQ}/nv=${maNV}/bill'); window.history.go();">
+            <i class="nc-icon nc-money-coins"></i>
+            <p>Bill</p>
+          </a>
+        </li>
+      </c:if>
+      <c:if test = "${maPQ == 1 || maPQ == 4}">
+        <li id="nav_product">
+          <a onclick="window.history.replaceState({}, document.title, '/' + 'role=${maPQ}/nv=${maNV}/product'); window.history.go();">
+            <i class="nc-icon nc-tv-2"></i>
+            <p>Product</p>
+          </a>
+        </li>
+      </c:if>
+      <c:if test = "${maPQ == 1 || maPQ == 4}">
+        <li id="nav_typeofcomponent">
+          <a onclick="window.history.replaceState({}, document.title, '/' + 'role=${maPQ}/nv=${maNV}/typeofcomponent'); window.history.go();">
+            <i class="nc-icon nc-align-left-2"></i>
+            <p>Type of component</p>
+          </a>
+        </li>
+      </c:if>
+      <c:if test = "${maPQ == 1 || maPQ == 4}">
+        </li id="nav_store">
         <li>
-          <a href="/store">
+          <a onclick="window.history.replaceState({}, document.title, '/' + 'role=${maPQ}/nv=${maNV}/store'); window.history.go();">
             <i class="nc-icon nc-app"></i>
             <p>Store</p>
           </a>
         </li>
+      </c:if>
+      <c:if test = "${maPQ == 1 || maPQ == 4}">
         <li id="nav_unit">
-          <a href="/unit">
+          <a onclick="window.history.replaceState({}, document.title, '/' + 'role=${maPQ}/nv=${maNV}/unit'); window.history.go();">
             <i class="nc-icon nc-bullet-list-67"></i>
             <p>Unit</p>
           </a>
         </li>
+      </c:if>
+      <c:if test = "${maPQ == 1}">
         <li id="nav_department">
-          <a href="/department">
+          <a onclick="window.history.replaceState({}, document.title, '/' + 'role=${maPQ}/nv=${maNV}/department'); window.history.go();">
             <i class="nc-icon nc-vector"></i>
             <p>Department</p>
           </a>
         </li>
+      </c:if>
+      <c:if test = "${maPQ == 1}">
         <li id="nav_employee">
-          <a href="/employee">
+          <a onclick="window.history.replaceState({}, document.title, '/' + 'role=${maPQ}/nv=${maNV}/employee'); window.history.go();">
             <i class="nc-icon nc-spaceship"></i>
             <p>Employee</p>
           </a>
         </li>
-        <li class="active-pro">
-          <a href="#about">
-            <i class="nc-icon nc-satisfied"></i>
-            <p>About</p>
+      </c:if>
+      <c:if test = "${maPQ == 1 || maPQ == 3 || maPQ == 4}">
+        <li id="nav_report">
+          <a onclick="window.history.replaceState({}, document.title, '/' + 'role=${maPQ}/nv=${maNV}/productReport'); window.history.go();">
+            <i class="nc-icon nc-spaceship"></i>
+            <p>Report</p>
           </a>
         </li>
+      </c:if>
+      <li class="active-pro">
+        <a href="#about">
+          <i class="nc-icon nc-satisfied"></i>
+          <p>About</p>
+        </a>
+      </li>
     </ul>
   </div>
 </div>

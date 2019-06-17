@@ -18,14 +18,32 @@ public class UnitController {
     @Autowired
     UnitRepository unitRepo;
 
-    @RequestMapping(value = "/unit", produces = "application/x-www-form-urlencoded;charset=utf-8")
-    public ModelAndView doUnit() {
-        ModelAndView mv = new ModelAndView("unit");
-        mv.addObject("unitLists", unitRepo.findAll());
+    @Autowired
+    LogInRepository logInRepository;
+
+    LogIn logIn = new LogIn();
+
+    @RequestMapping(value = "role={maPQ}/nv={maNV}/unit", produces = "application/x-www-form-urlencoded;charset=utf-8")
+    public ModelAndView doUnit(@PathVariable("maPQ") int maPQ, @PathVariable("maNV") int maNV) {
+        ModelAndView mv = null;
+        if (maPQ != 0 && maNV != 0)
+        {
+            Optional<LogIn> logInOptional = logInRepository.findByUserByID(maNV, maPQ);
+            if (logInOptional.isPresent())
+            {
+                logIn = logInOptional.get();
+                if (logIn.getAuthority().getMaPQ() == 1 || logIn.getAuthority().getMaPQ() == 2 || logIn.getAuthority().getMaPQ() == 3)
+                {
+                    mv = new ModelAndView("unit");
+                    mv.addObject("unitLists", unitRepo.findAll());
+                    mv.addObject("authorityObject", logIn);
+                }
+            }
+        }
         return mv;
     }
 
-    @RequestMapping(value = "/unit&save", method = RequestMethod.POST, produces = "application/x-www-form-urlencoded;charset=utf-8")
+    @RequestMapping(value = "role={maPQ}/nv={maNV}/unit&save", method = RequestMethod.POST, produces = "application/x-www-form-urlencoded;charset=utf-8")
     public ModelAndView doSave(@RequestParam("tenDV") String tenDV) {
         ModelAndView mv = new ModelAndView("redirect:/unit");
         Unit obj = new Unit();
@@ -34,7 +52,7 @@ public class UnitController {
         return mv;
     }
 
-    @RequestMapping(value = "/unit&edit", method = RequestMethod.POST, produces = "application/x-www-form-urlencoded;charset=utf-8")
+    @RequestMapping(value = "role={maPQ}/nv={maNV}/unit&edit", method = RequestMethod.POST, produces = "application/x-www-form-urlencoded;charset=utf-8")
     public ModelAndView doUpdate(@RequestParam("maDV") int maDV, @RequestParam("tenDV") String tenDV) {
         ModelAndView mv = new ModelAndView("redirect:/unit");
         Unit obj = null;
@@ -49,25 +67,39 @@ public class UnitController {
         return mv;
     }
 
-    @RequestMapping(value = "/viewUnit/{maDV}", method = RequestMethod.GET, produces = "application/x-www-form-urlencoded;charset=utf-8")
-    public ModelAndView doEdit(@PathVariable("maDV") int maDV) {
-        ModelAndView mv = new ModelAndView("viewUnit");
-        Optional<Unit> objOpt  = this.unitRepo.findById(maDV);
-        Unit obj = null;
-        if(objOpt.isPresent()){
-            obj = objOpt.get();
+    @RequestMapping(value = "role={maPQ}/nv={maNV}/viewUnit/{maDV}", method = RequestMethod.GET, produces = "application/x-www-form-urlencoded;charset=utf-8")
+    public ModelAndView doEdit(@PathVariable("maPQ") int maPQ, @PathVariable("maNV") int maNV, @PathVariable("maDV") int maDV) {
+        ModelAndView mv = null;
+        if (maPQ != 0 && maNV != 0)
+        {
+            Optional<LogIn> logInOptional = logInRepository.findByUserByID(maNV, maPQ);
+            if (logInOptional.isPresent())
+            {
+                logIn = logInOptional.get();
+                if (logIn.getAuthority().getMaPQ() == 1 || logIn.getAuthority().getMaPQ() == 2 || logIn.getAuthority().getMaPQ() == 3)
+                {
+                    mv = new ModelAndView("viewUnit");
+                    Optional<Unit> objOpt  = this.unitRepo.findById(maDV);
+                    Unit obj = null;
+                    if(objOpt.isPresent()){
+                        obj = objOpt.get();
+                    }
+                    if(obj == null){
+                        // Tu tao them class Exception cho Controller
+                    }
+                    mv.addObject("unitEditList", obj);
+                }
+            }
         }
-        if(obj == null){
-            // Tu tao them class Exception cho Controller
-        }
-        mv.addObject("unitEditList", obj);
         return mv;
     }
 
-    @RequestMapping(value = "/unit/delete/{maDV}", method = RequestMethod.GET, produces = "application/x-www-form-urlencoded;charset=utf-8")
+    @RequestMapping(value = "role={maPQ}/nv={maNV}/unit/delete/{maDV}", method = RequestMethod.GET, produces = "application/x-www-form-urlencoded;charset=utf-8")
     public ModelAndView doDelete(@PathVariable("maDV") int maDV) {
-        ModelAndView mv = new ModelAndView("redirect:/unit");
+        ModelAndView mv = new ModelAndView("unit");
         unitRepo.deleteById(maDV);
+        mv.addObject("unitLists", unitRepo.findAll());
+        mv.addObject("authorityObject", logIn);
         return mv;
     }
 }
