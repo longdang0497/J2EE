@@ -7,105 +7,123 @@
     <%@include file="fragment/importLibs.jsp" %>
 </head>
 <body>
-<!-- Sidebar (hidden by default) -->
-<%@include file="fragment/sidebar.jsp" %>
+<div class="wrapper ">
+    <!-- Sidebar (hidden by default) -->
+    <%@include file="fragment/sidebar.jsp"%>
+    <div class="main-panel">
+        <!-- Top menu -->
+        <%@include file="fragment/header.jsp"%>
 
-<!-- Top menu -->
-<%@include file="fragment/header.jsp" %>
-
-<!-- PAGE CONTENT -->
-<div class="w3-main w3-content w3-padding" style="max-width:1200px;margin-top:100px;">
-    <div class="w3-white w3-xlarge">
-        <h1 class="w3-left" style="width: 100%;">MANAGE BILLS</h1>
+        <!-- PAGE CONTENT -->
+        <div class="content">
+            <div class="row">
+                <div class="col-md-12">
+                    <div class="card card-user">
+                        <div class="card-header">
+                            <h5 class="card-title">MANAGE BILLS</h5>
+                        </div>
+                        <form class="card-body" method="post" action="/bill&save">
+                            <table>
+                                <tr>
+                                    <td>
+                                        <input type="hidden" name="maHD" class="form-control"/>
+                                        <label>Customer Name</label>
+                                        <select name="tenKH" class="form-control">
+                                            <option>Choose a customer</option>
+                                            <c:forEach var="cList" items="${customerLists}">
+                                                <option>${cList.tenKH}</option>
+                                            </c:forEach>
+                                        </select>
+                                    </td>
+                                    <td>
+                                        <label class="segment-lb">Tax Code</label>
+                                        <input type="text" name="maSoThue" required="" class="form-control"/>
+                                    </td>
+                                </tr>
+                                <tr>
+                                    <td>
+                                        <label class="segment-lb">Employee</label>
+                                        <select name="tenNV" class="form-control">
+                                            <option>Choose an employee</option>
+                                            <c:forEach var="eList" items="${employeeLists}">
+                                                <option>${eList.tenNV}</option>
+                                            </c:forEach>
+                                        </select>
+                                    </td>
+                                    <td>
+                                        <label>Published Date (yyyy-mm-dd)</label>
+                                        <input type="text" name="ngayLap" required="" class="form-control" required pattern="[0-9]{4}-[0-9]{2}-[0-9]{2}"/>
+                                    </td>
+                                </tr>
+                                <tr>
+                                    <td>
+                                        <input type="hidden" name="maHD" class="form-control"/>
+                                        <label class="segment-lb">Total</label>
+                                        <input type="number" name="tongTien" required="" class="form-control""/>
+                                    </td>
+                                </tr>
+                            </table>
+                            <input type="submit" value="SAVE" class="btn btn-primary btn-round"/>
+                            <input type="button" value="REFRESH" class="btn btn-primary btn-round" onclick="window.location.href='/bill'"/>
+                        </form>
+                    </div>
+                </div>
+            </div>
+            <div class="row">
+                <div class="col-md-12">
+                    <div class="card">
+                        <div class="card-body">
+                            <div class="table-responsive">
+                                <table class="table">
+                                    <thead class=" text-primary">
+                                    <tr>
+                                        <th>ID</th>
+                                        <th>Published Date</th>
+                                        <th>Employee</th>
+                                        <th>Customer</th>
+                                        <th>Tax Code</th>
+                                        <th>Total</th>
+                                        <th>Actions</th>
+                                    </tr>
+                                    </thead>
+                                    <tbody>
+                                    <c:forEach var="list" items="${billLists}">
+                                        <tr>
+                                            <td>${list.maHD}</td>
+                                            <td>${list.ngayLap}</td>
+                                            <td>${list.employee.tenNV}</td>
+                                            <td>${list.customer.tenKH}</td>
+                                            <td>${list.maSoThue}</td>
+                                            <td>${list.tongTien}</td>
+                                            <td>
+                                                <a href="/bill/details/${list.maHD}">Info</a>
+                                                <a href="/bill/delete/${list.maHD}" onclick="return confirm('Do you want to delete this?')">Delete</a>
+                                                <a href="/viewBill/${list.maHD}">Edit</a>
+                                            </td>
+                                        </tr>
+                                    </c:forEach>
+                                    </tbody>
+                                </table>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
     </div>
-
-    <div>
-        <form class="segment" method="post" action="/bill&save">
-            <table>
-                <tr>
-                    <td>
-                        <input type="hidden" name="maHD" class="segment-tb"/>
-                        <label class="segment-lb">Customer Name</label>
-                        <select name="tenKH" class="segment-tb">
-                            <option>Choose a customer</option>
-                            <c:forEach var="cList" items="${customerLists}">
-                                <option>${cList.tenKH}</option>
-                            </c:forEach>
-                        </select>
-                    </td>
-                    <td>
-                        <label class="segment-lb">Tax Code</label>
-                        <input type="text" name="maSoThue" required="" class="segment-tb"/>
-                    </td>
-                </tr>
-                <tr>
-                    <td>
-                        <label class="segment-lb">Employee</label>
-                        <select name="tenNV" class="segment-tb">
-                            <option>Choose an employee</option>
-                            <c:forEach var="eList" items="${employeeLists}">
-                                <option>${eList.tenNV}</option>
-                            </c:forEach>
-                        </select>
-                    </td>
-                    <td>
-                        <label class="segment-lb">Published Date (yyyy-mm-dd)</label>
-                        <input type="text" name="ngayLap" required="" class="segment-tb" required pattern="[0-9]{4}-[0-9]{2}-[0-9]{2}"/>
-                    </td>
-                </tr>
-                <tr>
-                    <td>
-                        <input type="hidden" name="maHD" class="segment-tb"/>
-                        <label class="segment-lb">Total</label>
-                        <input type="number" name="tongTien" required="" class="segment-tb""/>
-                    </td>
-                    <td>
-                        <input type="submit" value="SAVE"/>
-                        <input type="button" value="REFRESH" onclick="window.location.href='/bill'"/>
-                    </td>
-                </tr>
-            </table>
-        </form>
-    </div>
-    <div>
-        <table class="fl-table">
-            <thead>
-            <tr>
-                <th>ID</th>
-                <th>Published Date</th>
-                <th>Employee</th>
-                <th>Customer</th>
-                <th>Tax Code</th>
-                <th>Total</th>
-                <th>Actions</th>
-            </tr>
-            </thead>
-            <tbody>
-            <c:forEach var="list" items="${billLists}">
-                <tr>
-                    <td>${list.maHD}</td>
-                    <td>${list.ngayLap}</td>
-                    <td>${list.employee.tenNV}</td>
-                    <td>${list.customer.tenKH}</td>
-                    <td>${list.maSoThue}</td>
-                    <td>${list.tongTien}</td>
-                    <td>
-                        <a href="/bill/details/${list.maHD}">Info</a>
-                        <a href="/bill/delete/${list.maHD}" onclick="return confirm('Do you want to delete this?')">Delete</a>
-                        <a href="/viewBill/${list.maHD}">Edit</a>
-                    </td>
-                </tr>
-            </c:forEach>
-            </tbody>
-        </table>
-    </div>
-
-
+    <!-- Footer -->
+    <%@include file="fragment/footer.jsp"%>
 </div>
 
-<!-- Footer -->
-<%@include file="fragment/footer.jsp" %>
+<!-- JS -->
+<%@include file="fragment/importJS.jsp"%>
 
 <!-- End page content -->
+<script>
+    $(document).ready(function () {
+        $('#nav_bill').addClass('active');
+    });
+</script>
+</div>
 </body>
 </html>

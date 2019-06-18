@@ -32,111 +32,111 @@
   </div>
   <div class="sidebar-wrapper">
     <ul class="nav">
-      <c:set var = "maPQ" scope = "session" value = "${authorityObject.getAuthority().getMaPQ()}"/>
-      <c:set var = "maNV" scope = "session" value = "${authorityObject.getEmployee().getMaNV()}"/>
+<%--      <c:set var = "maPQ" scope = "session" value = "${authorityObject.getAuthority().getMaPQ()}"/>--%>
+<%--      <c:set var = "maNV" scope = "session" value = "${authorityObject.getEmployee().getMaNV()}"/>--%>
       <li id="nav_dashboard">
-        <a id="index" onclick="window.history.replaceState({}, document.title, '/' + 'role=${maPQ}/nv=${maNV}/index'); window.history.go();">
+        <a id="index" href="/index">
           <i class="nc-icon nc-bank"></i>
           <p>Dashboard</p>
         </a>
       </li>
-      <c:if test = "${maPQ == 1 || maPQ == 2 || maPQ == 3}">
+<%--      <c:if test = "${maPQ == 1 || maPQ == 2 || maPQ == 3}">--%>
         <li id="nav_customer">
-          <a onclick="window.history.replaceState({}, document.title, '/' + 'role=${maPQ}/nv=${maNV}/customer'); window.history.go();">
+          <a href="/customer">
             <i class="nc-icon nc-single-02"></i>
             <p>Customer</p>
           </a>
         </li>
-      </c:if>
-      <c:if test = "${maPQ == 1 || maPQ == 3 || maPQ == 4}">
+<%--      </c:if>--%>
+<%--      <c:if test = "${maPQ == 1 || maPQ == 3 || maPQ == 4}">--%>
         <li id="nav_provider">
-          <a onclick="window.history.replaceState({}, document.title, '/' + 'role=${maPQ}/nv=${maNV}/provider'); window.history.go();">
+          <a href="/provider">
             <i class="nc-icon nc-delivery-fast"></i>
             <p>Provider</p>
           </a>
         </li>
-      </c:if>
-      <c:if test = "${maPQ == 1 || maPQ == 3 || maPQ == 4}">
+<%--      </c:if>--%>
+<%--      <c:if test = "${maPQ == 1 || maPQ == 3 || maPQ == 4}">--%>
         <li id="nav_order">
-          <a onclick="window.history.replaceState({}, document.title, '/' + 'role=${maPQ}/nv=${maNV}/order'); window.history.go();">
+          <a href="/order">
             <i class="nc-icon nc-cart-simple"></i>
             <p>Order</p>
           </a>
         </li>
-      </c:if>
-      <c:if test = "${maPQ == 1 || maPQ == 2 || maPQ == 4}">
+<%--      </c:if>--%>
+<%--      <c:if test = "${maPQ == 1 || maPQ == 2 || maPQ == 4}">--%>
         <li id="nav_importProduct">
-          <a onclick="window.history.replaceState({}, document.title, '/' + 'role=${maPQ}/nv=${maNV}/importProduct'); window.history.go();">
+          <a href="/importProduct">
             <i class="nc-icon nc-badge"></i>
             <p>Import</p>
           </a>
         </li>
-      </c:if>
-      <c:if test = "${maPQ == 1 || maPQ == 2 || maPQ == 3}">
+<%--      </c:if>--%>
+<%--      <c:if test = "${maPQ == 1 || maPQ == 2 || maPQ == 3}">--%>
         <li id="nav_bill">
-          <a onclick="window.history.replaceState({}, document.title, '/' + 'role=${maPQ}/nv=${maNV}/bill'); window.history.go();">
+          <a href="/bill">
             <i class="nc-icon nc-money-coins"></i>
             <p>Bill</p>
           </a>
         </li>
-      </c:if>
-      <c:if test = "${maPQ == 1 || maPQ == 4}">
+<%--      </c:if>--%>
+<%--      <c:if test = "${maPQ == 1 || maPQ == 4}">--%>
         <li id="nav_product">
-          <a onclick="window.history.replaceState({}, document.title, '/' + 'role=${maPQ}/nv=${maNV}/product'); window.history.go();">
+          <a href="/product">
             <i class="nc-icon nc-tv-2"></i>
             <p>Product</p>
           </a>
         </li>
-      </c:if>
-      <c:if test = "${maPQ == 1 || maPQ == 4}">
+<%--      </c:if>--%>
+<%--      <c:if test = "${maPQ == 1 || maPQ == 4}">--%>
         <li id="nav_typeofcomponent">
-          <a onclick="window.history.replaceState({}, document.title, '/' + 'role=${maPQ}/nv=${maNV}/typeofcomponent'); window.history.go();">
+          <a href="/typeofcomponent">
             <i class="nc-icon nc-align-left-2"></i>
             <p>Type of component</p>
           </a>
         </li>
-      </c:if>
-      <c:if test = "${maPQ == 1 || maPQ == 4}">
+<%--      </c:if>--%>
+<%--      <c:if test = "${maPQ == 1 || maPQ == 4}">--%>
         </li id="nav_store">
         <li>
-          <a onclick="window.history.replaceState({}, document.title, '/' + 'role=${maPQ}/nv=${maNV}/store'); window.history.go();">
+          <a href="/store">
             <i class="nc-icon nc-app"></i>
             <p>Store</p>
           </a>
         </li>
-      </c:if>
-      <c:if test = "${maPQ == 1 || maPQ == 4}">
+<%--      </c:if>--%>
+<%--      <c:if test = "${maPQ == 1 || maPQ == 4}">--%>
         <li id="nav_unit">
-          <a onclick="window.history.replaceState({}, document.title, '/' + 'role=${maPQ}/nv=${maNV}/unit'); window.history.go();">
+          <a href="/unit">
             <i class="nc-icon nc-bullet-list-67"></i>
             <p>Unit</p>
           </a>
         </li>
-      </c:if>
-      <c:if test = "${maPQ == 1}">
+<%--      </c:if>--%>
+<%--      <c:if test = "${maPQ == 1}">--%>
         <li id="nav_department">
-          <a onclick="window.history.replaceState({}, document.title, '/' + 'role=${maPQ}/nv=${maNV}/department'); window.history.go();">
+          <a href="/department">
             <i class="nc-icon nc-vector"></i>
             <p>Department</p>
           </a>
         </li>
-      </c:if>
-      <c:if test = "${maPQ == 1}">
+<%--      </c:if>--%>
+<%--      <c:if test = "${maPQ == 1}">--%>
         <li id="nav_employee">
-          <a onclick="window.history.replaceState({}, document.title, '/' + 'role=${maPQ}/nv=${maNV}/employee'); window.history.go();">
+          <a href="/employee">
             <i class="nc-icon nc-spaceship"></i>
             <p>Employee</p>
           </a>
         </li>
-      </c:if>
-      <c:if test = "${maPQ == 1 || maPQ == 3 || maPQ == 4}">
+<%--      </c:if>--%>
+<%--      <c:if test = "${maPQ == 1 || maPQ == 3 || maPQ == 4}">--%>
         <li id="nav_report">
-          <a onclick="window.history.replaceState({}, document.title, '/' + 'role=${maPQ}/nv=${maNV}/productReport'); window.history.go();">
+          <a href="/productReport">
             <i class="nc-icon nc-spaceship"></i>
             <p>Report</p>
           </a>
         </li>
-      </c:if>
+<%--      </c:if>--%>
       <li class="active-pro">
         <a href="#about">
           <i class="nc-icon nc-satisfied"></i>

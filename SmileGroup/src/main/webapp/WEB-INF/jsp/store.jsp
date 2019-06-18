@@ -20,11 +20,11 @@
                 <div class="col-md-12">
                     <div class="card card-user">
                         <div class="card-header">
-                            <h5 class="card-title">MANAGE CUSTOMER</h5>
+                            <h5 class="card-title">MANAGE STORES</h5>
                         </div>
-                        <c:set var = "maPQ" scope = "session" value = "${authorityObject.getAuthority().getMaPQ()}"/>
-                        <c:set var = "maNV" scope = "session" value = "${authorityObject.getEmployee().getMaNV()}"/>
-                        <form class="card-body" method="post" onsubmit="window.history.replaceState({}, document.title, '/' + 'role=${maPQ}/nv=${maNV}/store&save'); window.history.go();">
+<%--                        <c:set var = "maPQ" scope = "session" value = "${authorityObject.getAuthority().getMaPQ()}"/>--%>
+<%--                        <c:set var = "maNV" scope = "session" value = "${authorityObject.getEmployee().getMaNV()}"/>--%>
+                        <form class="card-body" method="post" action="/store&save">
                             <table>
                                 <tr>
                                     <td>
@@ -34,9 +34,8 @@
                                     </td>
                                 </tr>
                             </table>
-                            <input type="submit" value="SAVE" class="btn btn-primary btn-round" onclick="window.history.replaceState({}, document.title, '/' + 'role=${maPQ}/nv=${maNV}/store'); window.history.go();" />
-                            <input type="button" value="REFRESH" class="btn btn-primary btn-round"
-                                   onclick="window.history.replaceState({}, document.title, '/' + 'role=${maPQ}/nv=${maNV}/store'); window.history.go();"/>
+                            <input type="submit" class="btn btn-primary btn-round" value="SAVE"/>
+                            <input type="button" class="btn btn-primary btn-round" value="REFRESH" onclick="window.location.href='/store'"/>
                         </form>
                         </div>
                     </div>
@@ -60,9 +59,8 @@
                                                     <td>${list.maKhu}</td>
                                                     <td>${list.tenKhu}</td>
                                                     <td>
-                                                        <a id="btn-delete" onclick="if (confirm('Do you want to delete this?')) window.history.replaceState({}, document.title, '/' + 'role=${maPQ}/nv=${maNV}/store/delete/${list.maKhu}'); window.history.go();">Delete</a>
-                                                        <a onclick="window.history.replaceState({}, document.title, '/' + 'role=${maPQ}/nv=${maNV}/viewStore/${list.maKhu}'); window.history.go();">Edit</a>
-                                                    </td>
+                                                        <a href="/store/delete/${list.maKhu}">Delete</a>
+                                                        <a href="/viewStore/${list.maKhu}">Edit</a>                                                    </td>
                                                 </tr>
                                             </c:forEach>
                                         </tbody>

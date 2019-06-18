@@ -7,27 +7,33 @@
     <%@include file="fragment/importLibs.jsp"%>
 </head>
 <body>
-<!-- Sidebar (hidden by default) -->
-<%@include file="fragment/sidebar.jsp"%>
+<div class="wrapper ">
+    <!-- Sidebar (hidden by default) -->
+    <%@include file="fragment/sidebar.jsp"%>
 
-<!-- Top menu -->
-<%@include file="fragment/header.jsp"%>
+    <div class="main-panel">
+        <!-- Top menu -->
+        <%@include file="fragment/header.jsp"%>
 
-<!-- PAGE CONTENT -->
-<div class="w3-main w3-content w3-padding" style="max-width:1200px;margin-top:100px;">
-
-    <div>
+        <!-- PAGE CONTENT -->
+        <div class="content">
+            <div class="row">
+                <div class="col-md-12">
+                    <div class="card">
+                        <div class="card-body">
+                            <div class="table-responsive">
+                                <div>
         <form class="segment" method="post" action="/order&edit">
-            <table class="fl-table">
-                <thead>
+            <table class="table">
+                <thead class=" text-primary">
                 <tr>
                     <th>ID</th>
-                    <td><input type="text" name="maDDH" required="" class="segment-tb" value="${orderEditList.maDDH}"></td>
+                    <td><input type="text" name="maDDH" readonly required="" class="form-control" value="${orderEditList.maDDH}"></td>
                 </tr>
                 <tr>
                     <th>Employee</th>
                     <td>
-                        <select name="tenNV" class="segment-tb" >
+                        <select name="tenNV" class="form-control" >
                             <c:forEach var="item" items="${empLists}">
                                 <option value="${item.tenNV}" ${item.maNV == orderEditList.employee.maNV ? 'selected="selected"' : ''}>${item.tenNV}</option>
                             </c:forEach>
@@ -36,12 +42,12 @@
                 </tr>
                 <tr>
                     <th>Published Date</th>
-                    <td><input type="text" name="ngayLap" required="" class="segment-tb" value="${orderEditList.ngayLap}"></td>
+                    <td><input type="text" name="ngayLap" required="" class="form-control" value="${orderEditList.ngayLap}"></td>
                 </tr>
                 <tr>
                     <th>Provider</th>
                     <td>
-                        <select name="tenNCC" class="segment-tb" >
+                        <select name="tenNCC" class="form-control" >
                             <c:forEach var="item" items="${providerLists}">
                                 <option value="${item.tenNCC}" ${item.maNCC == orderEditList.provider.maNCC ? 'selected="selected"' : ''}>${item.tenNCC}</option>
                             </c:forEach>
@@ -50,9 +56,10 @@
                 </tr>
                 <thead>
             </table>
-            <input type="submit" value="SAVE" />
+            <input type="submit" class="btn btn-primary btn-round" value="SAVE" />
+            <a class="btn btn-primary btn-round" href="/order">BACK</a>
         </form>
-        <a href="/order">BACK</a>
+
     </div>
 </div>
 

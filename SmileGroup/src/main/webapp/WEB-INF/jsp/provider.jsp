@@ -22,10 +22,10 @@
                         <div class="card-header">
                             <h5 class="card-title">MANAGE PROVIDERS</h5>
                         </div>
-                        <c:set var = "maPQ" scope = "session" value = "${authorityObject.getAuthority().getMaPQ()}"/>
-                        <c:set var = "maNV" scope = "session" value = "${authorityObject.getEmployee().getMaNV()}"/>
+<%--                        <c:set var = "maPQ" scope = "session" value = "${authorityObject.getAuthority().getMaPQ()}"/>--%>
+<%--                        <c:set var = "maNV" scope = "session" value = "${authorityObject.getEmployee().getMaNV()}"/>--%>
                         <div>
-                            <form class="card-body" method="post" onsubmit="window.history.replaceState({}, document.title, '/' + 'role=${maPQ}/nv=${maNV}/provider&save'); window.history.go();">
+                            <form class="card-body" method="post" action="/provider&save">
                                 <table>
                                     <tr>
                                         <td>
@@ -42,16 +42,16 @@
 
                                         <td class="form-list__row">
                                             <label class="segment-lb">Phone</label>
-                                            <input type="text" name="soDTNCC" required="" class="form-control"/>
+                                            <input type="number" name="soDTNCC" required="" class="form-control"/>
                                         </td>
                                         <td>
                                             <label class="segment-lb">Email</label>
-                                            <input type="text" name="emailNCC" required="" class="form-control"/>
+                                            <input type="email" name="emailNCC" required="" class="form-control"/>
                                         </td>
                                     </tr>
                                 </table>
-                                <input type="submit" class="btn btn-primary btn-round" value="SAVE" onclick="window.history.replaceState({}, document.title, '/' + 'role=${maPQ}/nv=${maNV}/provider'); window.history.go();"/>
-                                <input type="button" class="btn btn-primary btn-round" value="REFRESH" onclick="window.history.replaceState({}, document.title, '/' + 'role=${maPQ}/nv=${maNV}/provider'); window.history.go();"/>
+                                <input type="submit" class="btn btn-primary btn-round" value="SAVE"/>
+                                <input type="button" class="btn btn-primary btn-round" value="REFRESH" onclick="window.location.href='/provider'"/>
                             </form>
                         </div>
                     </div>
@@ -82,8 +82,8 @@
                                             <td>${list.emailNCC}</td>
                                             <td>${list.soDTNCC}</td>
                                             <td>
-                                                <a id="btn-delete" onclick="if (confirm('Do you want to delete this?')) window.history.replaceState({}, document.title, '/' + 'role=${maPQ}/nv=${maNV}/provider/delete/${list.maNCC}'); window.history.go();">Delete</a>
-                                                <a onclick="window.history.replaceState({}, document.title, '/' + 'role=${maPQ}/nv=${maNV}/viewProvider/${list.maNCC}'); window.history.go();">Edit</a>
+                                                <a href="/provider/delete/${list.maNCC}" onclick="return confirm('Do you want to delete this?')">Delete</a>
+                                                <a href="/viewProvider/${list.maNCC}">Edit</a>
                                             </td>
                                         </tr>
                                     </c:forEach>

@@ -22,9 +22,9 @@
                         <div class="card-header">
                             <h5 class="card-title">MANAGE UNITS</h5>
                         </div>
-                        <c:set var = "maPQ" scope = "session" value = "${authorityObject.getAuthority().getMaPQ()}"/>
-                        <c:set var = "maNV" scope = "session" value = "${authorityObject.getEmployee().getMaNV()}"/>
-                        <form class="card-body" method="post" onsubmit="window.history.replaceState({}, document.title, '/' + 'role=${maPQ}/nv=${maNV}/unit&save'); window.history.go();">
+<%--                        <c:set var = "maPQ" scope = "session" value = "${authorityObject.getAuthority().getMaPQ()}"/>--%>
+<%--                        <c:set var = "maNV" scope = "session" value = "${authorityObject.getEmployee().getMaNV()}"/>--%>
+                        <form class="card-body" method="post" action="/unit&save">
                             <table>
                                 <tr>
                                     <td>
@@ -33,10 +33,8 @@
                                         <input type="text" name="tenDV" required="" class="form-control"/>
                                     </td>
                                     <td>
-                                        <input type="submit" value="SAVE" class="btn btn-primary btn-round" onclick="window.history.replaceState({}, document.title, '/' + 'role=${maPQ}/nv=${maNV}/unit'); window.history.go();"/>
-                                        <input type="button" value="REFRESH" class="btn btn-primary btn-round"
-                                               onclick="window.history.replaceState({}, document.title, '/' + 'role=${maPQ}/nv=${maNV}/unit'); window.history.go();"/>
-                                    </td>
+                                        <input type="submit" class="btn btn-primary btn-round" value="SAVE"/>
+                                        <input type="button" class="btn btn-primary btn-round" value="REFRESH" onclick="window.location.href='/unit'"/>                                    </td>
                                 </tr>
                             </table>
                         </form>
@@ -62,9 +60,8 @@
                                             <td>${list.maDV}</td>
                                             <td>${list.tenDV}</td>
                                             <td>
-                                                <a id="btn-delete" onclick="if (confirm('Do you want to delete this?')) window.history.replaceState({}, document.title, '/' + 'role=${maPQ}/nv=${maNV}/unit/delete/${list.maDV}'); window.history.go();">Delete</a>
-                                                <a onclick="window.history.replaceState({}, document.title, '/' + 'role=${maPQ}/nv=${maNV}/viewUnit/${list.maDV}'); window.history.go();">Edit</a>
-                                            </td>
+                                                <a href="/unit/delete/${list.maDV}">Delete</a>
+                                                <a href="/viewUnit/${list.maDV}">Edit</a>                                                            </td>
                                         </tr>
                                     </c:forEach>
                                     </tbody>

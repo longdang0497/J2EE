@@ -18,32 +18,14 @@ public class StoreController {
     @Autowired
     StoreRepository storeRepo;
 
-    @Autowired
-    LogInRepository logInRepository;
-
-    LogIn logIn = new LogIn();
-
-    @RequestMapping(value = "role={maPQ}/nv={maNV}/store", produces = "application/x-www-form-urlencoded;charset=utf-8")
-    public ModelAndView doStore(@PathVariable("maPQ") int maPQ, @PathVariable("maNV") int maNV) {
-        ModelAndView mv = null;
-        if (maPQ != 0 && maNV != 0)
-        {
-            Optional<LogIn> logInOptional = logInRepository.findByUserByID(maNV, maPQ);
-            if (logInOptional.isPresent())
-            {
-                logIn = logInOptional.get();
-                if (logIn.getAuthority().getMaPQ() == 1 || logIn.getAuthority().getMaPQ() == 2 || logIn.getAuthority().getMaPQ() == 3)
-                {
-                    mv = new ModelAndView("store");
-                    mv.addObject("storeLists", storeRepo.findAll());
-                    mv.addObject("authorityObject", logIn);
-                }
-            }
-        }
+    @RequestMapping(value = "/store", produces = "application/x-www-form-urlencoded;charset=utf-8")
+    public ModelAndView doStore() {
+        ModelAndView mv = new ModelAndView("store");
+        mv.addObject("storeLists", storeRepo.findAll());
         return mv;
     }
 
-    @RequestMapping(value = "role={maPQ}/nv={maNV}/store&save", method = RequestMethod.POST, produces = "application/x-www-form-urlencoded;charset=utf-8")
+    @RequestMapping(value = "/store&save", method = RequestMethod.POST, produces = "application/x-www-form-urlencoded;charset=utf-8")
     public ModelAndView doSave(@RequestParam("tenKhu") String tenKhu) {
         ModelAndView mv = new ModelAndView("redirect:/store");
         Store obj = new Store();
@@ -52,7 +34,7 @@ public class StoreController {
         return mv;
     }
 
-    @RequestMapping(value = "role={maPQ}/nv={maNV}/store&edit", method = RequestMethod.POST, produces = "application/x-www-form-urlencoded;charset=utf-8")
+    @RequestMapping(value = "/store&edit", method = RequestMethod.POST, produces = "application/x-www-form-urlencoded;charset=utf-8")
     public ModelAndView doUpdate(@RequestParam("maKhu") int maKhu, @RequestParam("tenKhu") String tenKhu) {
         ModelAndView mv = new ModelAndView("redirect:/store");
         Store obj = null;
@@ -67,40 +49,25 @@ public class StoreController {
         return mv;
     }
 
-    @RequestMapping(value = "role={maPQ}/nv={maNV}/viewStore/{maKhu}", method = RequestMethod.GET, produces = "application/x-www-form-urlencoded;charset=utf-8")
-    public ModelAndView doEdit(@PathVariable("maPQ") int maPQ, @PathVariable("maNV") int maNV, @PathVariable("maKhu") int maKhu) {
-        ModelAndView mv = null;
-        if (maPQ != 0 && maNV != 0)
-        {
-            Optional<LogIn> logInOptional = logInRepository.findByUserByID(maNV, maPQ);
-            if (logInOptional.isPresent())
-            {
-                logIn = logInOptional.get();
-                if (logIn.getAuthority().getMaPQ() == 1 || logIn.getAuthority().getMaPQ() == 2 || logIn.getAuthority().getMaPQ() == 3)
-                {
-                    mv = new ModelAndView("viewStore");
-                    Optional<Store> objOpt  = this.storeRepo.findById(maKhu);
-                    Store obj = null;
-                    if(objOpt.isPresent()){
-                        obj = objOpt.get();
-                    }
-                    if(obj == null){
-                        // Tu tao them class Exception cho Controller
-                    }
-                    mv.addObject("storeEditList", obj);
-                    mv.addObject("authorityObject", logIn);
-                }
-            }
+    @RequestMapping(value = "/viewStore/{maKhu}", method = RequestMethod.GET, produces = "application/x-www-form-urlencoded;charset=utf-8")
+    public ModelAndView doEdit(@PathVariable("maKhu") int maKhu) {
+        ModelAndView mv = new ModelAndView("viewStore");
+        Optional<Store> objOpt  = this.storeRepo.findById(maKhu);
+        Store obj = null;
+        if(objOpt.isPresent()){
+            obj = objOpt.get();
         }
+        if(obj == null){
+            // Tu tao them class Exception cho Controller
+        }
+        mv.addObject("storeEditList", obj);
         return mv;
     }
 
-    @RequestMapping(value = "role={maPQ}/nv={maNV}/store/delete/{maKhu}", method = RequestMethod.GET, produces = "application/x-www-form-urlencoded;charset=utf-8")
+    @RequestMapping(value = "/store/delete/{maKhu}", method = RequestMethod.GET, produces = "application/x-www-form-urlencoded;charset=utf-8")
     public ModelAndView doDelete(@PathVariable("maKhu") int maKhu) {
-        ModelAndView mv = new ModelAndView("store");
+        ModelAndView mv = new ModelAndView("redirect:/store");
         storeRepo.deleteById(maKhu);
-        mv.addObject("storeEditList", storeRepo.findAll());
-        mv.addObject("authorityObject", logIn);
         return mv;
     }
 }

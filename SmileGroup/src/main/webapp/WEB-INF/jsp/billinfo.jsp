@@ -10,104 +10,122 @@
     <%@include file="fragment/importLibs.jsp" %>
 </head>
 <body>
-<!-- Sidebar (hidden by default) -->
-<%@include file="fragment/sidebar.jsp" %>
+<div class="wrapper ">
+    <!-- Sidebar (hidden by default) -->
+    <%@include file="fragment/sidebar.jsp"%>
+    <div class="main-panel">
+        <!-- Top menu -->
+        <%@include file="fragment/header.jsp"%>
 
-<!-- Top menu -->
-<%@include file="fragment/header.jsp" %>
-
-<!-- PAGE CONTENT -->
-<div class="w3-main w3-content w3-padding" style="max-width:1200px;margin-top:100px;">
-    <div class="w3-white w3-xlarge">
-        <h1 class="w3-left" style="width: 100%;">MANAGE BILLS INFORMATION</h1>
+        <!-- PAGE CONTENT -->
+        <div class="content">
+            <div class="row">
+                <div class="col-md-12">
+                    <div class="card card-user">
+                        <div class="card-header">
+                            <h5 class="card-title">BILLS INFORMATION</h5>
+                        </div>
+                        <form name="biForm" class="card-body" method="post" action="/bill-info&save/${maHD}">
+                            <table>
+                                <tr>
+                                    <td>
+                                        <input type="hidden" name="maCTHD" class="form-control"/>
+                                        <label class="segment-lb">Bill ID</label>
+                                        <input name="maHD" type="number" required="" value="${maHD}" class="form-control"/>
+                                    </td>
+                                    <td>
+                                        <label class="segment-lb">Product</label>
+                                        <select name="tenMH" class="form-control">
+                                            <option>Choose a product</option>
+                                            <c:forEach var="pList" items="${productLists}">
+                                                <option>${pList.tenMH}</option>
+                                            </c:forEach>
+                                        </select>
+                                    </td>
+                                </tr>
+                                <tr>
+                                    <td>
+                                        <label class="segment-lb">Selling price</label>
+                <%--                        <select name="tenNV" class="form-control" >--%>
+                <%--                            <c:forEach var="item" items="${productLists}">--%>
+                <%--                                <option value="${item.donGia}" ${item.tenMH == request.getParameter("tenKH") ? 'selected="selected"' : ''}>${item.donGia}</option>--%>
+                <%--                            </c:forEach>--%>
+                <%--                        </select>--%>
+                                        <input id="biPrice" type="number" name="donGia" required="" class="form-control"/>
+                                    </td>
+                                    <td>
+                                        <label class="segment-lb">Quantities</label>
+                                        <input id="biQuantities" type="number" name="soLuong" value="0" required="" class="form-control"/>
+                                    </td>
+                                </tr>
+                                <tr>
+                                    <td>
+                                        <label class="segment-lb">Total</label>
+                                        <input id="biTotal" type="number" value="" name="tienThanhToan" class="form-control" onclick="calculate()"/>
+                                    </td>
+                                </tr>
+                            </table>
+                            <input type="submit" value="SAVE" class="btn btn-primary btn-round"/>
+                            <input type="button" value="REFRESH" class="btn btn-primary btn-round" onclick="window.location.href='/bill/details/${maHD}'"/>
+                            <a href="/bill/" class="btn btn-primary btn-round">BACK</a>
+                        </form>
+                    </div>
+                </div>
+            </div>
+            <div class="row">
+                <div class="col-md-12">
+                    <div class="card">
+                        <div class="card-body">
+                            <div class="table-responsive">
+                                <table class="table">
+                                    <thead class=" text-primary">
+                                    <tr>
+                                        <th>ID</th>
+                                        <th>Bill ID</th>
+                                        <th>Product</th>
+                                        <th>Selling price</th>
+                                        <th>Quantities</th>
+                                        <th>Total</th>
+                                        <th>Actions</th>
+                                    </tr>
+                                    </thead>
+                                    <tbody>
+                                    <c:forEach var="list" items="${billInfoList}">
+                                        <tr>
+                                            <td>${list.maCTHD}</td>
+                                            <td>${list.bill.maHD}</td>
+                                            <td>${list.product.tenMH}</td>
+                                            <td>${list.donGia}</td>
+                                            <td>${list.soLuong}</td>
+                                            <td>${list.tienThanhToan}</td>
+                                            <td>
+                                                <a href="/bill/details/${list.bill.maHD}/delete/${list.maCTHD}" onclick="return confirm('Do you want to delete this?')">Delete</a>
+                                                <a href="/viewBillInfo/${list.maCTHD}">Edit</a>
+                                            </td>
+                                        </tr>
+                                    </c:forEach>
+                                    </tbody>
+                                </table>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
     </div>
-
-    <div>
-        <a href="/bill/">BACK</a>
-        <form name="biForm" class="segment" method="post" action="/bill-info&save/${maHD}">
-            <table>
-                <tr>
-                    <td>
-                        <input type="hidden" name="maCTHD" class="segment-tb"/>
-                        <label class="segment-lb">Bill ID</label>
-                        <input name="maHD" type="number" required="" value="${maHD}" class="segment-tb"/>
-                    </td>
-                    <td>
-                        <label class="segment-lb">Product</label>
-                        <select name="tenMH" class="segment-tb">
-                            <option>Choose a product</option>
-                            <c:forEach var="pList" items="${productLists}">
-                                <option>${pList.tenMH}</option>
-                            </c:forEach>
-                        </select>
-                    </td>
-                </tr>
-                <tr>
-                    <td>
-                        <label class="segment-lb">Selling price</label>
-<%--                        <select name="tenNV" class="segment-tb" >--%>
-<%--                            <c:forEach var="item" items="${productLists}">--%>
-<%--                                <option value="${item.donGia}" ${item.tenMH == request.getParameter("tenKH") ? 'selected="selected"' : ''}>${item.donGia}</option>--%>
-<%--                            </c:forEach>--%>
-<%--                        </select>--%>
-                        <input id="biPrice" type="number" name="donGia" required="" class="segment-tb"/>
-                    </td>
-                    <td>
-                        <label class="segment-lb">Quantities</label>
-                        <input id="biQuantities" type="number" name="soLuong" value="0" required="" class="segment-tb"/>
-                    </td>
-                </tr>
-                <tr>
-                    <td>
-                        <label class="segment-lb">Total</label>
-                        <input id="biTotal" type="number" value="" name="tienThanhToan" class="segment-tb" onclick="calculate()"/>
-                    </td>
-                    <td>
-                        <input type="submit" value="SAVE"/>
-                        <input type="button" value="REFRESH" onclick="window.location.href='/bill/details/${maHD}'"/>
-                    </td>
-                </tr>
-            </table>
-        </form>
-    </div>
-    <div>
-        <table class="fl-table">
-            <thead>
-            <tr>
-                <th>ID</th>
-                <th>Bill ID</th>
-                <th>Product</th>
-                <th>Selling price</th>
-                <th>Quantities</th>
-                <th>Total</th>
-                <th>Actions</th>
-            </tr>
-            </thead>
-            <tbody>
-            <c:forEach var="list" items="${billInfoList}">
-                <tr>
-                    <td>${list.maCTHD}</td>
-                    <td>${list.bill.maHD}</td>
-                    <td>${list.product.tenMH}</td>
-                    <td>${list.donGia}</td>
-                    <td>${list.soLuong}</td>
-                    <td>${list.tienThanhToan}</td>
-                    <td>
-                        <a href="/bill/details/${list.bill.maHD}/delete/${list.maCTHD}" onclick="return confirm('Do you want to delete this?')">Delete</a>
-                        <a href="/viewBillInfo/${list.maCTHD}">Edit</a>
-                    </td>
-                </tr>
-            </c:forEach>
-            </tbody>
-        </table>
-    </div>
-
-
+    <!-- Footer -->
+    <%@include file="fragment/footer.jsp"%>
 </div>
 
-<!-- Footer -->
-<%@include file="fragment/footer.jsp" %>
+<!-- JS -->
+<%@include file="fragment/importJS.jsp"%>
 
 <!-- End page content -->
+<script>
+    $(document).ready(function () {
+        $('#nav_bill').addClass('active');
+    });
+</script>
+</div>
 </body>
 </html>

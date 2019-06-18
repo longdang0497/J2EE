@@ -22,29 +22,11 @@ public class EmployeeController {
     @Autowired
     DepartmentRepository depRepository;
 
-    @Autowired
-    LogInRepository logInRepository;
-
-    LogIn logIn = new LogIn();
-
-    @RequestMapping(value = "role={maPQ}/nv={maNV}/employee", produces = "application/x-www-form-urlencoded;charset=utf-8")
-    public ModelAndView doEmployee(@PathVariable("maPQ") int maPQ, @PathVariable("maNV") int maNV) {
-        ModelAndView mv = null;
-        if (maPQ != 0 && maNV != 0)
-        {
-            Optional<LogIn> logInOptional = logInRepository.findByUserByID(maNV, maPQ);
-            if (logInOptional.isPresent())
-            {
-                logIn = logInOptional.get();
-                if (logIn.getAuthority().getMaPQ() == 1 || logIn.getAuthority().getMaPQ() == 2 || logIn.getAuthority().getMaPQ() == 3)
-                {
-                    mv = new ModelAndView("employee");
-                    mv.addObject("depLists", depRepository.findAll());
-                    mv.addObject("employeeLists", empRepository.findAll());
-                    mv.addObject("authorityObject", logIn);
-                }
-            }
-        }
+    @RequestMapping(value = "/employee", produces = "application/x-www-form-urlencoded;charset=utf-8")
+    public ModelAndView doEmployee() {
+        ModelAndView mv = new ModelAndView("employee");
+        mv.addObject("depLists", depRepository.findAll());
+        mv.addObject("employeeLists", empRepository.findAll());
         return mv;
     }
 
