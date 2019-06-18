@@ -24,19 +24,9 @@ public class HomeController {
         return mv;
     }
 
-    @RequestMapping(value = "role={maPQ}/nv={maNV}/index", produces = "application/x-www-form-urlencoded;charset=utf-8")
-    public ModelAndView doReturnHome(@PathVariable("maPQ") int maPQ, @PathVariable("maNV") int maNV) {
-        ModelAndView mv = null;
-        if (maPQ != 0 && maNV != 0)
-        {
-            Optional<LogIn> logInOptional = logInRepository.findByUserByID(maNV, maPQ);
-            if (logInOptional.isPresent())
-            {
-                logIn = logInOptional.get();
-                mv = new ModelAndView("index");
-                mv.addObject("authorityObject", logIn);
-            }
-        }
+    @RequestMapping(value = "/index", produces = "application/x-www-form-urlencoded;charset=utf-8")
+    public ModelAndView doReturnHome() {
+        ModelAndView mv = new ModelAndView("index");
         return mv;
     }
 }

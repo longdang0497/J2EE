@@ -24,9 +24,9 @@
               <div class="card-header">
                 <h5 class="card-title">MANAGE CUSTOMER</h5>
               </div>
-              <c:set var = "maPQ" scope = "session" value = "${authorityObject.getAuthority().getMaPQ()}"/>
-              <c:set var = "maNV" scope = "session" value = "${authorityObject.getEmployee().getMaNV()}"/>
-              <form class="card-body" method="post" onsubmit="window.history.replaceState({}, document.title, '/' + 'role=${maPQ}/nv=${maNV}/customer&save'); window.history.go();">
+<%--              <c:set var = "maPQ" scope = "session" value = "${authorityObject.getAuthority().getMaPQ()}"/>--%>
+<%--              <c:set var = "maNV" scope = "session" value = "${authorityObject.getEmployee().getMaNV()}"/>--%>
+              <form class="card-body" method="post" action="/customer&save">
                 <table>
                   <tr>
                     <td>
@@ -43,17 +43,16 @@
 
                     <td class="form-list__row">
                       <label class="segment-lb">Phone</label>
-                      <input type="text" name="soDT" required="" class="form-control" />
+                      <input type="number" name="soDT" required="" class="form-control" />
                     </td>
                     <td>
                       <label class="segment-lb">Email</label>
-                      <input type="text" name="email" required="" class="form-control" />
+                      <input type="email" name="email" required="" class="form-control" />
                     </td>
                   </tr>
                 </table>
-                <input type="submit" value="SAVE" class="btn btn-primary btn-round" onclick="window.history.replaceState({}, document.title, '/' + 'role=${maPQ}/nv=${maNV}/customer'); window.history.go();" />
-                <input type="button" value="REFRESH" class="btn btn-primary btn-round"
-                  onclick="window.history.replaceState({}, document.title, '/' + 'role=${maPQ}/nv=${maNV}/customer'); window.history.go();" />
+                <input type="submit" value="SAVE" class="btn btn-primary btn-round"/>
+                <input type="button" value="REFRESH" class="btn btn-primary btn-round" onclick="window.location.href='/customer'"/>
               </form>
             </div>
           </div>
@@ -83,8 +82,8 @@
                           <td>${list.email}</td>
                           <td>${list.soDT}</td>
                           <td>
-                            <a id="btn-delete" onclick="if (confirm('Do you want to delete this?')) window.history.replaceState({}, document.title, '/' + 'role=${maPQ}/nv=${maNV}/customer/delete/${list.maKH}'); window.history.go();">Delete</a>
-                            <a onclick="window.history.replaceState({}, document.title, '/' + 'role=${maPQ}/nv=${maNV}/viewCustomer/${list.maKH}'); window.history.go();">Edit</a>
+                            <a href="/customer/delete/${list.maKH}" onclick="return confirm('Do you want to delete this?')">Delete</a>
+                            <a href="/viewCustomer/${list.maKH}">Edit</a>
                           </td>
                         </tr>
                       </c:forEach>

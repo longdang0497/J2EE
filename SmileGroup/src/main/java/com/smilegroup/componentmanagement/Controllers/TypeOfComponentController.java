@@ -18,28 +18,10 @@ public class TypeOfComponentController {
     @Autowired
     TypeOfComponentRepository tocRepo;
 
-    @Autowired
-    LogInRepository logInRepository;
-
-    LogIn logIn = new LogIn();
-
-    @RequestMapping(value = "role={maPQ}/nv={maNV}/typeofcomponent", produces = "application/x-www-form-urlencoded;charset=utf-8")
-    public ModelAndView doTypeOfComponent(@PathVariable("maPQ") int maPQ, @PathVariable("maNV") int maNV) {
-        ModelAndView mv = null;
-        if (maPQ != 0 && maNV != 0)
-        {
-            Optional<LogIn> logInOptional = logInRepository.findByUserByID(maNV, maPQ);
-            if (logInOptional.isPresent())
-            {
-                logIn = logInOptional.get();
-                if (logIn.getAuthority().getMaPQ() == 1 || logIn.getAuthority().getMaPQ() == 2 || logIn.getAuthority().getMaPQ() == 3)
-                {
-                    mv = new ModelAndView("typeofcomponent");
-                    mv.addObject("tocLists", tocRepo.findAll());
-                    mv.addObject("authorityObject", logIn);
-                }
-            }
-        }
+    @RequestMapping(value = "/typeofcomponent", produces = "application/x-www-form-urlencoded;charset=utf-8")
+    public ModelAndView doTypeOfComponent() {
+        ModelAndView mv = new ModelAndView("typeofcomponent");
+        mv.addObject("tocLists", tocRepo.findAll());
         return mv;
     }
 

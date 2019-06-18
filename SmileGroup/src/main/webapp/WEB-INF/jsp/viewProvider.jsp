@@ -26,37 +26,53 @@
                                     <form class="segment" method="post" action="/provider&edit">
                                         <table class="table">
                                             <thead class=" text-primary">
-                <tr>
-                    <th>ID</th>
-                    <td><input type="text" name="maNCC" readonly required="" class="form-control" value="${providerEditList.maNCC}"></td>
-                </tr>
-                <tr>
-                    <th>Name</th>
-                    <td><input type="text" name="tenNCC" required="" class="form-control" value="${providerEditList.tenNCC}"></td>
-                </tr>
-                <tr>
-                    <th>Address</th>
-                    <td><input type="text" name="diaChiNCC" required="" class="form-control" value="${providerEditList.diaChiNCC}"></td>
-                </tr>
-                <tr>
-                    <th>Email</th>
-                    <td><input type="text" name="emailNCC" required="" class="form-control" value="${providerEditList.emailNCC}"></td>
-                </tr>
-                <tr>
-                    <th>Phone</th>
-                    <td><input type="text" name="soDTNCC" required="" class="form-control" value="${providerEditList.soDTNCC}"></td>
-                </tr>
-                </thead>
-            </table>
-            <input type="submit" class="btn btn-primary btn-round" value="SAVE" />
-        </form>
-        <a class="btn btn-primary btn-round" onclick="window.history.replaceState({}, document.title, '/' + 'role=${maPQ}/nv=${maNV}/provider'); window.history.go();">BACK</a>
+                                            <tr>
+                                                <th>ID</th>
+                                                <td><input type="text" name="maNCC" readonly required="" class="form-control" value="${providerEditList.maNCC}"></td>
+                                            </tr>
+                                            <tr>
+                                                <th>Name</th>
+                                                <td><input type="text" name="tenNCC" required="" class="form-control" value="${providerEditList.tenNCC}"></td>
+                                            </tr>
+                                            <tr>
+                                                <th>Address</th>
+                                                <td><input type="text" name="diaChiNCC" required="" class="form-control" value="${providerEditList.diaChiNCC}"></td>
+                                            </tr>
+                                            <tr>
+                                                <th>Email</th>
+                                                <td><input type="text" name="emailNCC" required="" class="form-control" value="${providerEditList.emailNCC}"></td>
+                                            </tr>
+                                            <tr>
+                                                <th>Phone</th>
+                                                <td><input type="text" name="soDTNCC" required="" class="form-control" value="${providerEditList.soDTNCC}"></td>
+                                            </tr>
+                                            </thead>
+                                        </table>
+                                        <input type="submit" class="btn btn-primary btn-round" value="SAVE" />
+                                        <a class="btn btn-primary btn-round" href="/provider">BACK</a>
+                                    </form>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
     </div>
+
+    <!-- Footer -->
+    <%@include file="fragment/footer.jsp"%>
+
+    <!-- JS -->
+    <%@include file="fragment/importJS.jsp"%>
+
+    <!-- End page content -->
+    <script>
+        $(document).ready(function () {
+            $('#nav_provider').addClass('active');
+        });
+    </script>
+    <!-- End page content -->
 </div>
-
-<!-- Footer -->
-<%@include file="fragment/footer.jsp"%>
-
-<!-- End page content -->
 </body>
 </html>

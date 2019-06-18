@@ -27,30 +27,12 @@ public class OrderController {
     @Autowired
     EmployeeRepository employeeRepository;
 
-    @Autowired
-    LogInRepository logInRepository;
-
-    LogIn logIn = new LogIn();
-
-    @RequestMapping(value = "role={maPQ}/nv={maNV}/order", produces = "application/x-www-form-urlencoded;charset=utf-8")
-    public ModelAndView doOrder(@PathVariable("maPQ") int maPQ, @PathVariable("maNV") int maNV) {
-        ModelAndView mv = null;
-        if (maPQ != 0 && maNV != 0)
-        {
-            Optional<LogIn> logInOptional = logInRepository.findByUserByID(maNV, maPQ);
-            if (logInOptional.isPresent())
-            {
-                logIn = logInOptional.get();
-                if (logIn.getAuthority().getMaPQ() == 1 || logIn.getAuthority().getMaPQ() == 2 || logIn.getAuthority().getMaPQ() == 3)
-                {
-                    mv = new ModelAndView("order");
-                    mv.addObject("employeeLists", employeeRepository.findAll());
-                    mv.addObject("providerLists", providerRepository.findAll());
-                    mv.addObject("orderLists", orderRepository.findAll());
-                    mv.addObject("authorityObject", logIn);
-                }
-            }
-        }
+    @RequestMapping(value = "/order", produces = "application/x-www-form-urlencoded;charset=utf-8")
+    public ModelAndView doOrder() {
+        ModelAndView mv = new ModelAndView("order");
+        mv.addObject("employeeLists", employeeRepository.findAll());
+        mv.addObject("providerLists", providerRepository.findAll());
+        mv.addObject("orderLists", orderRepository.findAll());
         return mv;
     }
 

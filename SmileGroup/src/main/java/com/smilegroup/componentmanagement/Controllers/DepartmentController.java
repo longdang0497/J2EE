@@ -23,23 +23,10 @@ public class DepartmentController {
 
     LogIn logIn = new LogIn();
 
-    @RequestMapping(value = "role={maPQ}/nv={maNV}/department", produces = "application/x-www-form-urlencoded;charset=utf-8")
-    public ModelAndView doDepartment(@PathVariable("maPQ") int maPQ, @PathVariable("maNV") int maNV) {
-        ModelAndView mv = null;
-        if (maPQ != 0 && maNV != 0)
-        {
-            Optional<LogIn> logInOptional = logInRepository.findByUserByID(maNV, maPQ);
-            if (logInOptional.isPresent())
-            {
-                logIn = logInOptional.get();
-                if (logIn.getAuthority().getMaPQ() == 1 || logIn.getAuthority().getMaPQ() == 2 || logIn.getAuthority().getMaPQ() == 3)
-                {
-                    mv = new ModelAndView("department");
-                    mv.addObject("depLists", depRepo.findAll());
-                    mv.addObject("authorityObject", logIn);
-                }
-            }
-        }
+    @RequestMapping(value = "/department", produces = "application/x-www-form-urlencoded;charset=utf-8")
+    public ModelAndView doDepartment() {
+        ModelAndView mv = new ModelAndView("department");
+        mv.addObject("depLists", depRepo.findAll());
         return mv;
     }
 

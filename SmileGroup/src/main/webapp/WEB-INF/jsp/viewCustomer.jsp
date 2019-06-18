@@ -49,8 +49,8 @@
                                                 </thead>
                                             </table>
                                             <input type="submit" class="btn btn-primary btn-round" value="SAVE" />
+                                            <a class="btn btn-primary btn-round" href="/customer">BACK</a>
                                         </form>
-                                        <a class="btn btn-primary btn-round" onclick="window.history.replaceState({}, document.title, '/' + 'role=${maPQ}/nv=${maNV}/customer'); window.history.go();">BACK</a>
                                     </div>
                                 </div>
                             </div>

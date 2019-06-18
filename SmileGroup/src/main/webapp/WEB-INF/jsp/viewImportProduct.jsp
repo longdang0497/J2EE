@@ -7,27 +7,33 @@
     <%@include file="fragment/importLibs.jsp"%>
 </head>
 <body>
-<!-- Sidebar (hidden by default) -->
-<%@include file="fragment/sidebar.jsp"%>
+<div class="wrapper ">
+    <!-- Sidebar (hidden by default) -->
+    <%@include file="fragment/sidebar.jsp"%>
 
-<!-- Top menu -->
-<%@include file="fragment/header.jsp"%>
+    <div class="main-panel">
+        <!-- Top menu -->
+        <%@include file="fragment/header.jsp"%>
 
-<!-- PAGE CONTENT -->
-<div class="w3-main w3-content w3-padding" style="max-width:1200px;margin-top:100px;">
-
-    <div>
+        <!-- PAGE CONTENT -->
+        <div class="content">
+            <div class="row">
+                <div class="col-md-12">
+                    <div class="card">
+                        <div class="card-body">
+                            <div class="table-responsive">
+                                <div>
         <form class="segment" method="post" action="/importProduct&edit">
-            <table class="fl-table">
-                <thead>
+            <table class="table">
+                <thead class=" text-primary">
                 <tr>
                     <th>ID</th>
-                    <td><input type="text" name="maPN" required="" class="segment-tb" value="${importProductEditList.maPN}"></td>
+                    <td><input type="text" name="maPN" readonly required="" class="form-control" value="${importProductEditList.maPN}"></td>
                 </tr>
                 <tr>
                     <th>Order ID</th>
                     <td>
-                        <select name="maDDH" class="segment-tb" >
+                        <select name="maDDH" class="form-control" >
                             <c:forEach var="item" items="${orderLists}">
                                 <option value="${item.maDDH}" ${item.maDDH == importProductEditList.order.maDDH ? 'selected="selected"' : ''}>${item.maDDH}</option>
                             </c:forEach>
@@ -37,7 +43,7 @@
                 <tr>
                     <th>Employee</th>
                     <td>
-                        <select name="tenNV" class="segment-tb" >
+                        <select name="tenNV" class="form-control" >
                             <c:forEach var="item" items="${empLists}">
                                 <option value="${item.tenNV}" ${item.maNV == importProductEditList.employee.maNV ? 'selected="selected"' : ''}>${item.tenNV}</option>
                             </c:forEach>
@@ -46,23 +52,39 @@
                 </tr>
                 <tr>
                     <th>Published Date</th>
-                    <td><input type="text" name="ngayLapPhieu" required="" class="segment-tb" value="${importProductEditList.ngayLapPhieu}"></td>
+                    <td><input type="text" name="ngayLapPhieu" required="" class="form-control" value="${importProductEditList.ngayLapPhieu}"></td>
                 </tr>
                 <tr>
                     <th>Total</th>
-                    <td><input type="number" name="tongTienPN" required="" class="segment-tb" value="${importProductEditList.tongTienPN}"></td>
+                    <td><input type="number" name="tongTienPN" required="" class="form-control" value="${importProductEditList.tongTienPN}"></td>
                 </tr>
                 <thead>
             </table>
-            <input type="submit" value="SAVE" />
+            <input type="submit" value="SAVE" class="btn btn-primary btn-round"/>
+            <a class="btn btn-primary btn-round" href="/importProduct">BACK</a>
         </form>
-        <a href="/importProduct">BACK</a>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
     </div>
+
+    <!-- Footer -->
+    <%@include file="fragment/footer.jsp"%>
+
+    <!-- JS -->
+    <%@include file="fragment/importJS.jsp"%>
+
+    <!-- End page content -->
+    <script>
+        $(document).ready(function () {
+            $('#nav_importProduct').addClass('active');
+        });
+    </script>
+    <!-- End page content -->
 </div>
-
-<!-- Footer -->
-<%@include file="fragment/footer.jsp"%>
-
-<!-- End page content -->
 </body>
 </html>
