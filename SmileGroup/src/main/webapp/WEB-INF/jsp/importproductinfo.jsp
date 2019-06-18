@@ -23,7 +23,7 @@
                 <div class="col-md-12">
                     <div class="card card-user">
                         <div class="card-header">
-                            <h5 class="card-title">MANAGE CUSTOMER</h5>
+                            <h5 class="card-title">IMPORT INFORMATION</h5>
                         </div>
                         <form name="ipForm" class="card-body" method="post" action="/importProduct-info&save/${maPN}">
                             <table>
