@@ -48,6 +48,18 @@
                       </c:forEach>
                     </tbody>
                   </table>
+                  <a href="/productReport/" class="btn btn-primary btn-round">BACK</a>
+                </div>
+                <div style="width: 600px;">
+                  <div id="chart_div_LB"></div>
+                </div>
+
+                <div style="width: 600px;">
+                  <div id="chart_div_LN"></div>
+                </div>
+
+                <div style="width: 600px;">
+                  <div id="chart_div_LT"></div>
                 </div>
               </div>
             </div>
@@ -66,6 +78,72 @@
   <!-- End page content -->
 
   </div>
+
+
+  <script type="text/javascript">
+    // Load the Visualization API and the piechart package.
+    google.load('visualization', '1.0', {
+      'packages' : [ 'corechart' ]
+    });
+    // Set a callback to run when the Google Visualization API is loaded.
+    google.setOnLoadCallback(drawChart);
+    // Callback that creates and populates a data table,
+    // instantiates the pie chart, passes in the data and
+    // draws it.
+    function drawChart() {
+      // Create the data table.
+      var dataLB = google.visualization.arrayToDataTable([
+        ['Product', 'Sell'],
+        <c:forEach items="${prInfoLists}" var="entry">
+        [ '${entry.product.tenMH}', ${entry.luongBan} ],
+        </c:forEach>
+      ]);
+      var dataLN = google.visualization.arrayToDataTable([
+        ['Product', 'Import'],
+        <c:forEach items="${prInfoLists}" var="entry">
+        [ '${entry.product.tenMH}', ${entry.luongNhap} ],
+        </c:forEach>
+      ]);
+      var dataLT = google.visualization.arrayToDataTable([
+        ['Product', 'Left'],
+        <c:forEach items="${prInfoLists}" var="entry">
+        [ '${entry.product.tenMH}', ${entry.luongTon} ],
+        </c:forEach>
+      ]);
+      // Set chart options
+      var optionsLB = {
+        'title' : 'SỐ LƯỢNG BÁN CỦA CÁC MẶT HÀNG TRONG THÁNG',
+        is3D : true,
+        pieSliceText: 'label',
+        tooltip :  {showColorCode: true},
+        'width' : 900,
+        'height' : 500
+      };
+      var optionsLN = {
+        'title' : 'SỐ LƯỢNG NHẬP CỦA CÁC MẶT HÀNG TRONG THÁNG',
+        is3D : true,
+        pieSliceText: 'label',
+        tooltip :  {showColorCode: true},
+        'width' : 900,
+        'height' : 500
+      };
+      var optionsLT = {
+        'title' : 'SỐ LƯỢNG TỒN CỦA CÁC MẶT HÀNG TRONG THÁNG',
+        is3D : true,
+        pieSliceText: 'label',
+        tooltip :  {showColorCode: true},
+        'width' : 900,
+        'height' : 500
+      };
+      // Instantiate and draw our chart, passing in some options.
+      var chartLB = new google.visualization.PieChart(document.getElementById('chart_div_LB'));
+      chartLB.draw(dataLB, optionsLB);
+      var chartLN = new google.visualization.PieChart(document.getElementById('chart_div_LN'));
+      chartLN.draw(dataLN, optionsLN);
+      var chartLT = new google.visualization.PieChart(document.getElementById('chart_div_LT'));
+      chartLT.draw(dataLT, optionsLT);
+    }
+  </script>
 </body>
 
 </html>
