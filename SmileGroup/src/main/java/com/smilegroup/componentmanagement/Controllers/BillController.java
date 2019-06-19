@@ -22,15 +22,13 @@ public class BillController {
     BillRepository billRepository;
 
     @Autowired
+    BillInfoRepository billInfoRepository;
+
+    @Autowired
     CustomerRepository customerRepository;
 
     @Autowired
     EmployeeRepository employeeRepository;
-
-    @Autowired
-    LogInRepository logInRepository;
-
-    LogIn logIn = new LogIn();
 
     @RequestMapping(value = "/bill", produces = "application/x-www-form-urlencoded;charset=utf-8")
     public ModelAndView doBill() {
@@ -42,7 +40,7 @@ public class BillController {
     }
 
     @RequestMapping(value = "/bill&save", method = RequestMethod.POST, produces = "application/x-www-form-urlencoded;charset=utf-8")
-    public ModelAndView doSave(String tenKH, String tenNV, @DateTimeFormat(iso = DateTimeFormat.ISO.DATE) Date ngayLap, Long tongTien, String maSoThue) {
+    public ModelAndView doSave(String tenKH, String tenNV, @DateTimeFormat(iso = DateTimeFormat.ISO.DATE) Date ngayLap, String maSoThue) {
         ModelAndView mv = new ModelAndView("redirect:/bill");
         Bill obj = new Bill();
         Customer customerObj = new Customer();
@@ -63,7 +61,7 @@ public class BillController {
         obj.setEmployee(employeeObj);
         obj.setCustomer(customerObj);
         obj.setMaSoThue(maSoThue);
-        obj.setTongTien(tongTien);
+        obj.setTongTien(Long.parseLong("0"));
         obj.setNgayLap(ngayLap);
         billRepository.save(obj);
         return mv;
@@ -123,6 +121,9 @@ public class BillController {
     @RequestMapping(value = "/bill/delete/{maHD}", method = RequestMethod.GET, produces = "application/x-www-form-urlencoded;charset=utf-8")
     public ModelAndView doDelete(@PathVariable("maHD") int maHD) {
         ModelAndView mv = new ModelAndView("redirect:/bill");
+        Iterable<BillInfo> arrDelete = billInfoRepository.findByBillID(maHD);
+        for (BillInfo obj : arrDelete)
+            billInfoRepository.deleteById(obj.getMaCTHD());
         billRepository.deleteById(maHD);
         return mv;
     }
