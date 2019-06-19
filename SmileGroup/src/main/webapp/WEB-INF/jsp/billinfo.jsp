@@ -58,12 +58,6 @@
                                         <input id="biQuantities" type="number" name="soLuong" value="0" required="" class="form-control"/>
                                     </td>
                                 </tr>
-                                <tr>
-                                    <td>
-                                        <label class="segment-lb">Total</label>
-                                        <input id="biTotal" type="number" value="" name="tienThanhToan" class="form-control" onclick="calculate()"/>
-                                    </td>
-                                </tr>
                             </table>
                             <input type="submit" value="SAVE" class="btn btn-primary btn-round"/>
                             <input type="button" value="REFRESH" class="btn btn-primary btn-round" onclick="window.location.href='/bill/details/${maHD}'"/>

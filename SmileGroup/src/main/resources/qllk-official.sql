@@ -253,13 +253,17 @@ CREATE TABLE IF NOT EXISTS `database-qllk`.`DANGNHAP` (
   `TenHienThi` NVARCHAR(30) NULL,
   `Username` VARCHAR(100) NULL,
   `Password` VARCHAR(20) NULL,
+  `MaNV` int NULL,
   `MaPQ` int NULL,
   PRIMARY KEY (`MaDN`),
   INDEX `Username_idx` (`Username` ASC),
   INDEX `MaPQ_idx` (`MaPQ` ASC),
   CONSTRAINT `fk_DANGNHAP_PHANQUYEN`
     FOREIGN KEY (`MaPQ`)
-    REFERENCES `database-qllk`.`PHANQUYEN` (`MaPQ`)
+    REFERENCES `database-qllk`.`PHANQUYEN` (`MaPQ`),
+  CONSTRAINT `fk_DANGNHAP_NHANVIEN`
+    FOREIGN KEY (`MaNV`)
+    REFERENCES `database-qllk`.`NHANVIEN` (`MaNV`)
     ON DELETE NO ACTION
     ON UPDATE NO ACTION)
 ENGINE = InnoDB;
@@ -439,115 +443,153 @@ SET FOREIGN_KEY_CHECKS=@OLD_FOREIGN_KEY_CHECKS;
 SET UNIQUE_CHECKS=@OLD_UNIQUE_CHECKS;
 
 SELECT * FROM `database-qllk`.khachhang;
-insert into `database-qllk`.khachhang values ('1', N'Đặng Hoàng Long', N'123 Đường ABC', N'long97@gmail.com', '0123456789');
-insert into `database-qllk`.khachhang values ('2', N'Phạm Nhật Phi', N'3 Đường số 2', N'phipn@gmail.com', '0903123456');
+insert into `database-qllk`.khachhang values (NULL, N'Đặng Hoàng Long', N'123 Đường ABC', N'long97@gmail.com', '0123456789');
+insert into `database-qllk`.khachhang values (NULL, N'Phạm Nhật Phi', N'3 Đường số 2', N'phipn@gmail.com', '0903123456');
+insert into `database-qllk`.khachhang values (NULL, N'Trần Minh Hoàng Long', N'357 Đường DEF', N'test@gmail.com', '0909154782');
 
 SELECT * FROM `database-qllk`.phongban;
-insert into `database-qllk`.PHONGBAN values ('PB001', N'Bộ phận kế toán');
-insert into `database-qllk`.PHONGBAN values ('PB002', N'Bộ phận kinh doanh');
-insert into `database-qllk`.PHONGBAN values ('PB003', N'Bộ phận thủ kho');
-INSERT INTO `database-qllk`.PHONGBAN VALUES ('PB004', N'Ban Giám đốc');
+insert into `database-qllk`.PHONGBAN values (NULL, N'Bộ phận kế toán');
+insert into `database-qllk`.PHONGBAN values (NULL, N'Bộ phận kinh doanh');
+insert into `database-qllk`.PHONGBAN values (NULL, N'Bộ phận thủ kho');
+INSERT INTO `database-qllk`.PHONGBAN VALUES (NULL, N'Ban Giám đốc');
 
 SELECT * FROM `database-qllk`.nhanvien;
-insert into `database-qllk`.NHANVIEN values ('NV002', N'Trần Văn A', N'Nam', 'PB001');
-insert into `database-qllk`.NHANVIEN values ('NV001', N'Phạm Thị Minh', N'Nữ', 'PB002');
-insert into `database-qllk`.NHANVIEN values ('NV003', N'Đặng Văn Thành', N'Nam', 'PB004');
-insert into `database-qllk`.NHANVIEN values ('NV004', N'Nguyễn Thị Trang', N'Nữ', 'PB003');
+insert into `database-qllk`.NHANVIEN values (NULL, N'Trần Văn A', N'Nam', '1');
+insert into `database-qllk`.NHANVIEN values (NULL, N'Phạm Thị Minh', N'Nữ', '2');
+insert into `database-qllk`.NHANVIEN values (NULL, N'Đặng Văn Thành', N'Nam', '4');
+insert into `database-qllk`.NHANVIEN values (NULL, N'Nguyễn Thị Trang', N'Nữ', '3');
 
 SELECT * FROM `database-qllk`.NHACUNGCAP;
 DELETE FROM `database-qllk`.NHACUNGCAP WHERE MaNCC = 'NCC06';
-INSERT INTO `database-qllk`.NHACUNGCAP VALUES('NCC001', N'Công Ty TNHH Tin học Đông Phúc', N'147 ĐƯỜNG BA CU', 'DONGPHUC@GMAIL.COM', '0978456812');
-INSERT INTO `database-qllk`.NHACUNGCAP VALUES('NCC002', N'Công Ty TNHH Nam Thông Bảo', N'258 ĐƯỜNG LÊ DUẨN', 'NAMTHONGBAO@GMAIL.COM', '0903456200');
-INSERT INTO `database-qllk`.NHACUNGCAP VALUES('NCC003', N'Công Ty TNHH TM DV Tin Học Hoàng Khang', N'369 ĐƯỜNG HOA SỮA', 'HOANGKHANG@GMAIL.COM', '09039994533');
-INSERT INTO `database-qllk`.NHACUNGCAP VALUES('NCC004', N'Công Ty TNHH TM & DV Nhật Tân Tín', N'357 ĐƯỜNG VÕ THỊ SÁU', 'NHATTANTIN@GMAIL.COM', '01228041103');
-INSERT INTO `database-qllk`.NHACUNGCAP VALUES('NCC005', N'Công Ty TNHH MTV Tên Lửa Số', N'159 ĐƯỜNG ĐINH TIÊN HOÀNG', 'TENLUASO@GMAIL.COM', '01227456666');
-INSERT INTO `database-qllk`.NHACUNGCAP VALUES('NCC006', N'Công Ty TNHH Vi Tính Tiến Phát', N'123 ĐƯỜNG LÊ VĂN SỈ', 'TIENPHAT@GMAIL.COM', '01697542311');
+INSERT INTO `database-qllk`.NHACUNGCAP VALUES(NULL, N'Công Ty TNHH Tin học Đông Phúc', N'147 ĐƯỜNG BA CU', 'DONGPHUC@GMAIL.COM', '0978456812');
+INSERT INTO `database-qllk`.NHACUNGCAP VALUES(NULL, N'Công Ty TNHH Nam Thông Bảo', N'258 ĐƯỜNG LÊ DUẨN', 'NAMTHONGBAO@GMAIL.COM', '0903456200');
+INSERT INTO `database-qllk`.NHACUNGCAP VALUES(NULL, N'Công Ty TNHH TM DV Tin Học Hoàng Khang', N'369 ĐƯỜNG HOA SỮA', 'HOANGKHANG@GMAIL.COM', '09039994533');
+INSERT INTO `database-qllk`.NHACUNGCAP VALUES(NULL, N'Công Ty TNHH TM & DV Nhật Tân Tín', N'357 ĐƯỜNG VÕ THỊ SÁU', 'NHATTANTIN@GMAIL.COM', '01228041103');
+INSERT INTO `database-qllk`.NHACUNGCAP VALUES(NULL, N'Công Ty TNHH MTV Tên Lửa Số', N'159 ĐƯỜNG ĐINH TIÊN HOÀNG', 'TENLUASO@GMAIL.COM', '01227456666');
+INSERT INTO `database-qllk`.NHACUNGCAP VALUES(NULL, N'Công Ty TNHH Vi Tính Tiến Phát', N'123 ĐƯỜNG LÊ VĂN SỈ', 'TIENPHAT@GMAIL.COM', '01697542311');
 
 SELECT * FROM `database-qllk`.PHANQUYEN;
-insert into `database-qllk`.PHANQUYEN values ('PQ001', N'Admin');
-insert into `database-qllk`.PHANQUYEN values ('PQ002', N'Kế Toán');
-insert into `database-qllk`.PHANQUYEN values ('PQ003', N'Kinh doanh');
-insert into `database-qllk`.PHANQUYEN values ('PQ004', N'Thủ kho');
-
-
+insert into `database-qllk`.PHANQUYEN values (NULL, N'Admin');
+insert into `database-qllk`.PHANQUYEN values (NULL, N'Kế Toán');
+insert into `database-qllk`.PHANQUYEN values (NULL, N'Kinh doanh');
+insert into `database-qllk`.PHANQUYEN values (NULL, N'Thủ kho');
+	
 SELECT * FROM `database-qllk`.DANGNHAP;
-INSERT INTO `database-qllk`.DANGNHAP VALUES ('DN001', N'Bộ phận kế toán', 'NV002', '123', 'PQ002');
-INSERT INTO `database-qllk`.DANGNHAP VALUES ('DN002', N'Bộ phận kinh doanh', 'NV001', '456', 'PQ003');
-INSERT INTO `database-qllk`.DANGNHAP VALUES ('DN003', N'Bộ phận thủ kho', 'NV004', 'ABC', 'PQ004');
-INSERT INTO `database-qllk`.DANGNHAP VALUES ('DN004', N'ADMIN Giám đốc', 'NV003', 'xyz', 'PQ001');
+INSERT INTO `database-qllk`.DANGNHAP VALUES (NULL, N'Bộ phận kế toán', 'ketoan', '123', '2', '2');
+INSERT INTO `database-qllk`.DANGNHAP VALUES (NULL, N'Bộ phận kinh doanh', 'kinhdoanh', '123', '5', '3');
+INSERT INTO `database-qllk`.DANGNHAP VALUES (NULL, N'Bộ phận thủ kho', 'thukho', '123', '4', '4');
+INSERT INTO `database-qllk`.DANGNHAP VALUES (NULL, N'ADMIN Giám đốc', 'admin', '123', '3', '1');
 
 SELECT * FROM `database-qllk`.DONVITINH;
-INSERT INTO `database-qllk`.DONVITINH VALUES ('DV001', N'CÁI');
-INSERT INTO `database-qllk`.DONVITINH VALUES ('DV002', N'CÂY');
-INSERT INTO `database-qllk`.DONVITINH VALUES ('DV003', N'BỘ');
+INSERT INTO `database-qllk`.DONVITINH VALUES ('1', N'CÁI');
+INSERT INTO `database-qllk`.DONVITINH VALUES ('2', N'CÂY');
+INSERT INTO `database-qllk`.DONVITINH VALUES ('3', N'BỘ');
 
 SELECT * FROM `database-qllk`.KHO;
-INSERT INTO `database-qllk`.KHO VALUES ('K001', N'A');
-INSERT INTO `database-qllk`.KHO VALUES ('K002', N'B');
-INSERT INTO `database-qllk`.KHO VALUES ('K003', N'C');
+INSERT INTO `database-qllk`.KHO VALUES ('1', N'A');
+INSERT INTO `database-qllk`.KHO VALUES ('2', N'B');
+INSERT INTO `database-qllk`.KHO VALUES ('3', N'C');
 
 SELECT * FROM `database-qllk`.LOAIMATHANG;
-INSERT INTO `database-qllk`.LOAIMATHANG VALUES ('LMH001', N'RAM MÁY TÍNH');
-INSERT INTO `database-qllk`.LOAIMATHANG VALUES ('LMH002', N'CARD ĐỒ HỌA');
-INSERT INTO `database-qllk`.LOAIMATHANG VALUES ('LMH003', N'MÀN HÌNH MÁY TÍNH');
-INSERT INTO `database-qllk`.LOAIMATHANG VALUES ('LMH004', N'BÀN PHÍM MÁY TÍNH');
+INSERT INTO `database-qllk`.LOAIMATHANG VALUES ('1', N'RAM MÁY TÍNH');
+INSERT INTO `database-qllk`.LOAIMATHANG VALUES ('2', N'CARD ĐỒ HỌA');
+INSERT INTO `database-qllk`.LOAIMATHANG VALUES ('3', N'MÀN HÌNH MÁY TÍNH');
+INSERT INTO `database-qllk`.LOAIMATHANG VALUES ('4', N'BÀN PHÍM MÁY TÍNH');
 
 SELECT * FROM `database-qllk`.MATHANG; 
-INSERT INTO `database-qllk`.MATHANG VALUES ('MH001', N'KEYBOARD', N'LOGITECH', 'DV001', 'KEYBOARD MÀU ĐEN CƠ NẶNG 30g', 'LMH004', 'K002', '20');
-INSERT INTO `database-qllk`.MATHANG VALUES ('MH002', N'KEYBOARD APPLE', N'APPLE', 'DV001', 'KEYBOARD MÀU TRẮNG', 'LMH004', 'K002', '15');
-INSERT INTO `database-qllk`.MATHANG VALUES ('MH003', N'RAM 2016', N'INTEL', 'DV002', 'RAM 32GB', 'LMH001', 'K001', '25');
+SELECT * FROM `database-qllk`.MATHANG WHERE TenMH = "KEYBOARD";
+INSERT INTO `database-qllk`.MATHANG VALUES ('1', N'KEYBOARD', N'LOGITECH', '1', 'KEYBOARD MÀU ĐEN CƠ NẶNG 30g', '4', '2', '20');
+INSERT INTO `database-qllk`.MATHANG VALUES ('2', N'KEYBOARD APPLE', N'APPLE', '1', 'KEYBOARD MÀU TRẮNG', '4', '2', '15');
+INSERT INTO `database-qllk`.MATHANG VALUES ('3', N'RAM 2016', N'INTEL', '2', 'RAM 32GB', '1', '1', '25');
 
 SELECT * FROM `database-qllk`.BAOCAOHANGTON;
+INSERT INTO `database-qllk`.BAOCAOHANGTON VALUES (null, '2018/06/11', '6', '0', '0', '0', '3');
 
 SELECT * FROM `database-qllk`.CHITIETBAOCAOHANGTON;
-INSERT INTO `database-qllk`.CHITIETBAOCAOHANGTON VALUES ('CTBC002', '40', '10', '30', 'MH004','BCHT001');
-INSERT INTO `database-qllk`.CHITIETBAOCAOHANGTON VALUES ('CTBC001', '60', '25', '35', 'MH002','BCHT001');
+INSERT INTO `database-qllk`.CHITIETBAOCAOHANGTON VALUES (NULL, '40', '10', '30', '4','2');
+INSERT INTO `database-qllk`.CHITIETBAOCAOHANGTON VALUES (NULL, '60', '25', '35', '2','2');
 delete from `database-qllk`.BAOCAOHANGTON where MaBCHT = 'BCHT001';
 
 SELECT BCHT.MaBCHT, BCHT.NgayLap, BCHT.Thang, NV.TenNV, SUM(CTBC.LuongNhapBĐ) AS TongNhap, SUM(CTBC.LuongBan) AS TongBan, SUM(CTBC.LuongTon) AS TongTon FROM BAOCAOHANGTON BCHT JOIN NHANVIEN NV ON BCHT.MaNV = NV.MaNV AND CTBC.MaBCHT = BCHT.MaBCHT;
-INSERT INTO `database-qllk`.BAOCAOHANGTON VALUES ('BCHT001', '2018/06/11', '6', '0', '0', '0', 'NV002');
-delete from `database-qllk`.CHITIETBAOCAOHANGTON where MaCTBC = 'CTBC001';
+
+delete from `database-qllk`.CHITIETBAOCAOHANGTON where MaCTBC = '1';
 SELECT CTBCHT.MaCTBC, MH.TenMH, SUM(CTPN.SoLuong) AS LuongNhapBĐ, SUM(CTHD.SoLuong) AS LuongBan, SUM(MH.SoLuong) AS LuongTon 
 FROM CHITIETBAOCAOHANGTON CTBCHT JOIN MATHANG MH JOIN CHITIETPHIEUNHAP CTPN JOIN CHITIETHOADON CTHD 
 ON CTBCHT.MaMH = MH.MaMH AND CTPN.MaMH = CTBCHT.MaMH AND CTHD.MaMH = CTBCHT.MaMH 
-WHERE MaBCHT = 'BCHT001' 
+WHERE MaBCHT = '1' 
 GROUP BY TenMH;
-SELECT BCHT.MaBCHT, SUM(CTBC.LuongNhapBĐ) AS TongNhap, SUM(CTBC.LuongTon) AS TongTon, SUM(CTBC.LuongBan) AS TongBan FROM BAOCAOHANGTON BCHT JOIN CHITIETBAOCAOHANGTON CTBC ON CTBC.MaBCHT = BCHT.MaBCHT WHERE BCHT.MaBCHT = 'BCHT001';
+SELECT BCHT.MaBCHT, SUM(CTBC.LuongNhapBĐ) AS TongNhap, SUM(CTBC.LuongTon) AS TongTon, SUM(CTBC.LuongBan) AS TongBan FROM BAOCAOHANGTON BCHT JOIN CHITIETBAOCAOHANGTON CTBC ON CTBC.MaBCHT = BCHT.MaBCHT WHERE BCHT.Thang = '6';
 
-SELECT MH.TenMH, MONTH(HD.NgayLap), SUM(CTPN.SoLuong) AS LuongNhapBĐ, SUM(CTHD.SoLuong) AS LuongBan, SUM(MH.SoLuong) AS LuongTon 
+SELECT MH.MaMH, MH.TenMH, MONTH(HD.NgayLap) AS Thang, SUM(CTPN.SoLuong) AS LuongNhapBĐ, SUM(CTHD.SoLuong) AS LuongBan, SUM(MH.SoLuong) AS LuongTon 
 FROM CHITIETPHIEUNHAP CTPN, PHIEUNHAPHANG PN, HOADON HD, CHITIETHOADON CTHD, MATHANG MH 
 WHERE CTPN.MaPN = PN.MaPN AND CTHD.MaHD = HD.MaHD AND CTHD.MaMH = MH.MaMH 
 AND MONTH(PN.NgayLapPhieu) = '6' AND MONTH(HD.NgayLap) = '6' GROUP BY MH.TenMH;
 
+SELECT CTPN.MaMH, MONTH(PN.NgayLapPhieu) AS Thang, SUM(CTPN.SoLuong) AS LuongNhapBĐ
+FROM CHITIETPHIEUNHAP CTPN, PHIEUNHAPHANG PN
+WHERE CTPN.MaPN = PN.MaPN
+AND MONTH(PN.NgayLapPhieu) = '6' GROUP BY CTPN.MaMH;
+
+SELECT CTHD.MaMH, MONTH(HD.NgayLap) AS Thang, SUM(CTHD.SoLuong) AS LuongBan
+FROM HOADON HD, CHITIETHOADON CTHD
+WHERE CTHD.MaHD = HD.MaHD
+AND MONTH(HD.NgayLap) = '6' GROUP BY CTHD.MaMH;
+
+SELECT * FROM MATHANG;
+
+SELECT * FROM HOADON HD where MONTH(HD.NgayLap) = '6';
+
+SELECT * FROM `database-qllk`.CHITIETBAOCAOHANGTON;
+
+select * from hoadon where MONTH(NgayLap) = '6';
+SELECT CTBCHT.MaCTBC, SUM(CTPN.SoLuong) AS LuongNhap, SUM(CTHD.SoLuong) AS LuongBan, SUM(MH.SoLuong) AS LuongTon, MH.MaMH, BCHT.MaBCHT 
+FROM BAOCAOHANGTON BCHT, CHITIETBAOCAOHANGTON CTBCHT, CHITIETPHIEUNHAP CTPN, PHIEUNHAPHANG PN, HOADON HD, CHITIETHOADON CTHD, MATHANG MH 
+WHERE CTBCHT.MaBCHT = BCHT.MaBCHT AND CTBCHT.MaMH = MH.MaMH AND CTPN.MaPN = PN.MaPN AND CTHD.MaHD = HD.MaHD AND CTHD.MaMH = MH.MaMH
+AND MONTH(PN.NgayLapPhieu) = '6' AND MONTH(HD.NgayLap) = '6' 
+GROUP BY MH.TenMH; 	
+
+SELECT MH.TenMH, MONTH(HD.NgayLap), SUM(CTPN.SoLuong) AS LuongNhapBĐ, SUM(CTHD.SoLuong) AS LuongBan, SUM(MH.SoLuong) AS LuongTon 
+FROM CHITIETPHIEUNHAP CTPN, PHIEUNHAPHANG PN, HOADON HD, CHITIETHOADON CTHD, MATHANG MH 
+WHERE CTPN.MaPN = PN.MaPN AND CTHD.MaHD = HD.MaHD AND CTHD.MaMH = MH.MaMH 
+AND MONTH(PN.NgayLapPhieu) = '" + month + "' AND MONTH(HD.NgayLap) = '" + month + "' GROUP BY MH.TenMH;
+
 SELECT * FROM `database-qllk`.BAOCAOTHUCHI;
 
 SELECT * FROM `database-qllk`.DONDATHANG;
-INSERT INTO `database-qllk`.DONDATHANG VALUES ('DDH001', '2018/05/30', 'NV002', 'NCC001');
-INSERT INTO `database-qllk`.DONDATHANG VALUES ('DDH002', '2018/06/10', 'NV001', 'NCC005');
-INSERT INTO `database-qllk`.DONDATHANG VALUES ('DDH003', '2018/05/25', 'NV002', 'NCC002');
-INSERT INTO `database-qllk`.DONDATHANG VALUES ('DDH004', '2018/06/05', 'NV003', 'NCC003');
+INSERT INTO `database-qllk`.DONDATHANG VALUES (NULL, '2018/05/30', '2', '1');
+INSERT INTO `database-qllk`.DONDATHANG VALUES (NULL, '2018/06/10', '4', '5');
+INSERT INTO `database-qllk`.DONDATHANG VALUES (NULL, '2018/05/25', '5', '2');
+INSERT INTO `database-qllk`.DONDATHANG VALUES (NULL, '2018/06/05', '3', '3');
 
 SELECT * FROM `database-qllk`.CHITIETDONDATHANG;
-INSERT INTO `database-qllk`.CHITIETDONDATHANG VALUES ('CTDH001', '15', 'DDH001', 'MH002');
-INSERT INTO `database-qllk`.CHITIETDONDATHANG VALUES ('CTDH002', '20', 'DDH001', 'MH001');
-INSERT INTO `database-qllk`.CHITIETDONDATHANG VALUES ('CTDH003', '25', 'DDH002', 'MH003');
+INSERT INTO `database-qllk`.CHITIETDONDATHANG VALUES (NULL, '15', '1', '2');
+INSERT INTO `database-qllk`.CHITIETDONDATHANG VALUES (NULL, '20', '1', '1');
+INSERT INTO `database-qllk`.CHITIETDONDATHANG VALUES (NULL, '25', '3', '3');
 
+SELECT SUM(CTHD.SoLuong) AS SoLuong FROM CHITIETHOADON CTHD WHERE CTHD.MaMH = '1' AND CTHD.MaHD = '1';
 SELECT * FROM `database-qllk`.HOADON;
-INSERT INTO `database-qllk`.HOADON VALUES ('HD001', '2018/06/10', '1223165161', '', 'NV002', 'KH001');
-UPDATE `database-qllk`.HOADON SET TongTien = '825000' WHere MaHD = 'HD001'; 
+INSERT INTO `database-qllk`.HOADON VALUES (NULL, '2018/06/10', '1223165161', '', '2', '1');
+UPDATE `database-qllk`.HOADON SET TongTien = '825000' WHere MaHD = '1'; 
 SELECT HD.MaHD, HD.NgayLap, HD.MaSoThue, HD.TongTien, NV.TenNV, KH.TenKH FROM HOADON HD JOIN NHANVIEN NV JOIN KHACHHANG KH ON HD.MaNV = NV.MaNV AND HD.MaKH = KH.MaKH;
 SELECT HD.MaHD, HD.NgayLap, HD.MaSoThue, HD.TongTien, NV.TenNV, KH.TenKH FROM HOADON HD JOIN NHANVIEN NV JOIN KHACHHANG KH JOIN CHITIETHOADON CTHD ON CTHD.MaHD = HD.MaHD AND HD.MaNV = NV.MaNV AND HD.MaKH = KH.MaKH;
 
 SELECT * FROM `database-qllk`.CHITIETHOADON;
-INSERT INTO `database-qllk`.CHITIETHOADON VALUES ('CTHD001', '165000', '5', 'HD001', 'MH004', '825000');
+INSERT INTO `database-qllk`.CHITIETHOADON VALUES (NULL, '165000', '5', '1', '3', '825000');
 SELECT HD.MaHD, NgayLap, MaSoThue, SUM(NULLIF(CTHD.TienThanhToan, 1)) AS TongTien, NV.TenNV, KH.TenKH FROM HOADON HD JOIN NHANVIEN NV JOIN KHACHHANG KH JOIN CHITIETHOADON CTHD ON CTHD.MaHD = HD.MaHD AND HD.MaNV = NV.MaNV AND HD.MaKH = KH.MaKH;
 SELECT HD.MaHD, NVL(SUM(CTHD.TienThanhToan),0) AS TongTien FROM HOADON HD LEFT JOIN CHITIETHOADON CTHD ON CTHD.MaHD = HD.MaHD;
 
+SELECT * FROM CHITIETBAOCAOHANGTON CTBC WHERE CTBC.MaMH IN (SELECT MH.MaMH, MH.TenMH, MONTH(HD.NgayLap) AS Thang, SUM(CTPN.SoLuong) AS LuongNhapBĐ, SUM(CTHD.SoLuong) AS LuongBan, SUM(MH.SoLuong) AS LuongTon 
+FROM CHITIETPHIEUNHAP CTPN, PHIEUNHAPHANG PN, HOADON HD, CHITIETHOADON CTHD, MATHANG MH 
+WHERE CTPN.MaPN = PN.MaPN AND CTHD.MaHD = HD.MaHD AND CTHD.MaMH = MH.MaMH 
+AND MONTH(PN.NgayLapPhieu) = '6' AND MONTH(HD.NgayLap) = '6' GROUP BY MH.TenMH);
+
 SELECT * FROM `database-qllk`.PHIEUNHAPHANG;
-INSERT INTO `database-qllk`.PHIEUNHAPHANG VALUES ('PN001', '2018/06/01', 'NV003', '37500000', 'DDH002');
-INSERT INTO `database-qllk`.PHIEUNHAPHANG VALUES ('PN002', '2018/06/05', 'NV002', '7500000', 'DDH001');
+INSERT INTO `database-qllk`.PHIEUNHAPHANG VALUES (NULL, '2018/06/01', '3', '37500000', '3');
+INSERT INTO `database-qllk`.PHIEUNHAPHANG VALUES (NULL, '2018/06/05', '5', '7500000', '1');
 
 SELECT * FROM `database-qllk`.CHITIETPHIEUNHAP;
-INSERT INTO `database-qllk`.CHITIETPHIEUNHAP VALUES ('CTPN001', '20', '150000', '180000', N'ĐÃ NHẬP ĐỦ', 'PN001', '3000000', 'MH001');
-INSERT INTO `database-qllk`.CHITIETPHIEUNHAP VALUES ('CTPN002', '15', '300000', '350000', N'ĐÃ NHẬP ĐỦ', 'PN001', '4500000', 'MH002');
-INSERT INTO `database-qllk`.CHITIETPHIEUNHAP VALUES ('CTPN003', '25', '1500000', '1800000', N'ĐÃ NHẬP ĐỦ', 'PN001', '37500000', 'MH003');
+SELECT SUM(CTPN.SoLuong) FROM CHITIETPHIEUNHAP CTPN where CTPN.MaPN = '5';
+
+INSERT INTO `database-qllk`.CHITIETPHIEUNHAP VALUES (NULL, '20', '150000', '180000', N'ĐÃ NHẬP ĐỦ', '2', '3000000', '1');
+INSERT INTO `database-qllk`.CHITIETPHIEUNHAP VALUES (NULL, '15', '300000', '350000', N'ĐÃ NHẬP ĐỦ', '2', '4500000', '4');
+INSERT INTO `database-qllk`.CHITIETPHIEUNHAP VALUES (NULL, '25', '1500000', '1800000', N'ĐÃ NHẬP ĐỦ', '2', '37500000', '3');

@@ -55,13 +55,6 @@
                                         <input type="text" name="ngayLap" required="" class="form-control" required pattern="[0-9]{4}-[0-9]{2}-[0-9]{2}"/>
                                     </td>
                                 </tr>
-                                <tr>
-                                    <td>
-                                        <input type="hidden" name="maHD" class="form-control"/>
-                                        <label class="segment-lb">Total</label>
-                                        <input type="number" name="tongTien" required="" class="form-control""/>
-                                    </td>
-                                </tr>
                             </table>
                             <input type="submit" value="SAVE" class="btn btn-primary btn-round"/>
                             <input type="button" value="REFRESH" class="btn btn-primary btn-round" onclick="window.location.href='/bill'"/>
